@@ -266,6 +266,14 @@
 | Экран уведомлений | Notifications screen | image | assets/images/artifacts/p-letter-three-pink-floyd.jpg | assets/images/artifacts/p-letter-three-pink-floyd.jpg | 2048 | 2048 |
 | Экран корзины | Shopping cart screen | image | assets/images/artifacts/g-letter.jpg | assets/images/artifacts/g-letter.jpg | 1440 | 1440 |
 | Концепт интерфейса такого то | Interface concept | image | assets/images/artifacts/dribbble-mockup-test3.jpg | assets/images/artifacts/dribbble-mockup-test3.jpg | 3200 | 2400 |
+| Плакат для банка | Bank poster | image | assets/images/cases/case_21_9.jpg | assets/images/cases/case_21_9.jpg | 1400 | 600 |
+| Серия баннеров | Banner series | image | assets/images/cases/case_3_2.jpg | assets/images/cases/case_3_2.jpg | 1400 | 933 |
+| Мобильный экран банка | Mobile banking screen | image | assets/images/cases/case_3_4.jpg | assets/images/cases/case_3_4.jpg | 1050 | 1400 |
+| Квадрат для соцсетей | Social square | image | assets/images/cases/case_1_1.jpg | assets/images/cases/case_1_1.jpg | 1400 | 1400 |
+| Скетч интерфейса | Interface sketch | image | assets/preview/gallery-01.jpg | assets/preview/gallery-01.jpg | 1024 | 1024 |
+| Сетка карточек | Card grid | image | assets/preview/gallery-03.jpg | assets/preview/gallery-03.jpg | 1024 | 1024 |
+| Проход по макету | Mockup walkthrough | video | assets/video/video_case_2-35-1.mp4 | assets/video/video_case_2-35-1.mp4 | 1600 | 682 |
+| Аватарка крупным планом | Avatar close-up | image | assets/images/about-design-day-2026.jpg | assets/images/about-design-day-2026.jpg | 1440 | 1080 |
 
 ## Обо мне
 
