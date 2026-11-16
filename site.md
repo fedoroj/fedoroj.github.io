@@ -50,8 +50,8 @@
 
 | Параметр | Значение |
 | --- | --- |
-| Превью | assets/images/greeting-serge-gif.gif |
-| Постер | assets/images/greeting-serge-poster.jpg |
+| Превью | assets/video/avatar-serge-2025.mp4 |
+| Постер | assets/images/avatar-serge-2025-poster.jpg |
 | Тип превью | auto |
 | Видео | assets/video/about.mp4 |
 

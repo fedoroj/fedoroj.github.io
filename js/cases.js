@@ -250,7 +250,7 @@
     if (type !== 'auto') return type === 'gif' ? 'image' : type;
     return /\.(mp4|webm|mov)$/i.test(new URL(source, base).pathname) ? 'video' : 'image';
   }
-  function previewMedia(source, type, className) {
+  function previewMedia(source, type, className, poster = null) {
     const media = element(type === 'video' ? 'video' : 'img', className);
     if (type === 'video') {
       media.dataset.sitePreview = '';
@@ -258,6 +258,7 @@
       media.loop = true; media.playsInline = true; media.controls = false;
       media.preload = 'none';
       media.setAttribute('muted', ''); media.setAttribute('playsinline', '');
+      if (poster) media.poster = poster;
     } else { media.alt = ''; media.loading = 'lazy'; media.decoding = 'async'; }
     if (type === 'video') media.dataset.previewSrc = source;
     else media.src = source;
@@ -557,8 +558,12 @@
     text('.case-modal__close-action', data.caseCloseLabel);
     changed('avatarMedia', [data.avatarMedia, data.avatarType, data.avatarPoster], () => {
       const previous = document.querySelector('.avatar__image');
-      if (!data.avatarPoster || data.avatarType !== 'image') {
-        previous.replaceWith(previewMedia(data.avatarMedia, data.avatarType, 'avatar__image'));
+      if (data.avatarType !== 'image') {
+        previous.replaceWith(previewMedia(data.avatarMedia, data.avatarType, 'avatar__image', data.avatarPoster));
+        return;
+      }
+      if (!data.avatarPoster) {
+        previous.replaceWith(previewMedia(data.avatarMedia, 'image', 'avatar__image'));
         return;
       }
       // Мгновенно показываем лёгкий статичный кадр, анимацию подставляем,
