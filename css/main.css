@@ -27,10 +27,10 @@
   --icon-url: url("../assets/icons/arrow-up-16.svg");
 }
 .icon--left {
-  --icon-url: url("../assets/icons/chevron-left.svg");
+  --icon-url: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22none%22 viewBox=%220 0 24 24%22 stroke-width=%221.5%22 stroke=%22currentColor%22 aria-hidden=%22true%22 data-slot=%22icon%22%3E%3Cpath stroke-linecap=%22round%22 stroke-linejoin=%22round%22 d=%22M15.75 19.5 8.25 12l7.5-7.5%22/%3E%3C/svg%3E");
 }
 .icon--right {
-  --icon-url: url("../assets/icons/chevron-right.svg");
+  --icon-url: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22none%22 viewBox=%220 0 24 24%22 stroke-width=%221.5%22 stroke=%22currentColor%22 aria-hidden=%22true%22 data-slot=%22icon%22%3E%3Cpath stroke-linecap=%22round%22 stroke-linejoin=%22round%22 d=%22m8.25 4.5 7.5 7.5-7.5 7.5%22/%3E%3C/svg%3E");
 }
 .icon--telegram {
   --icon-url: url("../assets/icons/telegram.svg");
@@ -747,10 +747,10 @@ section {
   white-space: nowrap;
 }
 .menu-toggle .menu-toggle__chevron {
-  --icon-url: url("../assets/icons/chevron-down-20.svg");
+  --icon-url: url("data:image/svg+xml,%3Csvg width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22 fill=%22none%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpath d=%22M15.8262 6.45117C16.0605 6.21686 16.4395 6.21686 16.6738 6.45117C16.9081 6.68549 16.9081 7.06451 16.6738 7.29883L10.4238 13.5488C10.1895 13.7831 9.81049 13.7831 9.57617 13.5488L3.32617 7.29883C3.09186 7.06451 3.09186 6.68549 3.32617 6.45117C3.56049 6.21686 3.93951 6.21686 4.17383 6.45117L10 12.2773L15.8262 6.45117Z%22 fill=%22black%22/%3E%3C/svg%3E");
 }
 .menu-toggle[aria-expanded="true"] .menu-toggle__chevron {
-  --icon-url: url("../assets/icons/chevron-up-20.svg");
+  --icon-url: url("data:image/svg+xml,%3Csvg width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22 fill=%22none%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpath d=%22M4.17383 13.5488C3.93951 13.7831 3.56049 13.7831 3.32617 13.5488C3.09186 13.3145 3.09186 12.9355 3.32617 12.7012L9.57617 6.45117C9.81049 6.21686 10.1895 6.21686 10.4238 6.45117L16.6738 12.7012C16.9081 12.9355 16.9081 13.3145 16.6738 13.5488C16.4395 13.7831 16.0605 13.7831 15.8262 13.5488L10 7.72266L4.17383 13.5488Z%22 fill=%22black%22/%3E%3C/svg%3E");
 }
 /* Вне плавающей шапки переключателям не нужна размытая подложка. */
 .site-header .header-outline {
@@ -959,10 +959,10 @@ section {
   height: var(--disclosure-icon-size);
 }
 .disclosure-toggle .icon {
-  --icon-url: url("../assets/icons/chevron-down-13.svg");
+  --icon-url: url("data:image/svg+xml,%3Csvg width=%2213%22 height=%2213%22 viewBox=%220 0 13 13%22 fill=%22none%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpath d=%22M10.209 4.11523C10.4042 3.91997 10.7208 3.91997 10.916 4.11523C11.1113 4.3105 11.1113 4.627 10.916 4.82227L6.85352 8.88477C6.65825 9.08003 6.34175 9.08003 6.14648 8.88477L2.08398 4.82227C1.88872 4.627 1.88872 4.3105 2.08398 4.11523C2.27925 3.91997 2.59575 3.91997 2.79102 4.11523L6.5 7.82422L10.209 4.11523Z%22 fill=%22black%22/%3E%3C/svg%3E");
 }
 .disclosure-toggle[aria-expanded="true"] .icon {
-  --icon-url: url("../assets/icons/chevron-up-13.svg");
+  --icon-url: url("data:image/svg+xml,%3Csvg width=%2213%22 height=%2213%22 viewBox=%220 0 13 13%22 fill=%22none%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpath d=%22M2.79102 8.88477C2.59575 9.08003 2.27925 9.08003 2.08399 8.88477C1.88872 8.6895 1.88872 8.373 2.08399 8.17773L6.14648 4.11523C6.34175 3.91997 6.65825 3.91997 6.85352 4.11523L10.916 8.17773C11.1113 8.373 11.1113 8.6895 10.916 8.88477C10.7208 9.08003 10.4042 9.08003 10.209 8.88477L6.5 5.17578L2.79102 8.88477Z%22 fill=%22black%22/%3E%3C/svg%3E");
 }
 .experience-list {
   margin-top: var(--space-4);
@@ -977,7 +977,7 @@ section {
   color: var(--color-text-tertiary);
 }
 .icon--down {
-  --icon-url: url("../assets/icons/chevron-down-13.svg");
+  --icon-url: url("data:image/svg+xml,%3Csvg width=%2213%22 height=%2213%22 viewBox=%220 0 13 13%22 fill=%22none%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpath d=%22M10.209 4.11523C10.4042 3.91997 10.7208 3.91997 10.916 4.11523C11.1113 4.3105 11.1113 4.627 10.916 4.82227L6.85352 8.88477C6.65825 9.08003 6.34175 9.08003 6.14648 8.88477L2.08398 4.82227C1.88872 4.627 1.88872 4.3105 2.08398 4.11523C2.27925 3.91997 2.59575 3.91997 2.79102 4.11523L6.5 7.82422L10.209 4.11523Z%22 fill=%22black%22/%3E%3C/svg%3E");
 }
 
 /* --------------------------------------------
@@ -1513,6 +1513,11 @@ section {
 }
 .case-modal__content > * + * {
   margin-top: var(--article-block-gap);
+}
+/* Первый блок статьи — обложка из карточки. Заголовок стоит к ней ближе,
+   чем обычные блоки друг к другу. */
+.case-modal__content > :first-child + h1 {
+  margin-top: var(--space-2);
 }
 .case-modal__content :is(h1, h2, h3, h4, h5, h6) {
   color: var(--article-heading-color);

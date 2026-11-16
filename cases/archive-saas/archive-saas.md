@@ -1,6 +1,6 @@
 ## Русский
 
-![Общий вид](assets/cover.jpg "Сводка метрик: активность, удержание, конверсия")
+![](assets/cover.jpg)
 
 # Дашборд продуктовой аналитики
 
@@ -12,7 +12,7 @@
 
 ## English
 
-![Overview](assets/cover.jpg "Metrics summary: activity, retention, conversion")
+![](assets/cover.jpg)
 
 # Product analytics dashboard
 

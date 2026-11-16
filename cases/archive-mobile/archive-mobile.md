@@ -1,6 +1,6 @@
 ## Русский
 
-![Общий вид](assets/cover.jpg "Главный экран: счета и быстрые действия")
+![](assets/cover.jpg)
 
 # Мобильный банк: ключевые сценарии
 
@@ -14,7 +14,7 @@
 
 ## English
 
-![Overview](assets/cover.jpg "Home screen: accounts and quick actions")
+![](assets/cover.jpg)
 
 # Mobile banking: key flows
 

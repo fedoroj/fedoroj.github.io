@@ -1,6 +1,6 @@
 ## Русский
 
-![Общий вид](assets/cover.jpg "Обзор библиотеки компонентов")
+![](assets/cover.jpg)
 
 # Дизайн-система для SaaS
 
@@ -12,7 +12,7 @@
 
 ## English
 
-![Overview](assets/cover.jpg "Component library overview")
+![](assets/cover.jpg)
 
 # SaaS design system
 

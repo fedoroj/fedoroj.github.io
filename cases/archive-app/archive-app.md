@@ -1,6 +1,6 @@
 ## Русский
 
-![Общий вид](assets/cover.jpg "Первый экран: короткое знакомство и один следующий шаг")
+![](assets/cover.jpg)
 
 # Онбординг мобильного приложения
 
@@ -12,7 +12,7 @@
 
 ## English
 
-![Overview](assets/cover.jpg "First screen: short intro and one next step")
+![](assets/cover.jpg)
 
 # Mobile app onboarding
 

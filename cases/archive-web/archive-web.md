@@ -1,6 +1,6 @@
 ## Русский
 
-![Общий вид](assets/cover.jpg "Новый экран сводки: заказы, статусы и быстрые действия")
+![](assets/cover.jpg)
 
 # Редизайн B2B-портала
 
@@ -14,7 +14,7 @@
 
 ## English
 
-![Overview](assets/cover.jpg "New dashboard: orders, statuses and quick actions")
+![](assets/cover.jpg)
 
 # B2B portal redesign
 
