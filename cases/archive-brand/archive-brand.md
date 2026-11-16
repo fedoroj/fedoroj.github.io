@@ -1,27 +1,23 @@
 ## Русский
 
-# Визуальная айдентика
+![Общий вид](assets/cover.jpg "Обзор библиотеки компонентов")
 
-Демонстрационная подборка архивной работы. Здесь — тестовые материалы для проверки галереи; замените их собственными работами.
+# Дизайн-система для SaaS
 
-![Общий вид](assets/cover.jpg "Общий вид проекта")
+Токены, компоненты и правила использования в одной библиотеке
 
-![Детали](assets/detail.jpg "Графика и детали интерфейса")
+![Детали](assets/detail.jpg "Состояния полей и кнопок в светлой и тёмной теме")
 
-![Анимация](assets/interaction.gif "Пример анимации взаимодействия")
-
-![Видео](assets/demo.mp4 "Видеодемонстрация проекта")
+![Анимация](assets/interaction.gif "Микровзаимодействия кнопок и полей")
 
 ## English
 
-# Visual identity
+![Overview](assets/cover.jpg "Component library overview")
 
-A sample archive collection with placeholder media for checking the layout. Replace these with your own work.
+# SaaS design system
 
-![Overview](assets/cover.jpg "Project overview")
+Tokens, components and usage rules in a single library
 
-![Details](assets/detail.jpg "Graphics and interface details")
+![Details](assets/detail.jpg "Field and button states in light and dark themes")
 
-![Animation](assets/interaction.gif "Interaction animation example")
-
-![Video](assets/demo.mp4 "Project video demonstration")
+![Animation](assets/interaction.gif "Button and field micro-interactions")

@@ -84,6 +84,8 @@ export function unlockUISounds() {
 // проверка prefers-reduced-motion, и на iPhone с включённым «Уменьшением движения»
 // звук молчал полностью. Теперь настройка влияет только на декоративный hover.
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+// Время последнего запуска звука: по нему гасим дубль в одном и том же клике.
+let lastSoundAt = 0;
 
 export function playUISound(name, intensity = 1) {
   if (!effects[name] || (name === 'hover' && reducedMotion())) return;
@@ -94,6 +96,7 @@ export function playUISound(name, intensity = 1) {
   };
   if (audioContext?.state === 'running') play(audioContext);
   else unlockUISounds().then(play);
+  lastSoundAt = performance.now();
 }
 
 // Звук включается любым доверенным касанием или нажатием — в том числе по пустому
@@ -105,30 +108,42 @@ export function playUISound(name, intensity = 1) {
   document.addEventListener(type, event => { if (event.isTrusted) unlockUISounds(); }, { capture: true, passive: true });
 });
 
-// Элементы, у которых есть свой звук, помечают событие флагом uiSoundHandled.
-// Всё остальное — текст, пустая область, фон — получает тихий «тап», поэтому
-// отклик есть на любом участке страницы. Слушаем именно click: обработчики
-// элементов тоже висят на click, поэтому двойных звуков не будет — а на iOS
-// click приходит и при тапе по обычному тексту.
-const FALLBACK_INTENSITY = 0.35;
+// Звук звучит на интерактивных элементах: кнопках, ссылках, карточках кейсов,
+// картинках, которые открываются в просмотрщике. Элементы со своим звуком
+// вызывают playUISound() сами и ставят uiSoundHandled — здесь такой клик
+// пропускается. Клики по пустому месту и обычному тексту не озвучиваются.
+const INTERACTIVE = 'a, button, [role="button"], summary, label, img, input[type="checkbox"], input[type="radio"]';
+const LINK_INTENSITY = 0.7;
+// Порядок обработчиков на странице не гарантирован, поэтому ориентируемся
+// на время: если звук уже сыграл в этом же клике, второй не нужен.
+const SAME_GESTURE_MS = 80;
 
-document.addEventListener('click', event => {
-  if (!event.isTrusted || event.uiSoundHandled) return;
-  if (event.button !== 0) return;
-  const target = event.target instanceof Element ? event.target : null;
-  // Поля ввода и выделение текста озвучивать не нужно.
-  if (target && target.closest('input, textarea, select, [contenteditable="true"]')) return;
-  if (window.getSelection?.()?.toString()) return;
-  playUISound('tap', FALLBACK_INTENSITY);
-}, { passive: true });
+// Озвучку вешаем следующим тактом: модуль подключается раньше cases.js и
+// main.js, а их обработчики должны успеть сыграть свой звук и поставить
+// uiSoundHandled — иначе получится двойной щелчок на карточках кейсов.
+function attachInteractiveSounds() {
+  document.addEventListener('click', event => {
+    if (!event.isTrusted || event.uiSoundHandled) return;
+    if (event.button !== 0) return;
+    const target = event.target instanceof Element ? event.target : null;
+    if (!target || !target.closest(INTERACTIVE)) return;
+    // Выделение текста и перетаскивание картинки — не клик по смыслу.
+    if (window.getSelection?.()?.toString()) return;
+    if (performance.now() - lastSoundAt < SAME_GESTURE_MS) return;
+    playUISound('tap', LINK_INTENSITY);
+  }, { passive: true });
 
-// Клавиатура: Enter и пробел по любому месту страницы тоже дают отклик.
-document.addEventListener('keydown', event => {
-  if (!event.isTrusted || event.uiSoundHandled) return;
-  if (event.key !== 'Enter' && event.key !== ' ') return;
-  const target = event.target instanceof Element ? event.target : null;
-  if (target && target.closest('input, textarea, select, [contenteditable="true"]')) return;
-  playUISound('press', FALLBACK_INTENSITY);
-}, { passive: true });
+  // Клавиатура: Enter и пробел по интерактивному элементу звучат так же.
+  document.addEventListener('keydown', event => {
+    if (!event.isTrusted || event.uiSoundHandled) return;
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    const target = event.target instanceof Element ? event.target : null;
+    if (!target || !target.closest('a, button, [role="button"], summary')) return;
+    if (performance.now() - lastSoundAt < SAME_GESTURE_MS) return;
+    playUISound('press', LINK_INTENSITY);
+  }, { passive: true });
+}
+
+setTimeout(attachInteractiveSounds, 0);
 
 export { createNoiseLayer, effects };

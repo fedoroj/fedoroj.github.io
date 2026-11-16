@@ -116,77 +116,53 @@
 | Google Play | Google Play | cases/design-system/design-system-case.md | |
 | Zinda.tj | Zinda.tj | cases/design-system/design-system-case.md | |
 
-### Кейс: liqesis
+### Кейс: factory-director
 
 | Поле | Русский | English |
 | --- | --- | --- |
-| Название | Бренд-айдентика — Liqesis | Brand Identity — Liqesis |
+| Название | Factory Director — производство | Factory Director — production |
 | Год | 2024 | 2024 |
-| Описание | Пример короткого описания визуальной айдентики. Здесь можно рассказать об идее и её воплощении. | Sample visual identity description. Describe the idea and how it was brought to life. |
-| Теги | Брендинг; Айдентика | Branding; Identity |
+| Описание | Внутренняя платформа для директоров производств: план и факт по цехам, заказы, простои и загрузка оборудования в одном окне. Заменила ручные сводки из Excel и звонки начальников смен. Моя роль — продуктовый дизайнер | Internal platform for plant directors: plan vs fact by workshop, orders, downtime and equipment load in one window. Replaced manual Excel reports and calls with shift supervisors. My role — product designer |
+| Теги | B2B; SaaS; Дашборд | B2B; SaaS; Dashboard |
 
 | Параметр | Значение |
 | --- | --- |
-| Цвета тегов | pink; violet |
-| Медиа | assets/images/cases/case_1_1.jpg |
+| Цвета тегов | cyan; blue; violet |
+| Медиа | assets/images/cases/case_21_9.jpg |
 | Тип | auto |
 | Медиа для мобильных | |
 | Тип для мобильных | auto |
-| Ширина | min |
-| URL RU | cases/liqesis/liqesis-case.md |
+| Ширина | full |
+| URL RU | cases/factory-director/factory-director-case.md |
 | URL EN | |
 
 | Русский | English | URL RU | URL EN |
 | --- | --- | --- | --- |
-| Читать кейс | Read case | cases/liqesis/liqesis-case.md | |
+| Читать кейс | Read case | cases/factory-director/factory-director-case.md | |
 
-### Кейс: finance-app
+### Кейс: natali
 
 | Поле | Русский | English |
 | --- | --- | --- |
-| Название | Финансовое приложение — Мобильное | Finance App — Mobile |
-| Год | 2023 | 2023 |
-| Описание | Пример описания мобильного приложения. Здесь будут основные сценарии и принятые дизайн-решения. | Sample mobile app description. Add key user flows and design decisions here. |
-| Теги | Fintech; UX/UI; Мобильное приложение | Fintech; UX/UI; Mobile app |
+| Название | Натали — оптовый маркетплейс | Natali — wholesale marketplace |
+| Год | 2023-2024 | 2023-2024 |
+| Описание | Оптовый маркетплейс для магазинов и HoReCa: каталог с оптовыми порогами цен, заявка вместо мгновенной оплаты и кабинет поставщика. Оформление заявки сократилось с 12 до 5 минут. Моя роль — продуктовый дизайнер | Wholesale marketplace for shops and HoReCa: catalogue with volume price tiers, an order request instead of instant payment, and a supplier workspace. Order flow went from 12 to 5 minutes. My role — product designer |
+| Теги | B2B; E-commerce; Маркетплейс | B2B; E-commerce; Marketplace |
 
 | Параметр | Значение |
 | --- | --- |
-| Цвета тегов | blue; lime; orange |
+| Цвета тегов | green; lime; amber |
 | Медиа | assets/images/cases/case_3_2.jpg |
 | Тип | auto |
 | Медиа для мобильных | |
 | Тип для мобильных | auto |
 | Ширина | 980 |
-| URL RU | cases/finance-app/finance-app-case.md |
+| URL RU | cases/natali/natali-case.md |
 | URL EN | |
 
 | Русский | English | URL RU | URL EN |
 | --- | --- | --- | --- |
-| Читать кейс | Read case | cases/finance-app/finance-app-case.md | |
-
-### Кейс: product-photography
-
-| Поле | Русский | English |
-| --- | --- | --- |
-| Название | Продуктовая фотография | Product Photography |
-| Год | 2023 | 2023 |
-| Описание | Пример описания фотопроекта. Расскажите о задаче, визуальном подходе и результате. | Sample photography project description. Describe the brief, visual approach and outcome. |
-| Теги | Фотография; Арт-дирекшн | Photography; Art direction |
-
-| Параметр | Значение |
-| --- | --- |
-| Цвета тегов | orange; pink |
-| Медиа | assets/images/cases/case_3_4.jpg |
-| Тип | auto |
-| Медиа для мобильных | |
-| Тип для мобильных | auto |
-| Ширина | min |
-| URL RU | cases/product-photography/product-photography-case.md |
-| URL EN | |
-
-| Русский | English | URL RU | URL EN |
-| --- | --- | --- | --- |
-| Читать кейс | Read case | cases/product-photography/product-photography-case.md | |
+| Читать кейс | Read case | cases/natali/natali-case.md | |
 
 ## Архивное
 
@@ -199,9 +175,9 @@
 
 | Поле | Русский | English |
 | --- | --- | --- |
-| Название | Концепт веб-сервиса | Web service concept |
-| Описание | Дизайн основных страниц сервиса | Key pages for a web service |
-| Роль | Веб-дизайнер | Web designer |
+| Название | Редизайн B2B-портала | B2B portal redesign |
+| Описание | Кабинет, таблицы заказов и навигация | Account area, order tables and navigation |
+| Роль | Продуктовый дизайнер | Product designer |
 | Год | 2022 | 2022 |
 | Ссылка | Смотреть | View project |
 
@@ -215,9 +191,9 @@
 
 | Поле | Русский | English |
 | --- | --- | --- |
-| Название | Визуальная айдентика | Visual identity |
-| Описание | Исследование графики и типографики | Exploring graphics and typography |
-| Роль | Графический дизайнер | Graphic designer |
+| Название | Дизайн-система для SaaS | SaaS design system |
+| Описание | Токены, компоненты и состояния | Tokens, components and states |
+| Роль | Дизайн-система | Design system |
 | Год | 2021 | 2021 |
 | Ссылка | Смотреть | View project |
 
@@ -231,8 +207,8 @@
 
 | Поле | Русский | English |
 | --- | --- | --- |
-| Название | Мобильный концепт | Mobile concept |
-| Описание | Экраны и переходы приложения | App screens and transitions |
+| Название | Мобильный банк: сценарии | Mobile banking: key flows |
+| Описание | Вход, перевод, история операций | Sign-in, transfer, transaction history |
 | Роль | UX/UI дизайнер | UX/UI designer |
 | Год | 2020 | 2020 |
 | Ссылка | Смотреть | View project |
@@ -241,6 +217,38 @@
 | --- | --- |
 | Обложка | assets/images/cases/case_3_4.jpg |
 | URL RU | cases/archive-mobile/archive-mobile.md |
+| URL EN | |
+
+### Архив: archive-saas
+
+| Поле | Русский | English |
+| --- | --- | --- |
+| Название | Дашборд продуктовой аналитики | Product analytics dashboard |
+| Описание | Пять метрик вместо двадцати графиков | Five metrics instead of twenty charts |
+| Роль | Продуктовый дизайнер | Product designer |
+| Год | 2023 | 2023 |
+| Ссылка | Смотреть | View project |
+
+| Параметр | Значение |
+| --- | --- |
+| Обложка | assets/images/cases/case_21_9.jpg |
+| URL RU | cases/archive-saas/archive-saas.md |
+| URL EN | |
+
+### Архив: archive-app
+
+| Поле | Русский | English |
+| --- | --- | --- |
+| Название | Онбординг мобильного приложения | Mobile app onboarding |
+| Описание | Первый экран и путь до первого действия | First screen and path to first value |
+| Роль | UX/UI дизайнер | UX/UI designer |
+| Год | 2019 | 2019 |
+| Ссылка | Смотреть | View project |
+
+| Параметр | Значение |
+| --- | --- |
+| Обложка | assets/images/cases/case_1_1.jpg |
+| URL RU | cases/archive-app/archive-app.md |
 | URL EN | |
 
 ## Дизайн-артефакты

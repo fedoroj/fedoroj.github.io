@@ -1,27 +1,27 @@
 ## Русский
 
-# Мобильный концепт
+![Общий вид](assets/cover.jpg "Главный экран: счета и быстрые действия")
 
-Демонстрационная подборка архивной работы. Здесь — тестовые материалы для проверки галереи; замените их собственными работами.
+# Мобильный банк: ключевые сценарии
 
-![Общий вид](assets/cover.jpg "Общий вид проекта")
+Вход, перевод и история операций — короткий путь до платежа
 
-![Детали](assets/detail.jpg "Графика и детали интерфейса")
+![Детали](assets/detail.jpg "История операций и статусы переводов")
 
-![Анимация](assets/interaction.gif "Пример анимации взаимодействия")
+![Анимация](assets/interaction.gif "Переход между счетами и карточкой операции")
 
-![Видео](assets/demo.mp4 "Видеодемонстрация проекта")
+![Видео](assets/demo.mp4 "Проход по сценарию перевода")
 
 ## English
 
-# Mobile concept
+![Overview](assets/cover.jpg "Home screen: accounts and quick actions")
 
-A sample archive collection with placeholder media for checking the layout. Replace these with your own work.
+# Mobile banking: key flows
 
-![Overview](assets/cover.jpg "Project overview")
+Sign-in, transfer and history — a short path to payment
 
-![Details](assets/detail.jpg "Graphics and interface details")
+![Details](assets/detail.jpg "Transaction history and transfer statuses")
 
-![Animation](assets/interaction.gif "Interaction animation example")
+![Animation](assets/interaction.gif "Switching between accounts and a transaction card")
 
-![Video](assets/demo.mp4 "Project video demonstration")
+![Video](assets/demo.mp4 "Transfer flow walkthrough")

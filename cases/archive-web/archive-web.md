@@ -1,27 +1,27 @@
 ## Русский
 
-# Концепт веб-сервиса
+![Общий вид](assets/cover.jpg "Новый экран сводки: заказы, статусы и быстрые действия")
 
-Демонстрационная подборка архивной работы. Здесь — тестовые материалы для проверки галереи; замените их собственными работами.
+# Редизайн B2B-портала
 
-![Общий вид](assets/cover.jpg "Общий вид проекта")
+Навигация, таблицы заказов и кабинет — без перерисовки с нуля
 
-![Детали](assets/detail.jpg "Графика и детали интерфейса")
+![Детали](assets/detail.jpg "Таблица заказов: фильтры, группировка и массовые действия")
 
-![Анимация](assets/interaction.gif "Пример анимации взаимодействия")
+![Анимация](assets/interaction.gif "Состояния строки заказа при изменении статуса")
 
-![Видео](assets/demo.mp4 "Видеодемонстрация проекта")
+![Видео](assets/demo.mp4 "Короткий проход по основным экранам")
 
 ## English
 
-# Web service concept
+![Overview](assets/cover.jpg "New dashboard: orders, statuses and quick actions")
 
-A sample archive collection with placeholder media for checking the layout. Replace these with your own work.
+# B2B portal redesign
 
-![Overview](assets/cover.jpg "Project overview")
+Navigation, order tables and account area — without a full rebuild
 
-![Details](assets/detail.jpg "Graphics and interface details")
+![Details](assets/detail.jpg "Orders table: filters, grouping and bulk actions")
 
-![Animation](assets/interaction.gif "Interaction animation example")
+![Animation](assets/interaction.gif "Order row states when the status changes")
 
-![Video](assets/demo.mp4 "Project video demonstration")
+![Video](assets/demo.mp4 "Short walkthrough of the main screens")
