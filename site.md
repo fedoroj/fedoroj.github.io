@@ -59,7 +59,7 @@
 
 | Поле | Русский | English |
 | --- | --- | --- |
-| Текст | Дизайню продукты для веба и&nbsp;мобилок. Домены — b2b, ai, fintech, e-com, messaging. 5+&nbsp;лет в&nbsp;продуктовом дизайне. Живу в Мск. Веду [тг‑канал](https://t.me/fedoros), пишу [статьи](https://dsgners.ru/fedorov) | Crafting digital experiences — b2b, ai, fintech, e-commerce, messaging. 5+ yrs in product design. Based in Moscow. Run a [telegram-channel](https://t.me/fedoros) and write [articles](https://dsgners.ru/fedorov) |
+| Текст | Проектирую продукты для веба и&nbsp;мобильных: b2b, ai, fintech, e-commerce, messaging. 5+&nbsp;лет в&nbsp;продуктовом дизайне. Живу в&nbsp;Москве. Веду [тг‑канал](https://t.me/fedoros), пишу [статьи](https://dsgners.ru/fedorov) | I design web and mobile products: b2b, ai, fintech, e-commerce, messaging. 5+ years in product design. Based in Moscow. I run a [telegram channel](https://t.me/fedoros) and write [articles](https://dsgners.ru/fedorov) |
 
 ## Статус
 
@@ -122,7 +122,7 @@
 | --- | --- | --- |
 | Название | Factory Director — производство | Factory Director — production |
 | Год | 2024 | 2024 |
-| Описание | Внутренняя платформа для директоров производств: план и факт по цехам, заказы, простои и загрузка оборудования в одном окне. Заменила ручные сводки из Excel и звонки начальников смен. Моя роль — продуктовый дизайнер | Internal platform for plant directors: plan vs fact by workshop, orders, downtime and equipment load in one window. Replaced manual Excel reports and calls with shift supervisors. My role — product designer |
+| Описание | Платформа для директоров производств: план и факт по цехам, заказы, простои и загрузка оборудования в одном окне. Заменила сводки из Excel и звонки начальников смен. Роль — продуктовый дизайнер | Platform for plant directors: plan and fact by workshop, orders, downtime and equipment load in one window. Replaced Excel reports and calls with shift supervisors. Role — product designer |
 | Теги | B2B; SaaS; Дашборд | B2B; SaaS; Dashboard |
 
 | Параметр | Значение |
@@ -146,7 +146,7 @@
 | --- | --- | --- |
 | Название | Натали — оптовый маркетплейс | Natali — wholesale marketplace |
 | Год | 2023-2024 | 2023-2024 |
-| Описание | Оптовый маркетплейс для магазинов и HoReCa: каталог с оптовыми порогами цен, заявка вместо мгновенной оплаты и кабинет поставщика. Оформление заявки сократилось с 12 до 5 минут. Моя роль — продуктовый дизайнер | Wholesale marketplace for shops and HoReCa: catalogue with volume price tiers, an order request instead of instant payment, and a supplier workspace. Order flow went from 12 to 5 minutes. My role — product designer |
+| Описание | Оптовый маркетплейс для магазинов и HoReCa: каталог с оптовыми порогами цен, заявка вместо мгновенной оплаты и кабинет поставщика. Оформление заявки сократилось с 12 до 5 минут. Роль — продуктовый дизайнер | Wholesale marketplace for shops and HoReCa: catalogue with volume price tiers, order requests instead of instant payment, and a supplier workspace. Order flow went from 12 to 5 minutes. Role — product designer |
 | Теги | B2B; E-commerce; Маркетплейс | B2B; E-commerce; Marketplace |
 
 | Параметр | Значение |
@@ -290,23 +290,19 @@
 
 ### Вступление RU
 
-Весной и летом катаюсь на велосипеде и ковыряюсь в механизмах, в остальное время — спорт и длинные прогулки по Москве.
-Разобрать и собрать механизм — моя медитация и способ думать.
-Изредка снимаю на зеркалку, но чаще просто хожу и смотрю на город.
+Весной и летом катаюсь на велосипеде и разбираю механизмы, в остальное время — спорт и длинные прогулки по Москве.
+Иногда снимаю на зеркалку, чаще просто хожу и смотрю на город.
 
-Каждый день читаю английские данк-мемы, без них теряю чувство юмора.
-В работе ценю то же, что в хорошем механизме: когда всё работает незаметно.
-Не люблю пафос, люблю, когда вещи работают как надо.
+Читаю английские мемы, чтобы не терять чувство юмора.
+В работе ценю, когда всё работает без объяснений. Не люблю пафос.
 
 ### Вступление EN
 
-Currently based in Moscow, so off-season means sport and long walks.
-In spring and summer I ride bikes and tinker with mechanics, it's my meditation.
-Occasionally shoot with a DSLR, but mostly I just walk and watch.
+In spring and summer I ride bikes and take mechanisms apart. Off-season means sport and long walks around Moscow.
+Sometimes I shoot with a DSLR, but mostly I just walk and look at the city.
 
-I read English dank memes every day, otherwise I lose my sense of humor.
-In work I value the same as in a good mechanism: when everything works invisibly.
-I dislike pretentiousness, I like things that just work.
+I read English memes to keep my sense of humour.
+At work I value things that work without explanation. I dislike pretension.
 
 ### Сводка
 
@@ -314,7 +310,7 @@ I dislike pretentiousness, I like things that just work.
 | --- | --- | --- | --- |
 | ФИО | Full name | Фёдоров Сергей Валерьевич | Sergey Valeryevich Fedorov |
 | Последняя роль | Last role | Дизайн-лид | Design lead |
-| Рукопожатие | State | Крепкое | Ready to get to work |
+| Статус | Status | Открыт к предложениям | Open to offers |
 | Постоянная локация | Based in | Москва | Moscow |
 | Последнее место работы | Most recent workplace | [Паприка](https://paprika.design/) | [Paprika](https://paprika.design/) |
 
@@ -345,11 +341,8 @@ Asana, ClickUp, Notion, Bitrix24, Figma, FigJam, Miro, Framer, Tilda, Pen and pa
 
 | Заголовок RU | Заголовок EN | Описание RU | Описание EN | Подпись RU | Подпись EN | Изображение | URL |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Однажды тут появится статья для dsgners | An article for dsgners will appear here someday | Но пока статьи пишутся, насладитесь этим empty-state с превью silly-кэта | While the articles are being written, enjoy this empty state with a silly cat preview | Статья на Дизайнерс | Article on Dsgners | assets/images/publications/case_3_4.jpg | https://t.me/fedoros/1145 |
-| Однажды тут появится статья для dsgners | An article for dsgners will appear here someday | Но пока статьи пишутся, насладитесь этим empty-state с превью silly-кэта | While the articles are being written, enjoy this empty state with a silly cat preview | Статья на Дизайнерс | Article on Dsgners | assets/images/publications/blog-img.jpg | https://t.me/fedoros/1145 |
-| Однажды тут появится статья для dsgners | An article for dsgners will appear here someday | Но пока статьи пишутся, насладитесь этим empty-state с превью silly-кэта | While the articles are being written, enjoy this empty state with a silly cat preview | Статья на Дизайнерс | Article on Dsgners | assets/images/publications/blog-img.jpg | https://t.me/fedoros/1145 |
-| Однажды тут появится статья для dsgners | An article for dsgners will appear here someday | Но пока статьи пишутся, насладитесь этим empty-state с превью silly-кэта | While the articles are being written, enjoy this empty state with a silly cat preview | Статья на Дизайнерс | Article on Dsgners | assets/images/publications/blog-img.jpg | https://t.me/fedoros/1145 |
-| Создал этот сайт-портфолио | Created this site portfolio | Круто? Круто! | Cool? Cool! |  |  | assets/images/publications/blog-img.jpg | https://t.me/fedoros/1145 |
+| Статьи о дизайне | Articles on design | Пишу в телеграм-канале, длинные материалы выйдут позже | I write in a telegram channel, longer pieces are coming | Телеграм-канал | Telegram channel | assets/images/publications/case_3_4.jpg | https://t.me/fedoros |
+| Сайт-портфолио | Portfolio site | Собрал сам: контент, вёрстка, звук | Built it myself: content, layout, sound | Этот сайт | This site | assets/images/publications/blog-img.jpg | https://t.me/fedoros/1145 |
 
 ## Контакты
 
