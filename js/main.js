@@ -15,6 +15,25 @@ import('./ui-sounds.js?v=d06a4a3a5b90').then(function(module) { uiSounds = modul
 // Ручной выбор → первый поддерживаемый язык браузера → русский.
 var languageStorageKey = 'serge-portfolio-language';
 
+// Описание для поисковиков: держим в согласии с языком интерфейса,
+// чтобы сниппет в выдаче совпадал с тем, что видит посетитель.
+var metaDescriptions = {
+  ru: 'Портфолио продуктового дизайнера Сергея Фёдорова: кейсы в b2b, fintech, e-commerce, messaging и AI. 5+ лет в продуктовом дизайне, дизайн-системы, прототипирование, мобильные и веб-продукты. Москва.',
+  en: 'Portfolio of product designer Serge Fedorov: b2b, fintech, e-commerce, messaging and AI cases. 5+ years in product design, design systems, prototyping, mobile and web products. Based in Moscow.'
+};
+
+function applyMetaLanguage(lang) {
+  var description = document.querySelector('meta[name="description"]');
+  if (description) description.setAttribute('content', metaDescriptions[lang]);
+  var ogDescription = document.querySelector('meta[property="og:description"]');
+  if (ogDescription) ogDescription.setAttribute('content', metaDescriptions[lang]);
+  var twitterDescription = document.querySelector('meta[name="twitter:description"]');
+  if (twitterDescription) twitterDescription.setAttribute('content', metaDescriptions[lang]);
+  document.querySelectorAll('meta[property="og:locale"]').forEach(function(meta) {
+    meta.setAttribute('content', lang === 'en' ? 'en_US' : 'ru_RU');
+  });
+}
+
 function resolveLanguage(savedLanguage, browserLanguages) {
   if (savedLanguage === 'ru' || savedLanguage === 'en') return savedLanguage;
   for (var i = 0; i < browserLanguages.length; i++) {
@@ -27,6 +46,7 @@ function resolveLanguage(savedLanguage, browserLanguages) {
 function setLang(lang, remember) {
   if (lang !== 'ru' && lang !== 'en') return;
   document.documentElement.lang = lang;
+  applyMetaLanguage(lang);
   document.querySelectorAll('.lang-btn').forEach(function(btn) {
     btn.classList.remove('active');
   });

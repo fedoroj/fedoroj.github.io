@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Служебные файлы: не страницы для выдачи.
+Disallow: /build_index.py
+Disallow: /subset_fonts.py
+Disallow: /AGENTS.md
+Disallow: /.gitignore
+
+# site.md и статьи кейсов читаются скриптами сайта — их нельзя закрывать,
+# иначе поисковик не отрисует контент.
+
+Sitemap: https://fedoroj.github.io/sitemap.xml

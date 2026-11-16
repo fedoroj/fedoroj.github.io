@@ -156,7 +156,10 @@
   --palette-neutral-90: hsl(220deg 12% 90%);
   --palette-neutral-95: hsl(220deg 12% 95%);
 
-  --palette-neutral-alfa-20: hsl(220deg 12% 10% / 0.5);
+  /* Полупрозрачный нейтральный слой: нейтраль 10% при прозрачности 50%.
+     Название было «neutral-alfa-20», что путало: и опечатка, и число не совпадало
+     с фактической прозрачностью. */
+  --palette-neutral-10-alpha-50: hsl(220deg 12% 10% / 0.5);
 
   --palette-white-0: hsl(0deg 0% 100% / 0);
   --palette-white-5: hsl(0deg 0% 100% / 0.05);
