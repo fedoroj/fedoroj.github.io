@@ -11,6 +11,7 @@
 import hashlib
 from html import escape
 import re
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -18,6 +19,40 @@ ROOT = Path(__file__).resolve().parent
 # Ресурсы, к URL которых добавляется версия содержимого.
 ASSET_PATTERN = (r'(href|src)="((?:css|js|assets/vendor)/[^"?]+\.(?:css|js)'
                  r'|assets/fonts/[^"?]+\.woff2)(?:\?v=[a-f0-9]+)?"')
+
+
+def content_lastmod():
+    """Дата последнего изменения контента (site.md или cases/) по git.
+
+    Нужна для lastmod в sitemap.xml: поисковик считает страницу свежей
+    только когда дата растёт. Берём дату коммита, а не текущее время,
+    иначе файл менялся бы при каждой сборке без изменений в тексте.
+    """
+    try:
+        result = subprocess.run(
+            ['git', 'log', '-1', '--format=%cs', '--', 'site.md', 'cases'],
+            cwd=ROOT, capture_output=True, text=True, check=True,
+        )
+        value = result.stdout.strip()
+        if re.fullmatch(r'\d{4}-\d{2}-\d{2}', value):
+            return value
+    except (OSError, subprocess.CalledProcessError):
+        pass
+    return None
+
+
+def update_sitemap():
+    """Обновляет lastmod в sitemap.xml, остальное содержимое не трогает."""
+    path = ROOT / 'sitemap.xml'
+    if not path.exists():
+        return
+    lastmod = content_lastmod()
+    if not lastmod:
+        return
+    source = path.read_text(encoding='utf-8')
+    updated = re.sub(r'<lastmod>[^<]*</lastmod>', f'<lastmod>{lastmod}</lastmod>', source)
+    if updated != source:
+        path.write_text(updated, encoding='utf-8')
 
 
 def version_asset(match):
@@ -89,6 +124,7 @@ def main():
         if updated != source:
             extra.write_text(updated, encoding='utf-8')
     print(f'Версии ресурсов index.html обновлены: {output.stat().st_size / 1024:.1f} КБ; CSS и JS подключены отдельно.')
+    update_sitemap()
 
 
 if __name__ == '__main__':
