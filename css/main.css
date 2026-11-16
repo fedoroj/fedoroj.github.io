@@ -1,0 +1,2218 @@
+/* Стили компонентов. Порядок подключения в index.html:
+   reset → variables → base → layout → main.
+   Адаптив каркаса — в layout.css, адаптив компонентов — здесь. */
+.icon {
+  display: block;
+  flex: none;
+  width: 1em;
+  height: 1em;
+  background-color: currentColor;
+  -webkit-mask: var(--icon-url) center / contain no-repeat;
+  mask: var(--icon-url) center / contain no-repeat;
+  pointer-events: none;
+}
+.icon--bars {
+  --icon-url: url("../assets/icons/bars-3.svg");
+}
+.icon--close {
+  --icon-url: url("../assets/icons/x-mark.svg");
+}
+.icon--sun {
+  --icon-url: url("../assets/icons/sun-20.svg");
+}
+.icon--moon {
+  --icon-url: url("../assets/icons/moon-20.svg");
+}
+.icon--up {
+  --icon-url: url("../assets/icons/arrow-up-16.svg");
+}
+.icon--left {
+  --icon-url: url("../assets/icons/chevron-left.svg");
+}
+.icon--right {
+  --icon-url: url("../assets/icons/chevron-right.svg");
+}
+.icon--telegram {
+  --icon-url: url("../assets/icons/telegram.svg");
+}
+.icon--play {
+  --icon-url: url("../assets/icons/play.svg");
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Область типографики Geist Mono. Контакты, футер и диалоги кейсов
+   не входят сюда и сохраняют собственные межстрочные интервалы. */
+:is(#hero, #works, #gallery, #about, #publications, .site-header, .toast, .about-video__hint) {
+  --fs-small: var(--fs-base); /* 13px для основного текста, без изменения контактов и футера */
+  --main-copy-line-height: var(--main-font-line-height);
+  --main-copy-letter-spacing: var(--main-font-letter-spacing);
+  line-height: var(--main-copy-line-height);
+  letter-spacing: var(--main-copy-letter-spacing);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: var(--main-font-text-rendering);
+}
+/* Кнопки имеют собственную высоту и padding, меняется только набор текста. */
+:is(#hero, .site-header) .btn {
+  line-height: var(--main-copy-line-height);
+  letter-spacing: var(--main-copy-letter-spacing);
+}
+
+section {
+  padding: var(--space-4) var(--space-0);
+}
+
+/* Единое скругление медиа на главной; у аватарки остаётся своё оформление. */
+:where(main) :is(img, video):not(.avatar__image) {
+  border-radius: var(--radius-sm);
+}
+
+/* --------------------------------------------
+   Общий стиль имени и заголовков всех секций. Размер на телефонах — ниже в брейкпоинте.
+   -------------------------------------------- */
+.section-label {
+  text-rendering: optimizeLegibility;
+  font-family: var(--font-section-heading);
+  font-size: var(--fs-mobile-display);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-normal);
+  line-height: var(--lh-single);
+  font-variation-settings: normal;
+  font-stretch: normal;
+  margin-bottom: var(--space-1);
+  display: flex;
+  align-items: center;
+  /* Заголовки секций выровнены по центру своей ширины */
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.section-label::after {
+  content: none;
+}
+
+/* --------------------------------------------
+   Hero
+   -------------------------------------------- */
+#hero {
+  min-height: calc(100svh - var(--space-8));
+  width: var(--hero-avatar-size);
+  max-width: 100%;
+  margin: var(--space-0) auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  /* Имя, аватарка и текстовый блок центрируются в колонке */
+  align-items: center;
+}
+
+/* В hero своих горизонтальных отступов нет: сброс из reset.css
+   перебиваем точечно, чтобы не задавать отступы всему блоку */
+#hero,
+#hero h1,
+#hero p {
+  padding-left: var(--space-0);
+  padding-right: var(--space-0);
+}
+
+/* Отступ под подзаголовком hero — 24px на всех экранах. */
+#hero .section-hint {
+  margin-bottom: var(--space-6);
+}
+
+/* Центральная колонка шириной с аватарку; описание и статус внутри — по левому краю. */
+#heroDescription {
+  line-height: var(--main-copy-line-height);
+  width: var(--hero-avatar-size);
+  max-width: 100%;
+  margin-bottom: var(--space-5);
+  text-align: left;
+}
+
+#heroSubtitle { text-transform: uppercase; }
+
+#hero .hero-sub {
+  width: var(--hero-avatar-size);
+  max-width: 100%;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-regular);
+  text-align: left;
+  line-height: var(--main-copy-line-height, var(--lh-compact));
+  letter-spacing: var(--main-copy-letter-spacing, var(--ls-tight));
+}
+
+#hero .hero-status {
+  justify-content: flex-start;
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.hero-status__dot {
+  flex: none;
+  width: var(--status-dot-size);
+  height: var(--status-dot-size);
+  border-radius: var(--radius-circle);
+  background: var(--color-status-available);
+  animation: status-pulse var(--duration-status-pulse) ease-in-out infinite;
+}
+@keyframes status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-status__dot {
+    animation: none;
+  }
+}
+
+/* --------------------------------------------
+   Кнопки в hero
+   -------------------------------------------- */
+.hero-actions {
+  width: var(--hero-avatar-size);
+  max-width: 100%;
+  margin-top: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.hero-presentation {
+  align-self: center;
+  /* Итоговый отступ от CV — space-4 (16px), включая gap родителя. */
+  margin-top: calc(var(--space-4) - var(--space-2));
+  font-family: var(--font-main);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-regular);
+  line-height: var(--main-copy-line-height, var(--lh-heading));
+  text-align: center;
+  color: var(--color-text-primary);
+}
+
+/* Общий press: отдельный scale не перезаписывает transform компонентов. */
+:where(button, [role="button"], .btn) {
+  scale: 1;
+  transition: scale var(--button-press-duration) ease;
+}
+:where(button, [role="button"], .btn):not(:disabled):not([aria-disabled="true"]):active {
+  scale: var(--button-press-scale);
+}
+
+/* Кнопка: здесь только вёрстка и применение настроек.
+   Все цвета вариантов и обеих тем — в variables.css, блок «ЦВЕТА КНОПОК».
+   По умолчанию: primary / accent / fill / md. */
+.btn {
+  --btn-height: var(--button-height-md);
+  --btn-padding: var(--button-padding-md);
+  --btn-font: var(--button-font-md);
+  --btn-icon: var(--button-icon-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: var(--btn-height);
+  padding: max(
+      0px,
+      calc(
+        (var(--btn-height) - var(--btn-font) * var(--button-line-height)) / 2 -
+          var(--button-border-width)
+      )
+    )
+    var(--btn-padding);
+  gap: var(--button-gap);
+  border: var(--button-border-width) solid var(--btn-border);
+  border-radius: var(--button-radius);
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  font-family: var(--font-main);
+  font-size: var(--btn-font);
+  font-weight: var(--button-font-weight);
+  line-height: var(--button-line-height);
+  text-align: center;
+  overflow-wrap: anywhere;
+  cursor: var(--cursor-link);
+  transition:
+    background-color var(--button-transition) ease,
+    border-color var(--button-transition) ease,
+    color var(--button-transition) ease,
+    scale var(--button-press-duration) ease;
+}
+/* Outline: размываем фон сайта под прозрачной заливкой кнопки. */
+.btn--outline {
+  -webkit-backdrop-filter: blur(var(--button-outline-blur));
+  backdrop-filter: blur(var(--button-outline-blur));
+}
+
+/* Brand / Telegram / fill. Button 38: https://csspro.com/css-3d-buttons */
+.btn--brand-telegram {
+  /* Без бордера inset-тень доходит до края и не оставляет синий контур.
+     Общий padding .btn учитывает эту толщину, сохраняя высоту кнопки. */
+  --button-border-width: 0px;
+  --btn-bg: var(--button-telegram-bg);
+  --btn-bg-hover: var(--button-telegram-bg);
+  --btn-text: var(--button-telegram-text);
+  --btn-text-hover: var(--button-telegram-text);
+  border: none;
+  border-radius: 999px;
+  background-image: var(--button-telegram-gradient);
+  box-shadow: var(--button-telegram-inset);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  transition: filter var(--button-press-duration) ease,
+    scale var(--button-press-duration) ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn--brand-telegram:hover { filter: brightness(var(--button-telegram-hover-brightness)); }
+}
+@media (hover: none), (pointer: coarse) {
+  .btn--brand-telegram:active { filter: brightness(var(--button-telegram-hover-brightness)); }
+}
+@media (hover: hover) and (pointer: fine) {
+.btn:hover {
+  background-color: var(--btn-bg-hover);
+  color: var(--btn-text-hover);
+  border-color: var(--btn-border-hover);
+  text-decoration: none;
+}
+}
+@media (hover: none), (pointer: coarse) {
+.btn:active {
+  background-color: var(--btn-bg-hover);
+  color: var(--btn-text-hover);
+  border-color: var(--btn-border-hover);
+  text-decoration: none;
+}
+}
+
+/* Размер: минимальная высота, горизонтальные отступы, текст и иконка. */
+.btn--xs {
+  --btn-height: var(--button-height-xs);
+  --btn-padding: var(--button-padding-xs);
+  --btn-font: var(--button-font-xs);
+  --btn-icon: var(--button-icon-xs);
+}
+.btn--sm {
+  --btn-height: var(--button-height-sm);
+  --btn-padding: var(--button-padding-sm);
+  --btn-font: var(--button-font-sm);
+  --btn-icon: var(--button-icon-sm);
+}
+.btn--md {
+  --btn-height: var(--button-height-md);
+  --btn-padding: var(--button-padding-md);
+  --btn-font: var(--button-font-md);
+  --btn-icon: var(--button-icon-md);
+}
+.btn--l {
+  --btn-height: var(--button-height-l);
+  --btn-padding: var(--button-padding-l);
+  --btn-font: var(--button-font-l);
+  --btn-icon: var(--button-icon-l);
+}
+.btn--xl {
+  --btn-height: var(--button-height-xl);
+  --btn-padding: var(--button-padding-xl);
+  --btn-font: var(--button-font-xl);
+  --btn-icon: var(--button-icon-xl);
+}
+
+.btn > .icon,
+.btn__telegram-icon {
+  flex: none;
+  width: var(--btn-icon);
+  height: var(--btn-icon);
+}
+
+/* ССЫЛКИ: общий компонент. Настройки --link-* — в конце variables.css.
+   Пример: <a class="link link--accent" href="…">Читать кейс</a>.
+   Геометрия карточек и разделов остаётся в main.css; .btn сюда не входит. */
+/* Наведение мгновенное; после ухода курсора цвет возвращается за --link-transition.
+   Переход затрагивает только цвета, не размеры и не zoom изображений. */
+.link:not(.btn),
+.theme-switch,
+.lang-btn {
+  transition:
+    color var(--link-transition) ease,
+    border-color var(--link-transition) ease,
+    text-decoration-color var(--link-transition) ease,
+    scale var(--button-press-duration) ease;
+}
+
+.link:not(.btn) {
+  color: var(--_link-color, var(--link-color));
+  text-decoration-line: var(--_link-decoration, var(--link-decoration));
+  text-decoration-color: var(
+    --_link-underline-color,
+    var(--link-underline-color)
+  );
+  text-decoration-thickness: var(
+    --_link-underline-width,
+    var(--link-underline-width)
+  );
+  text-underline-offset: var(--_link-offset, var(--link-underline-offset));
+}
+
+/* Обычные ссылки внутри текста, под кейсами и ссылка на презентацию. */
+.link--inline {
+  --_link-underline-width: var(--link-inline-underline-width);
+}
+
+/* Акцентные синие ссылки — опциональный вариант компонента. */
+.link--accent {
+  --_link-color: var(--link-color-accent);
+  --_link-underline-color: var(--link-accent-underline-color);
+  --_link-offset: var(--link-accent-underline-offset);
+}
+
+/* Markdown-статьи: ссылка наследует типографику своего абзаца/заголовка. */
+.link--article {
+  font: inherit;
+  --_link-color: var(--article-link-color);
+  --_link-underline-color: var(--article-link-underline-color);
+  --link-color-hover: var(--article-link-hover-color);
+  --link-underline-color-hover: var(--article-link-underline-hover-color);
+  --_link-offset: var(--article-link-underline-offset);
+  --_link-underline-width: var(--article-link-underline-width);
+}
+
+/* Названия кейсов и кликабельные карточки — без подчёркивания. */
+.link--plain,
+.link--card,
+.link--nav {
+  --_link-decoration: none;
+}
+
+/* Меню: его шрифт и размещение задаёт адаптивная навигация. */
+.link--nav {
+  --_link-color: var(--color-text-secondary-alpha);
+}
+.link--nav.active {
+  --_link-color: var(--link-color);
+}
+
+/* Крупные контакты: прежняя типографика, теперь настраивается через --link-display-*. */
+.link--display {
+  font-family: var(--link-display-font);
+  font-variation-settings: var(--link-display-axes);
+  font-optical-sizing: auto;
+  font-stretch: var(--link-display-stretch);
+  font-size: var(--link-display-size);
+  font-weight: var(--link-display-weight);
+  line-height: var(--link-display-line-height);
+  letter-spacing: var(--link-display-letter-spacing);
+  text-transform: var(--link-display-transform);
+  --_link-offset: var(--link-display-underline-offset);
+  --_link-underline-color: var(--link-display-underline-color);
+  --_link-underline-width: var(--link-display-underline-width);
+}
+@media (hover: hover) and (pointer: fine) {
+/* Общий hover; никаких новых границ и изменений размеров при наведении. */
+.link:not(.btn):hover,
+.theme-switch:hover,
+.lang-btn:not(.btn):hover {
+  color: var(--link-color-hover);
+  border-color: var(--link-color-hover);
+  text-decoration-color: var(--link-underline-color-hover);
+  transition-duration: var(--link-transition-hover);
+}
+}
+@media (hover: none), (pointer: coarse) {
+/* Общий hover; никаких новых границ и изменений размеров при наведении. */
+.link:not(.btn):active,
+.theme-switch:active,
+.lang-btn:not(.btn):active {
+  color: var(--link-color-hover);
+  border-color: var(--link-color-hover);
+  text-decoration-color: var(--link-underline-color-hover);
+  transition-duration: var(--link-transition-hover);
+}
+}
+
+/* Зум меню не меняет размеры строк и не сдвигает соседние пункты.
+   Зум и цвет: мгновенный hover и возврат за --link-transition. */
+.fixed-nav .link--nav {
+  transform-origin: left center;
+  transition:
+    color var(--link-transition) ease,
+    border-color var(--link-transition) ease,
+    text-decoration-color var(--link-transition) ease,
+    transform var(--link-transition) ease;
+}
+@media (hover: hover) and (pointer: fine) {
+.fixed-nav .link--nav:hover {
+  transition-duration: var(--link-transition-hover);
+}
+}
+@media (hover: none), (pointer: coarse) {
+.fixed-nav .link--nav:active {
+  transition-duration: var(--link-transition-hover);
+}
+}
+@media (hover: hover) and (pointer: fine) {
+.fixed-nav .link--nav:hover {
+    transform: scale(var(--link-nav-hover-scale));
+  }
+}
+@media (hover: none), (pointer: coarse) {
+.fixed-nav .link--nav:active {
+    transform: scale(var(--link-nav-hover-scale));
+  }
+}
+
+@media (max-width: 1024px) {
+  .fixed-nav .link--nav {
+    transform-origin: center;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+@media (hover: hover) and (pointer: fine) {
+.fixed-nav .link--nav:hover {
+    transform: none;
+  }
+}
+@media (hover: none), (pointer: coarse) {
+.fixed-nav .link--nav:active {
+    transform: none;
+  }
+}
+}
+
+.hero-image {
+  width: var(--hero-avatar-size);
+  max-width: 100%;
+  margin-bottom: var(--space-4);
+}
+
+.avatar {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: var(--hero-avatar-ratio);
+  padding: var(--space-0);
+  overflow: hidden;
+  border: var(--border-width-none);
+  border-radius: var(--radius-l);
+  background: transparent;
+  color: var(--color-text-on-media);
+  font: inherit;
+  cursor: var(--cursor-link);
+}
+
+.avatar:focus-visible {
+  outline: var(--outline-width-focus) solid var(--color-focus-ring);
+  outline-offset: 4px;
+}
+
+.avatar__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar__control {
+  position: absolute;
+  left: 50%;
+  bottom: var(--space-4);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  height: var(--control-size-play);
+  padding: var(--space-0)
+    calc(
+      (var(--control-size-play) - var(--icon-size-play)) / 2 -
+        var(--border-width-thin)
+    );
+  border: var(--border-width-thin) solid var(--color-border-play);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-play);
+  backdrop-filter: blur(var(--blur-sm));
+  -webkit-backdrop-filter: blur(var(--blur-sm));
+  pointer-events: none;
+}
+
+.avatar__play {
+  flex: none;
+  width: var(--icon-size-play);
+  height: var(--icon-size-play);
+}
+
+/* Схлопываем только текст и зазор: плашка плавно превращается в круг. */
+.avatar__time {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-left: var(--space-1-5);
+  opacity: 1;
+  transition:
+    grid-template-columns var(--duration-normal) ease,
+    margin-left var(--duration-normal) ease,
+    opacity var(--duration-fast) ease;
+}
+
+.avatar__duration {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: var(--fs-base);
+  font-weight: var(--fw-regular);
+  line-height: var(--main-copy-line-height, var(--lh-single));
+}
+
+.avatar:focus-visible .avatar__time {
+  grid-template-columns: 0fr;
+  margin-left: var(--space-0);
+  opacity: 0;
+}
+@media (hover: hover) and (pointer: fine) {
+.avatar:hover .avatar__time {
+    grid-template-columns: 0fr;
+    margin-left: var(--space-0);
+    opacity: 0;
+  }
+}
+@media (hover: none), (pointer: coarse) {
+.avatar:active .avatar__time {
+    grid-template-columns: 0fr;
+    margin-left: var(--space-0);
+    opacity: 0;
+  }
+}
+
+
+.avatar__caption {
+  margin-top: var(--space-1);
+  color: var(--color-text-tertiary);
+  font-size: var(--fs-base);
+  line-height: var(--main-copy-line-height, var(--lh-compact));
+  text-align: center;
+}
+
+.about-video {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  width: min(var(--about-video-width), calc(100vw - 96px));
+  max-width: none;
+  max-height: calc(100dvh - 112px);
+  margin: auto;
+  padding: var(--space-0);
+  overflow: visible;
+  border: var(--border-width-none);
+  border-radius: var(--radius-sm);
+  background: transparent;
+}
+
+.about-video__hint {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  margin: var(--space-0);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-hint);
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  color: var(--color-text-on-media);
+  font-size: var(--fs-base);
+  text-align: center;
+  pointer-events: none;
+}
+
+.about-video__player {
+  display: block;
+  width: 100%;
+  max-height: calc(100dvh - 112px);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-video);
+  box-shadow: var(--shadow-video);
+}
+
+/* Общий стиль крестиков видео и кейсов: размер, цвет, blur и hover. */
+.modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: var(--space-0);
+  right: calc(-1 * (var(--control-size-video-close) + var(--space-2)));
+  z-index: 1;
+  width: var(--control-size-video-close);
+  height: var(--control-size-video-close);
+  padding: var(--space-0);
+  border: var(--border-width-none);
+  border-radius: var(--radius-circle);
+  background: var(--color-surface-close);
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  color: var(--color-text-on-media);
+  font: inherit;
+  line-height: var(--lh-single);
+  cursor: var(--cursor-link);
+}
+@media (hover: hover) and (pointer: fine) {
+.modal-close:hover {
+  color: var(--color-text-on-media);
+  background: var(--color-surface-close-hover);
+}
+}
+@media (hover: none), (pointer: coarse) {
+.modal-close:active {
+  color: var(--color-text-on-media);
+  background: var(--color-surface-close-hover);
+}
+}
+
+.modal-close .icon {
+  width: var(--icon-size-video-close);
+  height: var(--icon-size-video-close);
+}
+
+/* Только положение видео на телефоне отличается от кейса. */
+/* .about-video__close {
+  top: -40px;
+} */
+
+@media (prefers-reduced-motion: reduce) {
+  .avatar__time {
+    transition: none;
+  }
+}
+
+/* --------------------------------------------
+   Навигация: логотип, ссылки, переключатели
+   -------------------------------------------- */
+.fixed-nav .logo {
+  display: flex;
+  align-items: center;
+  min-height: var(--space-6);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--ls-tight);
+  margin-bottom: var(--space-3);
+  cursor: var(--cursor-link);
+  border: none;
+  background: none;
+  color: var(--color-text-primary);
+  padding: var(--space-0);
+}
+
+.nav-mark {
+  width: var(--nav-mark-width);
+  height: auto;
+}
+
+/* Планшет и десктоп: крестик снаружи, на одной верхней границе с видео. */
+@media (min-width: 768px) {
+  .about-video__close {
+    top: var(--space-0);
+  }
+}
+
+.menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  padding: var(--space-2) var(--space-0);
+  border: none;
+  background: none;
+  color: var(--color-text-primary);
+  cursor: var(--cursor-link);
+}
+
+.menu-toggle {
+  gap: var(--space-1);
+  font-family: inherit;
+  font-size: var(--fs-base);
+  font-weight: var(--fw-regular);
+  letter-spacing: inherit;
+  white-space: nowrap;
+}
+.menu-toggle .menu-toggle__chevron {
+  --icon-url: url("../assets/icons/chevron-down-20.svg");
+}
+.menu-toggle[aria-expanded="true"] .menu-toggle__chevron {
+  --icon-url: url("../assets/icons/chevron-up-20.svg");
+}
+/* Вне плавающей шапки переключателям не нужна размытая подложка. */
+.site-header .header-outline {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.fixed-nav nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0);
+}
+
+.fixed-nav nav a {
+  padding: var(--space-0);
+}
+
+/* Естественная ширина кнопок; общую ось задаёт .fixed-preferences. */
+.theme-switch,
+.lang-btn {
+  text-align: center;
+}
+
+.theme-switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  cursor: var(--cursor-link);
+  background: none;
+  border: none;
+  padding: var(--space-0);
+  color: var(--color-text-primary);
+}
+
+.menu-toggle .icon,
+.theme-switch .icon {
+  width: var(--icon-size-navigation);
+  height: var(--icon-size-navigation);
+}
+
+/* Размер только стрелки «Наверх», не ссылок и обложек. */
+.back-to-top .icon {
+  width: var(--icon-size-back-to-top);
+  height: var(--icon-size-back-to-top);
+}
+
+/* Самостоятельный вариант кнопки. Цвета --back-to-top-* в variables.css. */
+.btn.back-to-top {
+  --btn-bg: var(--back-to-top-bg);
+  --btn-bg-hover: var(--back-to-top-bg-hover);
+  --btn-text: var(--back-to-top-text);
+  --btn-text-hover: var(--back-to-top-text-hover);
+  --btn-border: var(--back-to-top-stroke);
+  --btn-border-hover: var(--back-to-top-stroke-hover);
+  --btn-height: 28px;
+  height: var(--btn-height);
+  padding-block: var(--space-0);
+  --btn-padding: var(--space-6);
+  width: 36px;
+  margin: var(--space-6) auto var(--space-0);
+}
+
+.lang-btn {
+  font-size: var(--fs-base);
+  font-weight: var(--fw-regular);
+  background: none;
+  border: none;
+  color: var(--lang-color, var(--color-text-secondary-alpha));
+  cursor: var(--cursor-link);
+  padding: var(--space-0);
+}
+
+.lang-btn.active {
+  color: var(--color-text-primary);
+}
+
+/* Обо мне: фото, вступление и остальные блоки одной ширины — --about-panel-width.
+   На телефонах все блоки занимают ширину страницы с общими полями 16px. */
+/* Фото сохраняет пропорции файла; отступы совпадают с сеткой раздела. */
+.about-photo {
+  width: var(--about-panel-width);
+  max-width: 100%;
+  margin: var(--space-6) auto var(--space-0);
+}
+.about-photo__link {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}
+.about-photo__image {
+  transition: transform var(--duration-long) ease;
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+}
+.about-intro {
+  width: var(--about-panel-width);
+  max-width: 100%;
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-8);
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  font-size: var(--fs-small);
+  line-height: var(--main-copy-line-height, var(--lh-heading));
+  color: var(--color-text-secondary);
+}
+.about-intro p + p {
+  margin-top: var(--space-4);
+}
+#aboutContent {
+  width: var(--about-panel-width);
+  max-width: 100%;
+  margin-inline: auto;
+}
+@media (max-width: 767px) {
+  .about-photo, .about-intro, #aboutContent { width: 100%; }
+}
+#about .about-panel {
+  padding: var(--space-0);
+  border: none;
+  margin-bottom: var(--space-8);
+}
+.about-heading {
+  font-weight: var(--fw-medium);
+  margin-bottom: var(--space-2);
+}
+.about-row {
+  display: grid;
+  /* Подпись — по содержимому (hug), значение — на оставшуюся ширину (fill). */
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--space-4);
+  padding: var(--space-2) var(--space-0);
+  border-bottom: var(--border-width-thin) solid var(--color-border-tertiary);
+}
+.about-label {
+  color: var(--color-text-secondary);
+  font-weight: var(--fw-regular);
+  overflow-wrap: anywhere;
+}
+.about-value {
+  min-width: 0;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+.about-row:last-child {
+  border-bottom: none;
+}
+.experience-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+.experience-avatar {
+  display: block;
+  flex: 0 0 var(--experience-avatar-size);
+  width: var(--experience-avatar-size);
+  height: var(--experience-avatar-size);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.experience-avatar img,
+.experience-avatar > .media-slot {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.experience-copy { min-width: 0; overflow-wrap: anywhere; }
+.about-tools-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--about-tools-lines);
+  line-clamp: var(--about-tools-lines);
+  overflow: hidden;
+  color: var(--color-text-secondary);
+}
+.about-tools-text.is-expanded {
+  display: block;
+  -webkit-line-clamp: unset;
+  line-clamp: none;
+}
+.about-tools-text p { margin: var(--space-0); }
+/* Общий компонент раскрытия для summary и button. Цвет/hover — от link. */
+.disclosure-toggle {
+  --_link-color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: fit-content;
+  padding: var(--space-0);
+  border: none;
+  background: none;
+  font: inherit;
+  cursor: var(--cursor-link);
+}
+.about-tools-toggle[hidden],
+.about-tools-toggle[aria-expanded="false"] .about-tools__collapse,
+.about-tools-toggle[aria-expanded="true"] .about-tools__expand { display: none; }
+.about-tools-toggle { margin-top: var(--space-1); }
+.disclosure-toggle::-webkit-details-marker { display: none; }
+.disclosure-toggle .icon {
+  width: var(--disclosure-icon-size);
+  height: var(--disclosure-icon-size);
+}
+.disclosure-toggle .icon {
+  --icon-url: url("../assets/icons/chevron-down-13.svg");
+}
+.disclosure-toggle[aria-expanded="true"] .icon {
+  --icon-url: url("../assets/icons/chevron-up-13.svg");
+}
+.experience-list {
+  margin-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.experience-heading {
+  margin-bottom: var(--space-0);
+}
+.experience-date {
+  color: var(--color-text-tertiary);
+}
+.icon--down {
+  --icon-url: url("../assets/icons/chevron-down-13.svg");
+}
+
+/* --------------------------------------------
+   Selected works
+   -------------------------------------------- */
+/* Изображение имеет собственную ширину из MD; описание всегда по центру.
+   На маленьких экранах обе ширины ограничены доступной колонкой сайта. */
+#works {
+  width: 100%;
+  max-width: 100%;
+  margin: var(--space-0) auto;
+}
+.works-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+/* Архив — продолжение «Работ». Разделители есть только между карточками. */
+.archive {
+  width: var(--archive-width);
+  max-width: 100%;
+  margin: var(--space-16) auto var(--space-0);
+  font-size: var(--fs-small);
+  line-height: var(--main-copy-line-height, var(--lh-heading));
+}
+.archive-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+.archive-header .section-label { margin: var(--space-0); text-align: left; }
+.archive-hint { text-align: right; color: var(--color-text-tertiary); }
+.archive-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-6);
+  overflow-wrap: anywhere;
+}
+.archive-card + .archive-card {
+  margin-top: var(--space-10);
+  padding-top: var(--space-10);
+  border-top: var(--border-width-thin) solid var(--color-border-subtle);
+}
+.archive-copy { min-width: 0; }
+.archive-detail { color: var(--color-text-secondary); }
+.archive-action { margin-top: var(--space-8); }
+.archive-cover {
+  display: block;
+  /* Единый размер обложек независимо от текста; на телефоне — в пределах колонки. */
+  width: min(100%, var(--archive-cover-width));
+  justify-self: end;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}
+.archive-cover > .media-slot { width: 100%; height: 100%; aspect-ratio: 16 / 9; }
+.archive-cover .archive-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-long) ease;
+}
+@media (max-width: 767px) {
+  .archive { width: 100%; }
+  /* На телефонах сохраняем две колонки: текст слева, обложка 16:9 справа. */
+  .archive-card { gap: var(--space-4); }
+}
+
+.work-item {
+  width: 100%;
+  min-width: 0;
+  color: var(--color-text-primary);
+}
+.work-item__frame {
+  display: block;
+  width: min(100%, var(--work-image-width, 100%));
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}
+.work-item :is(img, video) {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform var(--duration-long) ease;
+}
+@media (hover: hover) and (pointer: fine) {
+.work-item:hover .work-item__frame :is(img, video),
+.archive-card:hover .archive-image,
+.about-photo__link:hover .about-photo__image {
+  transform: scale(1.06);
+}
+}
+@media (hover: none), (pointer: coarse) {
+.work-item:active .work-item__frame :is(img, video),
+.archive-card:active .archive-image,
+.about-photo__link:active .about-photo__image {
+  transform: scale(1.06);
+}
+}
+.work-info {
+  width: var(--case-description-width);
+  max-width: 100%;
+  margin: var(--space-4) auto var(--space-0);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-regular);
+  line-height: var(--main-copy-line-height, var(--lh-heading));
+  overflow-wrap: anywhere;
+}
+.work-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+.work-title-heading {
+  font: inherit;
+  min-width: 0;
+  font-weight: var(--fw-medium);
+}
+.work-title {
+  font: inherit;
+}
+.work-year {
+  flex-shrink: 0;
+  color: var(--color-text-tertiary);
+}
+.work-links {
+  margin-top: var(--space-3);
+}
+.work-description {
+  margin-top: var(--space-1);
+  color: var(--color-text-secondary);
+}
+.work-tags {
+  margin-top: var(--space-3);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  color: var(--color-text-tertiary);
+}
+/* Некликабельные теги; цвет каждого задаётся из site.md. */
+.work-tag {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: var(--tag-height);
+  max-width: 100%;
+  padding: var(--space-0) var(--tag-padding-inline);
+  border-radius: var(--tag-radius);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-regular);
+  line-height: var(--main-copy-line-height, var(--lh-heading));
+  overflow-wrap: anywhere;
+  color: color-mix(in srgb, var(--tag-color, var(--tag-blue)) var(--tag-text-strength), var(--tag-text-mix));
+  background: color-mix(in srgb, var(--tag-color, var(--tag-blue)) var(--tag-bg-strength), var(--tag-bg-mix));
+}
+.work-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+}
+.works-status {
+  text-align: center;
+  font-size: var(--fs-small);
+  color: var(--color-text-secondary);
+}
+.works-status[hidden] {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .work-item :is(img, video),
+  .archive-cover .archive-image,
+  .about-photo__image {
+    transition: none;
+  }
+@media (hover: hover) and (pointer: fine) {
+.work-item:hover .work-item__frame :is(img, video),
+  .archive-card:hover .archive-image,
+  .about-photo__link:hover .about-photo__image {
+    transform: none;
+  }
+}
+@media (hover: none), (pointer: coarse) {
+.work-item:active .work-item__frame :is(img, video),
+  .archive-card:active .archive-image,
+  .about-photo__link:active .about-photo__image {
+    transform: none;
+  }
+}
+}
+
+/* Статья в модалке: прозрачный фон страницы, тень под поверхностью.
+   Крестик вне поверхности; собственная прокрутка оставляет его на месте. */
+.case-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+  width: min(var(--case-modal-width), calc(100% - calc(var(--space-16) * 2)));
+  max-width: none;
+  max-height: calc(100dvh - calc(var(--space-8) * 2));
+  margin: auto;
+  padding: var(--space-0);
+  overflow: visible;
+  border: none;
+  background: transparent;
+  color: var(--color-text-primary);
+}
+.case-modal[open] {
+  display: flex;
+  flex-direction: column;
+}
+.case-modal::backdrop {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.case-modal__close-action {
+  display: none;
+}
+@media (min-width: 768px) {
+  .case-modal {
+    width: min(var(--case-modal-width), calc(100% - var(--case-modal-gutter) * 2));
+    /* Явный центр окна, независимо от высоты содержимого. */
+    top: 50%;
+    bottom: auto;
+    margin-block: 0;
+    transform: translateY(-50%);
+  }
+}
+/* Планшеты с плавающей шапкой: больше воздуха над и под модалкой. */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .case-modal {
+    max-height: calc(100dvh - calc(var(--space-16) * 2));
+  }
+}
+.case-modal__body {
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  padding: var(--article-padding);
+  border-radius: var(--radius-l);
+  background: var(--color-surface-case);
+  box-shadow: var(--shadow-case);
+}
+[data-theme="dark"] .case-modal__body {
+  box-shadow: none;
+  border: var(--border-width-thin) solid var(--color-border-case);
+}
+@media (min-width: 1025px) {
+  /* Скроллбар кейса только на десктопе; до 1024px — системный. */
+  :is(.case-modal__body, .case-modal__body *)::-webkit-scrollbar {
+    width: var(--case-modal-scrollbar-width);
+    height: var(--case-modal-scrollbar-width);
+  }
+  :is(.case-modal__body, .case-modal__body *)::-webkit-scrollbar-thumb {
+    background: var(--color-case-modal-scrollbar);
+  }
+  :is(.case-modal__body, .case-modal__body *)::-webkit-scrollbar-thumb:hover {
+    background: var(--color-case-modal-scrollbar-hover);
+  }
+  @supports not selector(::-webkit-scrollbar) {
+    :is(.case-modal__body, .case-modal__body *) {
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-case-modal-scrollbar) transparent;
+    }
+  }
+}
+/* Нижняя кнопка закрытия нужна только в мобильном bottom sheet. */
+@media (max-width: 767px) {
+  .case-modal__close-action {
+    display: flex;
+    flex-shrink: 0;
+    align-self: center;
+    width: auto;
+    max-width: 100%;
+    margin-top: var(--space-1);
+  }
+}
+/* Телефон: одна кнопка закрытия во всю ширину поверхности. */
+@media (max-width: 767px) {
+  .case-modal__close {
+    display: none;
+  }
+  .case-modal__close-action {
+    width: 100%;
+  }
+}
+@media (max-width: 600px) {
+  .case-modal {
+    width: calc(100% - var(--space-8));
+    max-height: calc(100dvh - calc(var(--space-10) * 2));
+    margin-bottom: var(--space-4);
+  }
+  .case-modal__body {
+    padding: var(--article-padding-mobile);
+  }
+}
+
+/* Дизайн-артефакты: естественные пропорции медиа, без обрезки.
+   Две колонки; при недостаточной ширине на мобильном автоматически остаётся одна. */
+.gallery-grid {
+  columns: var(--gallery-column-min) 2;
+  column-gap: var(--space-3);
+}
+.gallery-item {
+  display: inline-block;
+  width: 100%;
+  break-inside: avoid;
+  margin-bottom: var(--space-4);
+  vertical-align: top;
+}
+.gallery-item > a {
+  display: block;
+  position: relative;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.gallery-item img,
+.gallery-item video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+}
+.gallery-item video {
+  background: var(--color-surface-video);
+}
+.gallery-item figcaption,
+.about-photo figcaption {
+  padding: var(--space-1-5);
+  padding-left: var(--space-0);
+  font-size: var(--fs-small);
+  line-height: var(--main-copy-line-height, var(--lh-heading));
+  color: var(--color-text-tertiary);
+}
+.about-photo figcaption {
+  padding-inline: var(--space-0);
+  text-align: center;
+}
+.avatar__image,
+.gallery-item img,
+.gallery-item video,
+.publication-image img {
+  transition: transform var(--duration-long) ease;
+}
+@media (hover: hover) and (pointer: fine) {
+.avatar:hover .avatar__image,
+.gallery-item > a:hover :is(img, video),
+.publication-card:hover .publication-image img {
+  transform: scale(1.06);
+}
+}
+@media (hover: none), (pointer: coarse) {
+.avatar:active .avatar__image,
+.gallery-item > a:active :is(img, video),
+.publication-card:active .publication-image img {
+  transform: scale(1.06);
+}
+}
+@media (prefers-reduced-motion: reduce) {
+  .avatar__image,
+  .gallery-item img,
+  .gallery-item video,
+  .publication-image img {
+    transition: none;
+  }
+@media (hover: hover) and (pointer: fine) {
+.avatar:hover .avatar__image,
+  .gallery-item > a:hover :is(img, video),
+  .publication-card:hover .publication-image img {
+    transform: none;
+  }
+}
+@media (hover: none), (pointer: coarse) {
+.avatar:active .avatar__image,
+  .gallery-item > a:active :is(img, video),
+  .publication-card:active .publication-image img {
+    transform: none;
+  }
+}
+}
+/* Сначала Fancybox измеряет доступную область, затем вписывает видео
+   по его пропорциям. Убираем библиотечный потолок 960 × 540px. */
+.fancybox__container .has-html5video .fancybox__content {
+  width: 100%;
+  height: 100%;
+}
+
+/* Видео артефактов без controls: жест получает обёртка слайда.
+   Fancybox исключает сам VIDEO из свайпов; плееры с controls не затрагиваем. */
+.fancybox__container .artifact-viewer-video:not([controls]) {
+  pointer-events: none;
+}
+
+/* Отступы панели просмотрщика: сверху/справа 8px, между кнопками 4px. */
+.fancybox__container .fancybox__toolbar {
+  padding: var(--space-2) var(--space-2) var(--space-0) var(--space-0);
+}
+.fancybox__container .fancybox__toolbar__column.is-right {
+  gap: var(--space-1);
+}
+
+/* Скругление кнопок лупы и закрытия во всех адаптивах просмотрщика. */
+.fancybox__container .fancybox__toolbar .f-button {
+  border-radius: var(--radius-2xl);
+  /* Тот же blur, что у крестика видео «Обо мне». */
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
+}
+
+/* Кнопки навигации — по 8px от соответствующего края просмотрщика. */
+.fancybox__container .fancybox__nav .f-button[data-carousel-prev] {
+  left: var(--space-2) !important; /* Перекрывает позиционирование Fancybox. */
+  right: auto;
+}
+.fancybox__container .fancybox__nav .f-button[data-carousel-next] {
+  right: var(--space-2) !important; /* Перекрывает позиционирование Fancybox. */
+  left: auto;
+}
+
+/* Уменьшаем только SVG шевронов; область нажатия Fancybox остаётся прежней. */
+.fancybox__container :is([data-carousel-prev], [data-carousel-next]) svg {
+  width: var(--icon-size-viewer);
+  height: var(--icon-size-viewer);
+}
+
+/* Контакты: крупные узкие ссылки как раньше, вся композиция по центру. */
+#contacts {
+  text-align: center;
+  container-type: inline-size;
+}
+/* Описания главных секций: близко к заголовку, общая ширина и primary цвет. */
+.section-label:has(+ .section-hint:not([hidden])) {
+  margin-bottom: var(--space-1);
+}
+.section-hint {
+  font-family: var(--font-main);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-normal);
+  text-align: center;
+  width: var(--section-description-width);
+  max-width: 100%;
+  color: var(--color-text-secondary);
+  margin: var(--space-0) auto var(--space-10);
+}
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+/* Футер из старого портфолио: знак СФ, метаданные и записка. */
+#footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-0);
+  margin-top: var(--space-0);
+  margin-bottom: var(--space-4);
+}
+.footer-mark {
+  width: var(--footer-mark-width);
+  height: var(--footer-mark-height);
+  object-fit: contain;
+}
+/* От логотипа до текста и между текстовыми блоками — space-4. */
+#footer .footer-meta {
+  margin-top: var(--space-6);
+}
+#footer .footer-note {
+  margin-top: var(--space-3);
+}
+[data-theme="dark"] .nav-mark {
+  filter: invert(1);
+}
+.footer-meta,
+.footer-note {
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-roboto);
+  font-weight: var(--fw-regular);
+  font-variation-settings: var(--font-axes-footer);
+  font-optical-sizing: auto;
+  font-stretch: var(--font-stretch-condensed);
+  font-size: var(--fs-footer);
+  line-height: var(--lh-single);
+  letter-spacing: var(--ls-neg-3pct);
+  text-transform: uppercase;
+}
+#footer a {
+  font: inherit;
+  letter-spacing: inherit;
+  font-variation-settings: inherit;
+  font-optical-sizing: inherit;
+  font-stretch: inherit;
+}
+
+/* --------------------------------------------
+   Адаптив (каркас — в layout.css)
+   -------------------------------------------- */
+@media (max-width: 375px) {
+  section {
+    padding: var(--space-10) var(--space-0);
+  }
+}
+
+@media (max-width: 320px) {
+  section {
+    padding: var(--space-8) var(--space-0);
+  }
+}
+
+/* Обычная Markdown-статья. Все основные параметры — в variables.css. */
+.case-modal__content {
+  width: 100%;
+  margin-inline: auto;
+  overflow-wrap: anywhere;
+  font-family: var(--article-font-body);
+  font-size: var(--article-font-size);
+  line-height: var(--article-line-height);
+  font-weight: var(--fw-regular);
+  color: var(--article-text-color);
+}
+.case-modal__content > * + * {
+  margin-top: var(--article-block-gap);
+}
+.case-modal__content :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--article-heading-color);
+  font-family: var(--article-font-heading);
+  font-weight: var(--article-heading-weight);
+  line-height: var(--article-heading-line-height);
+  letter-spacing: var(--ls-tight);
+  font-variation-settings: var(--article-heading-axes);
+  font-stretch: normal;
+  font-optical-sizing: auto;
+  margin-top: var(--article-heading-gap);
+}
+.case-modal__content :is(h1, h2, h3, h4, h5, h6) + :is(p, ul, ol, blockquote, .article-table) {
+  margin-top: var(--article-heading-text-gap);
+}
+.case-modal__content h1 {
+  font-size: var(--article-h1);
+}
+.case-modal__content h2 {
+  font-size: var(--article-h2);
+}
+.case-modal__content h3 {
+  font-size: var(--article-h3);
+}
+.case-modal__content h4 {
+  font-size: var(--article-h4);
+}
+.case-modal__content h5 {
+  font-size: var(--article-h5);
+}
+.case-modal__content h6 {
+  font-size: var(--article-h6);
+}
+.case-modal__content > :first-child {
+  margin-top: 0;
+}
+.case-modal__content :is(img, video) {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  margin-inline: auto;
+  border-radius: var(--radius-sm);
+}
+/* Обёртка для просмотра фото/GIF: без оформления текстовой ссылки. */
+.case-image-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  cursor: var(--cursor-link);
+}
+.case-modal__content video {
+  width: 100%;
+}
+.case-modal__content :is(figcaption, caption) {
+  font-family: var(--article-font-body);
+  font-size: var(--article-caption-size);
+  line-height: var(--article-caption-line-height);
+  color: var(--article-caption-color);
+  margin-top: var(--space-2);
+  text-align: center;
+}
+.case-modal__content :is(ul, ol) {
+  padding-left: var(--space-6);
+}
+.case-modal__content ul {
+  list-style: disc;
+}
+.case-modal__content ol {
+  list-style: decimal;
+}
+.case-modal__content li + li,
+.case-modal__content li > :is(ul, ol) {
+  margin-top: var(--space-2);
+}
+.case-modal__content :is(strong, b) {
+  font-weight: var(--article-strong-weight);
+  color: var(--article-strong-color);
+}
+.case-modal__content em {
+  font-style: italic;
+}
+.case-modal__content blockquote {
+  border-left: var(--border-width-thin) solid var(--color-border-tertiary);
+  padding-left: var(--space-4);
+  border-width: var(--border-width-l);
+  border-color: var(--article-quote-stroke);
+}
+.case-modal__content pre {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+/* Скругление и внешняя рамка — на контейнере, скролл остаётся внутри. */
+.case-modal__content .article-table {
+  overflow-x: auto;
+  border: var(--border-width-thin) solid var(--color-border-tertiary);
+  border-radius: var(--radius-sm);
+}
+.case-modal__content table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: var(--article-font-body);
+  font-size: var(--article-font-size);
+}
+.case-modal__content :is(th, td) {
+  padding: var(--space-3);
+  border: 0;
+  border-right: var(--border-width-thin) solid var(--color-border-tertiary);
+  border-bottom: var(--border-width-thin) solid var(--color-border-tertiary);
+  text-align: left;
+  min-width: 120px;
+}
+.case-modal__content tr > :last-child {
+  border-right: 0;
+}
+.case-modal__content table > :last-child > tr:last-child > :is(th, td) {
+  border-bottom: 0;
+}
+.case-modal__content th {
+  font-weight: var(--article-table-heading-weight);
+  color: var(--article-heading-color);
+}
+.case-modal__content thead {
+  background: var(--color-surface-secondary);
+}
+.case-modal__content hr {
+  border: none;
+  border-top: var(--border-width-thin) solid var(--color-border-tertiary);
+}
+.case-retry {
+  margin-top: var(--space-4);
+  text-decoration: underline;
+}
+/* Узкая колонка для чтения, широкие самостоятельные медиа.
+   На телефонах сохраняется прежняя ширина всех блоков. */
+@media (min-width: 768px) {
+  .case-modal__body {
+    padding-inline: var(--article-media-padding);
+  }
+  .case-modal__content > * {
+    width: 100%;
+    margin-inline: auto;
+    box-sizing: border-box;
+  }
+  .case-modal__content > :not(.article-media) {
+    max-width: var(--article-content-width);
+  }
+  .case-modal__content > .article-media {
+    max-width: none;
+  }
+  .case-modal__content > .article-media :is(img, video) {
+    width: 100%;
+  }
+  .case-modal__content > .article-media > figcaption {
+    max-width: var(--article-content-width);
+    margin-inline: auto;
+  }
+}
+/* Компактная иерархия заголовков только в мобильной статье кейса. */
+@media (max-width: 767px) {
+  .case-modal__content h1 { font-size: var(--article-h1-mobile); }
+  .case-modal__content h2 { font-size: var(--article-h2-mobile); }
+  .case-modal__content h3 { font-size: var(--article-h3-mobile); }
+  .case-modal__content h4 { font-size: var(--article-h4-mobile); }
+  .case-modal__content h5 { font-size: var(--article-h5-mobile); }
+  .case-modal__content h6 { font-size: var(--article-h6-mobile); }
+}
+#heroDescription strong {
+  font-weight: var(--fw-bold);
+}
+
+/* Мобильный первый экран — узкая колонка 200px по референсу.
+   Остальные блоки по-прежнему занимают ширину страницы с полями 16px. */
+@media (max-width: 1024px) {
+  :root {
+    --hero-avatar-size: var(--mobile-hero-width);
+  }
+  #hero {
+    width: var(--mobile-hero-width);
+    max-width: 100%;
+    justify-content: center;
+    min-height: calc(100svh - var(--mobile-header-height) - var(--mobile-header-offset));
+    /* Верхний и нижний padding берём из общего section, без обнуления сверху. */
+  }
+  .fixed-nav nav a {
+    text-rendering: optimizeLegibility;
+    font-family: var(--font-section-heading);
+    font-variation-settings: normal;
+    font-stretch: normal;
+    font-size: var(--fs-mobile-display);
+    font-weight: var(--fw-bold);
+    line-height: var(--lh-single);
+    letter-spacing: var(--ls-normal);
+    text-transform: uppercase;
+  }
+  #heroDescription,
+  #hero .hero-sub,
+  #hero .hero-actions {
+    width: 100%;
+  }
+
+  .fixed-nav .logo {
+    margin-bottom: var(--space-0);
+  }
+  .menu-toggle {
+    display: flex;
+    align-self: auto;
+    padding: var(--space-1) var(--space-0);
+  }
+  .fixed-lang .lang-btn.active {
+    display: none;
+  }
+  .fixed-nav.is-open nav {
+    visibility: visible;
+    padding-block: var(--space-4);
+    transition-delay: 0s;
+  }
+  .fixed-nav nav {
+    display: flex;
+    min-height: 0;
+    visibility: hidden;
+    transition: padding-block var(--mobile-header-transition) ease,
+      visibility 0s var(--mobile-header-transition);
+    position: static;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    align-self: stretch;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* Прокрутка на низком экране доступна, но полоса не мелькает при анимации. */
+    scrollbar-width: none;
+    width: auto;
+    max-width: none;
+    max-height: calc(100dvh - var(--mobile-header-height) - var(--mobile-header-offset) - var(--space-4));
+    margin: var(--space-0);
+    padding: var(--space-0) var(--space-4);
+    gap: var(--space-2);
+    /* Zoom применяется к ширине текста, а не ко всей ширине меню. */
+    align-items: center;
+    /* Фон, blur и обводка общие с шапкой, без отдельной всплывающей панели. */
+    border: none;
+    border-radius: var(--radius-none);
+    background: transparent;
+  }
+  .fixed-nav nav::-webkit-scrollbar { display: none; }
+  .fixed-nav nav a {
+    padding: var(--space-1) var(--space-0);
+    text-align: center;
+  }
+}
+
+/* Карточки на телефонах и планшетах 768px — на всю доступную ширину.
+   На 1024px и выше действуют размеры карточек из site.md. */
+@media (max-width: 768px) {
+  #works .work-info,
+  #works .work-item__frame {
+    width: 100%;
+  }
+}
+
+/* Крупный размер заголовков — только на телефонах.
+   Планшеты от 768px и десктоп сохраняют прежний кегль. */
+@media (max-width: 767px) {
+  .section-label {
+    font-size: var(--fs-mobile-display);
+  }
+}
+
+/* Публикации: естественные пропорции изображений и masonry как у артефактов. */
+.publication-card {
+  display: inline-block;
+  width: 100%;
+  break-inside: avoid;
+  margin-bottom: var(--space-4);
+  vertical-align: top;
+}
+.publication-image {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-3);
+}
+.publication-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.publication-title {
+  color: var(--color-text-primary);
+  font-family: var(--font-main);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  line-height: var(--main-copy-line-height, var(--lh-heading));
+  letter-spacing: var(--main-copy-letter-spacing, normal);
+  text-transform: none;
+  margin-bottom: var(--space-1);
+}
+.publication-description,
+.publication-caption {
+  font-size: var(--fs-small);
+  line-height: var(--main-copy-line-height, var(--lh-heading));
+}
+.publication-description {
+  color: var(--color-text-secondary);
+}
+.publication-caption {
+  color: var(--color-text-tertiary);
+  margin-top: var(--space-1);
+}
+/* Каждый текст меняет собственный цвет: без задержки от наследования
+   анимированного цвета карточки. Исходные primary/secondary/tertiary сохраняются. */
+.publication-card[href] :is(.publication-title, .publication-description, .publication-caption) {
+  transition: color var(--link-transition) ease;
+}
+@media (hover: hover) and (pointer: fine) {
+.publication-card[href]:hover :is(.publication-title, .publication-description, .publication-caption) {
+  color: var(--link-color-hover);
+  transition-duration: var(--link-transition-hover);
+}
+}
+@media (hover: none), (pointer: coarse) {
+.publication-card[href]:active :is(.publication-title, .publication-description, .publication-caption) {
+  color: var(--link-color-hover);
+  transition-duration: var(--link-transition-hover);
+}
+}
+/* Иконка показывает действие: луна включает тёмную тему, солнце — светлую. */
+#sunIcon,
+[data-theme="dark"] #moonIcon {
+  display: none;
+}
+[data-theme="dark"] #sunIcon {
+  display: block;
+}
+
+/* Общие состояния блоков и медиа; настройки цветов — в variables.css. */
+.content-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding-block: var(--space-4);
+  width: 100%;
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-small);
+}
+.content-state p {
+  margin: 0;
+}
+.content-state .btn {
+  width: auto;
+}
+.media-state {
+  position: relative;
+}
+.media-slot {
+  display: block;
+  max-width: 100%;
+  border-radius: var(--radius-sm);
+}
+.media-state:not([data-media-state="ready"]) {
+  background: var(--media-placeholder-bg);
+  aspect-ratio: var(--media-ratio, var(--media-placeholder-ratio));
+}
+.media-state:not([data-media-state="ready"]) > :is(img, video) {
+  opacity: 0;
+}
+.media-state__message {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  color: var(--media-placeholder-text);
+  font-family: var(--font-main);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-regular);
+  line-height: var(--main-copy-line-height, var(--lh-heading));
+  text-align: center;
+  pointer-events: none;
+}
+/* По принципу Doka: световая полоса проходит по neutral-фону.
+   Анимация только во время загрузки; ошибка и готовое медиа её не наследуют. */
+:is(.content-state[data-content-state="loading"], .media-state[data-media-state="loading"], .case-skeleton__shape) {
+  border-radius: var(--radius-sm);
+  background-color: var(--media-placeholder-bg);
+  background-image: linear-gradient(100deg, transparent 30%, var(--skeleton-highlight) 50%, transparent 70%);
+  background-size: 250% 100%;
+  animation: skeleton-loading var(--skeleton-duration) ease-in-out infinite;
+}
+@keyframes skeleton-loading {
+  from { background-position: 150% 0; }
+  to { background-position: -50% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.content-state[data-content-state="loading"], .media-state[data-media-state="loading"], .case-skeleton__shape) {
+    animation: none;
+  }
+}
+/* Загрузка статьи: широкая обложка и узкая текстовая колонка, как у готового кейса. */
+.case-skeleton {
+  position: relative;
+}
+.case-skeleton__status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.case-skeleton__copy {
+  width: 100%;
+  max-width: var(--article-content-width);
+  margin-inline: auto;
+  display: grid;
+  gap: var(--space-2);
+}
+.case-skeleton__title {
+  width: 75%;
+  height: var(--space-6);
+}
+.case-skeleton__media {
+  width: 100%;
+  aspect-ratio: var(--media-placeholder-ratio);
+  margin-block: var(--article-block-gap);
+}
+.case-skeleton__line {
+  height: var(--space-3);
+}
+.case-skeleton__line--short {
+  width: 65%;
+}
+@media (max-width: 767px) {
+  .case-skeleton__copy { max-width: none; }
+}
+.media-state__message[hidden] {
+  display: none;
+}
+.avatar.media-state {
+  aspect-ratio: var(--hero-avatar-ratio);
+}
+.avatar:not([data-media-state="ready"]) .avatar__control {
+  visibility: hidden;
+}
+.about-video > .media-slot {
+  max-height: calc(100dvh - 112px);
+}
+
+.gallery-grid > .content-state {
+  column-span: all;
+}
+
+.icon--check {
+  --icon-url: url("../assets/icons/check.svg");
+}
+/* Toast — один компонент для уведомлений, тексты находятся в site.md. */
+.toast {
+  position: fixed;
+  z-index: 2000;
+  bottom: var(--space-6);
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: max-content;
+  max-width: calc(100% - var(--space-8));
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--toast-bg);
+  box-shadow: var(--toast-shadow);
+  color: var(--toast-text);
+  font-family: var(--font-main);
+  font-size: var(--fs-small);
+  line-height: var(--main-copy-line-height, var(--lh-heading));
+  opacity: 0;
+  transform: translate(-50%, var(--space-2));
+  transition:
+    opacity var(--toast-transition-duration) ease,
+    transform var(--toast-transition-duration) ease;
+  pointer-events: none;
+}
+.toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.toast[hidden] {
+  display: none;
+}
+.toast .icon {
+  width: var(--toast-icon-size);
+  height: var(--toast-icon-size);
+  color: var(--toast-success);
+}
+.toast[data-kind="error"] .icon {
+  color: var(--toast-error);
+}
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    transition: none;
+  }
+}
+
+/* Курсоры: файлы и точки клика настраиваются в variables.css.
+   Нативную полосу прокрутки не стилизуем этими правилами. */
+html { cursor: var(--cursor-default); }
+:where(p, h1, h2, h3, h4, h5, h6, li, dt, dd, figcaption, blockquote,
+       td, th, pre, code, label, textarea, [contenteditable="true"],
+       input:not([type]), input[type="text"], input[type="email"],
+       input[type="search"], input[type="password"], input[type="tel"],
+       input[type="url"], input[type="number"],
+       .about-value, .footer-meta, .footer-note, .work-year, .work-tag,
+       .experience-heading, .experience-date) {
+  cursor: var(--cursor-text);
+}
+/* Кликабельная карточка сохраняет курсор ссылки и над вложенными текстами. */
+:is(a[href], button, summary, [role="button"]),
+:is(a[href], button, summary, [role="button"]) :where(*) {
+  cursor: var(--cursor-link);
+}
+/* Особые курсоры наследуются также текстом и иконками внутри элемента. */
+#avatar {
+  --cursor-link: var(--cursor-avatar);
+}
+#contacts a[href^="mailto:" i] {
+  --cursor-link: var(--cursor-email);
+}
+
+/* Курсор закрытия на свободном фоне окна; содержимое остаётся интерактивным.
+   Нативный скроллбар не изменяем. Прозрачный промежуток самого dialog тоже закрывается. */
+html:has(#aboutVideoDialog[open], #caseDialog[open]),
+#aboutVideoDialog, #caseDialog {
+  cursor: var(--cursor-close);
+}
+.case-modal__body,
+.about-video > .media-slot,
+.about-video__player {
+  cursor: var(--cursor-default);
+}
+.modal-close,
+.case-modal__close-action,
+[data-fancybox-close] {
+  --cursor-link: var(--cursor-close);
+  cursor: var(--cursor-close);
+}
+[data-fancybox-close] * {
+  cursor: var(--cursor-close);
+}
+
+/* На сенсорных экранах feedback только при удержании пальца, без задержки отпускания. */
+@media (hover: none), (pointer: coarse) {
+  .btn, .link, .theme-switch, .lang-btn, .modal-close, .back-to-top,
+  .publication-card :is(.publication-title, .publication-description, .publication-caption),
+  .avatar__time, .avatar__image, .work-item__frame :is(img, video),
+  .archive-image, .about-photo__image, .gallery-item :is(img, video), .publication-image img {
+    transition-duration: 0s;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Телефон: кейс — bottom sheet; Fancybox остаётся выше него отдельным слоем. */
+.case-sheet-backdrop,
+.case-modal__handle { display: none; }
+@media (max-width: 767px) {
+  html.case-sheet-open { overflow: hidden; }
+  body.case-sheet-open {
+    position: fixed;
+    top: var(--case-page-offset);
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+  .case-sheet-backdrop:not([hidden]) {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: var(--color-case-sheet-backdrop);
+    animation: case-backdrop-in var(--duration-normal) ease both;
+  }
+  .case-modal {
+    inset: auto 0 0;
+    width: 100%;
+    height: var(--case-sheet-height);
+    max-height: calc(100dvh - var(--space-4) - env(safe-area-inset-top));
+    margin: 0;
+    padding: var(--space-0);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    background: var(--color-surface-case);
+    box-shadow: var(--shadow-case);
+    overflow: hidden;
+    /* Удерживаем углы при инерционной прокрутке и переносе панели в отдельный слой. */
+    clip-path: inset(0 round var(--radius-xl) var(--radius-xl) 0 0);
+    isolation: isolate;
+  }
+  /* Отдельная неподвижная область: статья не прокручивается поверх полоски. */
+  .case-modal__handle {
+    display: flex;
+    flex: 0 0 var(--case-sheet-handle-area-height);
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: var(--space-2);
+    box-sizing: border-box;
+    background: var(--color-surface-case);
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .case-modal__handle > span {
+    width: var(--case-sheet-handle-width);
+    height: var(--case-sheet-handle-height);
+    border-radius: var(--radius-2xl);
+    background: var(--color-case-sheet-handle);
+  }
+  .case-modal[open] { animation: case-sheet-in var(--duration-long) ease both; }
+  .case-modal[open].is-dragging {
+    translate: 0 var(--case-sheet-drag, 0px);
+  }
+  .case-modal__body, [data-theme="dark"] .case-modal__body {
+    flex: 1;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    /* Прокручивается вся ширина панели; поля отделяют статью от скроллбара у края. */
+    /* Скролл-область начинается ниже закруглений; поверхность рисует сама панель.
+       Собственный clip не даёт слою инерционной прокрутки выходить за её границы. */
+    background: transparent;
+    clip-path: inset(0);
+    padding: var(--space-0) var(--space-4) var(--space-6);
+    /* Последний абзац можно прокрутить выше плавающей кнопки. */
+    padding-bottom: calc(var(--button-height-l) + var(--space-4) * 2 + env(safe-area-inset-bottom));
+  }
+  /* После тапа не подсвечиваем программный фокус кнопки во время въезда панели. */
+  .case-modal__close-action {
+    position: absolute;
+    z-index: 1;
+    left: var(--space-2);
+    bottom: max(var(--space-2), env(safe-area-inset-bottom));
+    margin: var(--space-0);
+    width: calc(100% - var(--space-2) * 2);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .case-modal[open], .case-sheet-backdrop { animation: none; }
+  }
+}
+@keyframes case-sheet-in { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes case-backdrop-in { from { opacity: 0; } to { opacity: 1; } }
+
+/* Появление при загрузке. После animationend класс снимается: эффекты hover
+   и существующие анимации компонентов продолжают работать самостоятельно. */
+@media (prefers-reduced-motion: no-preference) {
+  .page-enter-pending main { opacity: 0; }
+  .page-enter-pending .site-header { visibility: hidden; }
+  .page-enter-item {
+    animation: page-enter var(--page-enter-duration) var(--page-enter-easing)
+      calc(var(--page-enter-index, 0) * var(--page-enter-stagger)) both;
+  }
+}
+@keyframes page-enter {
+  from { opacity: 0; filter: blur(var(--page-enter-blur)); }
+  to { opacity: 1; filter: blur(0); }
+}
+
+/* Переключатели плавающей шапки используют цвета secondary / neutral / outline.
+   На десктопе их прежнее оформление сохраняется. */
+@media (max-width: 1024px) {
+  .site-header .header-outline {
+    box-sizing: border-box;
+    border: var(--button-border-width) solid var(--color-border-header-cv);
+    border-radius: var(--button-radius);
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    transition: background-color var(--button-transition) ease,
+      border-color var(--button-transition) ease, color var(--button-transition) ease,
+      scale var(--button-press-duration) ease;
+  }
+}
+@media (max-width: 1024px) and (hover: hover) and (pointer: fine) {
+  .site-header .header-outline:hover {
+    background-color: var(--btn-bg-hover);
+    border-color: var(--btn-border-hover);
+    color: var(--btn-text-hover);
+  }
+}
+@media (max-width: 1024px) and (hover: none), (max-width: 1024px) and (pointer: coarse) {
+  .site-header .header-outline:active {
+    background-color: var(--btn-bg-hover);
+    border-color: var(--btn-border-hover);
+    color: var(--btn-text-hover);
+  }
+}
+
+/* До site.md показываем состояние загрузки, а не пустые CTA и старый контент. */
+#hero[data-cms-pending] > :not(#heroLoading) { display: none; }
+
+/* При уменьшении движения шапка раскрывается без анимации. */
+@media (max-width: 1024px) and (prefers-reduced-motion: reduce) {
+  .site-header, .fixed-nav nav { transition: none; }
+}

@@ -1,0 +1,46 @@
+/* BASE.CSS — Базовые стили элементов
+   (сброс браузерных стилей живёт в reset.css) */
+
+body {
+  font-family: var(--font-main);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface-page);
+  transition:
+    background-color var(--duration-normal) ease,
+    color var(--duration-normal) ease;
+}
+
+/* Заголовки наследуют размер от родителя (см. reset.css),
+   поэтому задаём их явно по уровням */
+h1 {
+  font-size: var(--fs-base);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-compact);
+  letter-spacing: var(--ls-tight);
+}
+
+h2 {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-regular);
+}
+
+a {
+  color: var(--color-text-primary);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-regular);
+  transition: 0.75s;
+}
+
+button {
+  font-family: var(--font-main);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-regular);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}

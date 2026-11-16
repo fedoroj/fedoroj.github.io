@@ -1,0 +1,1013 @@
+/* Полные variable-шрифты из Google Fonts, сжаты woff2_compress без сабсеттинга.
+   unicode-range сохраняет диапазоны для латиницы/кириллицы. Они ссылаются
+   на один URL для каждого семейства: файл скачивается один раз целиком.
+   Все 13 осей Roboto Flex сохранены; CSS-имя совпадает с Roboto Flex в Figma. */
+/* latin */
+@font-face {
+  font-family: "Golos Text";
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("../assets/fonts/golos-text-variable.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+
+/* cyrillic */
+@font-face {
+  font-family: "Golos Text";
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("../assets/fonts/golos-text-variable.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+/* latin */
+@font-face {
+  font-family: "Roboto Flex";
+  font-style: normal;
+  font-weight: 100 1000;
+  font-stretch: 25% 151%;
+  font-display: swap;
+  src: url("../assets/fonts/roboto-flex-variable.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+
+/* cyrillic */
+@font-face {
+  font-family: "Roboto Flex";
+  font-style: normal;
+  font-weight: 100 1000;
+  font-stretch: 25% 151%;
+  font-display: swap;
+  src: url("../assets/fonts/roboto-flex-variable.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+
+/* Geist Mono — основной текст главной, variable-файлы с обычным и курсивным начертанием. */
+@font-face {
+  font-family: "Geist Mono";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../assets/fonts/geist-mono-variable.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Geist Mono";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../assets/fonts/geist-mono-italic-variable.woff2") format("woff2");
+}
+
+/* Lebowski: font-weight 100 Thin, 200 ExtraLight, 300 Light, 400 Regular,
+   500 Medium, 600 SemiBold, 700 Bold, 800 ExtraBold, 900 Black.
+   В .section-label можно менять font-weight числом или токеном --fw-*. */
+@font-face {
+  font-family: "Lebowski";
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url("../assets/fonts/lebowski-thin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Lebowski";
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url("../assets/fonts/lebowski-extralight.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Lebowski";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("../assets/fonts/lebowski-light.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Lebowski";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/lebowski-regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Lebowski";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../assets/fonts/lebowski-medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Lebowski";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../assets/fonts/lebowski-semibold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Lebowski";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/fonts/lebowski-bold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Lebowski";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("../assets/fonts/lebowski-extrabold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Lebowski";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("../assets/fonts/lebowski-black.woff2") format("woff2");
+}
+
+/* Дизайн-токены */
+:root {
+  --palette-neutral-5: hsl(220deg 12% 5%);
+  --palette-neutral-10: hsl(220deg 12% 10%);
+  --palette-neutral-15: hsl(220deg 12% 15%);
+  --palette-neutral-20: hsl(220deg 12% 20%);
+  --palette-neutral-25: hsl(220deg 12% 25%);
+  --palette-neutral-30: hsl(220deg 12% 30%);
+  --palette-neutral-35: hsl(220deg 12% 35%);
+  --palette-neutral-40: hsl(220deg 12% 40%);
+  --palette-neutral-45: hsl(220deg 12% 45%);
+  --palette-neutral-50: hsl(220deg 12% 50%);
+  --palette-neutral-55: hsl(220deg 12% 55%);
+  --palette-neutral-60: hsl(220deg 12% 60%);
+  --palette-neutral-65: hsl(220deg 12% 65%);
+  --palette-neutral-70: hsl(220deg 12% 70%);
+  --palette-neutral-75: hsl(220deg 12% 75%);
+  --palette-neutral-80: hsl(220deg 12% 80%);
+  --palette-neutral-85: hsl(220deg 12% 85%);
+  --palette-neutral-90: hsl(220deg 12% 90%);
+  --palette-neutral-95: hsl(220deg 12% 95%);
+
+  --palette-neutral-alfa-20: hsl(220deg 12% 10% / 0.5);
+
+  --palette-white-0: hsl(0deg 0% 100% / 0);
+  --palette-white-5: hsl(0deg 0% 100% / 0.05);
+  --palette-white-10: hsl(0deg 0% 100% / 0.1);
+  --palette-white-15: hsl(0deg 0% 100% / 0.15);
+  --palette-white-20: hsl(0deg 0% 100% / 0.2);
+  --palette-white-25: hsl(0deg 0% 100% / 0.25);
+  --palette-white-30: hsl(0deg 0% 100% / 0.3);
+  --palette-white-35: hsl(0deg 0% 100% / 0.35);
+  --palette-white-40: hsl(0deg 0% 100% / 0.4);
+  --palette-white-45: hsl(0deg 0% 100% / 0.45);
+  --palette-white-50: hsl(0deg 0% 100% / 0.5);
+  --palette-white-55: hsl(0deg 0% 100% / 0.55);
+  --palette-white-60: hsl(0deg 0% 100% / 0.6);
+  --palette-white-65: hsl(0deg 0% 100% / 0.65);
+  --palette-white-70: hsl(0deg 0% 100% / 0.7);
+  --palette-white-75: hsl(0deg 0% 100% / 0.75);
+  --palette-white-80: hsl(0deg 0% 100% / 0.8);
+  --palette-white-85: hsl(0deg 0% 100% / 0.85);
+  --palette-white-90: hsl(0deg 0% 100% / 0.9);
+  --palette-white-95: hsl(0deg 0% 100% / 0.95);
+  --palette-white-100: hsl(0deg 0% 100% / 1);
+
+  --palette-black-0: hsl(0deg 0% 0% / 0);
+  --palette-black-5: hsl(0deg 0% 0% / 0.05);
+  --palette-black-10: hsl(0deg 0% 0% / 0.1);
+  --palette-black-15: hsl(0deg 0% 0% / 0.15);
+  --palette-black-20: hsl(0deg 0% 0% / 0.2);
+  --palette-black-25: hsl(0deg 0% 0% / 0.25);
+  --palette-black-30: hsl(0deg 0% 0% / 0.3);
+  --palette-black-35: hsl(0deg 0% 0% / 0.35);
+  --palette-black-40: hsl(0deg 0% 0% / 0.4);
+  --palette-black-45: hsl(0deg 0% 0% / 0.45);
+  --palette-black-50: hsl(0deg 0% 0% / 0.5);
+  --palette-black-55: hsl(0deg 0% 0% / 0.55);
+  --palette-black-60: hsl(0deg 0% 0% / 0.6);
+  --palette-black-65: hsl(0deg 0% 0% / 0.65);
+  --palette-black-70: hsl(0deg 0% 0% / 0.7);
+  --palette-black-75: hsl(0deg 0% 0% / 0.75);
+  --palette-black-80: hsl(0deg 0% 0% / 0.8);
+  --palette-black-85: hsl(0deg 0% 0% / 0.85);
+  --palette-black-90: hsl(0deg 0% 0% / 0.9);
+  --palette-black-95: hsl(0deg 0% 0% / 0.95);
+  --palette-black-100: hsl(0deg 0% 0% / 1);
+
+  /* АКЦЕНТНЫЕ ПАЛИТРЫ */
+  --palette-blue-5: hsl(215deg 100% 5%);
+  --palette-blue-10: hsl(215deg 100% 10%);
+  --palette-blue-15: hsl(215deg 100% 15%);
+  --palette-blue-20: hsl(215deg 100% 20%);
+  --palette-blue-25: hsl(215deg 100% 25%);
+  --palette-blue-30: hsl(215deg 100% 30%);
+  --palette-blue-35: hsl(215deg 100% 35%);
+  --palette-blue-40: hsl(215deg 100% 40%);
+  --palette-blue-45: hsl(215deg 100% 45%);
+  --palette-blue-50: hsl(215deg 100% 50%);
+  --palette-blue-55: hsl(215deg 100% 55%);
+  --palette-blue-60: hsl(215deg 100% 60%);
+  --palette-blue-65: hsl(215deg 100% 65%);
+  --palette-blue-70: hsl(215deg 100% 70%);
+  --palette-blue-75: hsl(215deg 100% 75%);
+  --palette-blue-80: hsl(215deg 100% 80%);
+  --palette-blue-85: hsl(215deg 100% 85%);
+  --palette-blue-90: hsl(215deg 100% 90%);
+  --palette-blue-95: hsl(215deg 100% 95%);
+
+  --palette-telegram-55: hsl(200deg 100% 55%);
+  --palette-telegram-50: hsl(200deg 100% 50%);
+  --palette-telegram-45: hsl(200deg 100% 45%);
+  --palette-telegram-40: hsl(200deg 100% 40%);
+  --palette-telegram-35: hsl(200deg 100% 35%);
+  --palette-telegram-30: hsl(200deg 100% 30%);
+
+  --palette-red-5: hsl(1.36deg 77.19% 5%);
+  --palette-red-10: hsl(1.36deg 77.19% 10%);
+  --palette-red-15: hsl(1.36deg 77.19% 15%);
+  --palette-red-20: hsl(1.36deg 77.19% 20%);
+  --palette-red-25: hsl(1.36deg 77.19% 25%);
+  --palette-red-30: hsl(1.36deg 77.19% 30%);
+  --palette-red-35: hsl(1.36deg 77.19% 35%);
+  --palette-red-40: hsl(1.36deg 77.19% 40%);
+  --palette-red-45: hsl(1.36deg 77.19% 45%);
+  --palette-red-50: hsl(1.36deg 77.19% 50%);
+  --palette-red-55: hsl(1.36deg 77.19% 55%);
+  --palette-red-60: hsl(1.36deg 77.19% 60%);
+  --palette-red-65: hsl(1.36deg 77.19% 65%);
+  --palette-red-70: hsl(1.36deg 77.19% 70%);
+  --palette-red-75: hsl(1.36deg 77.19% 75%);
+  --palette-red-80: hsl(1.36deg 77.19% 80%);
+  --palette-red-85: hsl(1.36deg 77.19% 85%);
+  --palette-red-90: hsl(1.36deg 77.19% 90%);
+  --palette-red-95: hsl(1.36deg 77.19% 95%);
+
+  --palette-green-5: hsl(142deg 71% 5%);
+  --palette-green-10: hsl(142deg 71% 10%);
+  --palette-green-15: hsl(142deg 71% 15%);
+  --palette-green-20: hsl(142deg 71% 20%);
+  --palette-green-25: hsl(142deg 71% 25%);
+  --palette-green-30: hsl(142deg 71% 30%);
+  --palette-green-35: hsl(142deg 71% 35%);
+  --palette-green-40: hsl(142deg 71% 40%);
+  --palette-green-45: hsl(142deg 71% 45%);
+  --palette-green-50: hsl(142deg 71% 50%);
+  --palette-green-55: hsl(142deg 71% 55%);
+  --palette-green-60: hsl(142deg 71% 60%);
+  --palette-green-65: hsl(142deg 71% 65%);
+  --palette-green-70: hsl(142deg 71% 70%);
+  --palette-green-75: hsl(142deg 71% 75%);
+  --palette-green-80: hsl(142deg 71% 80%);
+  --palette-green-85: hsl(142deg 71% 85%);
+  --palette-green-90: hsl(142deg 71% 90%);
+  --palette-green-95: hsl(142deg 71% 95%);
+
+  /* Точные прежние акценты и прозрачные варианты кнопок. */
+  --palette-blue-hover: hsl(220deg 100% 50%);
+  --palette-red-base: hsl(1.36deg 77.19% 55.29%);
+  --palette-red-bright: hsl(0deg 100% 50%);
+  --palette-green-lime: hsl(100deg 100% 50%);
+  --palette-blue-alpha-6: hsl(215deg 100% 50% / 0.06);
+  --palette-blue-alpha-12: hsl(215deg 100% 50% / 0.12);
+  --palette-blue-alpha-20: hsl(215deg 100% 50% / 0.2);
+  --palette-blue-alpha-40: hsl(215deg 100% 50% / 0.4);
+
+  /* АЛИАСЫ — светлая тема и общие цвета обеих тем */
+
+  /* Текст */
+  --color-text-primary: var(--palette-black-100);
+  --color-text-secondary: var(--palette-neutral-20);
+  /* Меню и язык: чёрный с непрозрачностью 40%.
+     Настраивается отдельно; остальные secondary-тексты остаются neutral. */
+  --color-text-secondary-alpha: var(--palette-black-40);
+  --color-text-tertiary: var(--palette-neutral-60);
+  --color-text-on-accent: var(--palette-white-100);
+  --color-text-on-media: var(--palette-white-100);
+  --color-text-accent: var(--palette-blue-50);
+
+  /* Поверхности */
+  --color-surface-page: var(--palette-white-100);
+  --color-surface-case: var(--color-surface-page);
+  --color-surface-secondary: var(--palette-neutral-95);
+  --color-mobile-header: var(--palette-white-80);
+  --color-border-mobile-header: var(--palette-black-15); /* Обводка плавающей шапки: 15% */
+  --color-border-header-cv: var(--palette-black-20); /* CV: чуть плотнее обводки шапки */
+  /* Кнопка «Наверх»: собственные цвета, независимо от остальных outline-кнопок. */
+  --back-to-top-bg: var(--palette-black-0);
+  --back-to-top-bg-hover: var(--palette-neutral-95);
+  --back-to-top-text: var(--palette-black-100);
+  --back-to-top-text-hover: var(--palette-black-100);
+  --back-to-top-stroke: var(--palette-neutral-80);
+  --back-to-top-stroke-hover: var(--palette-neutral-45);
+  --color-mobile-menu: var(--palette-white-60);
+  --color-surface-video: var(--palette-black-100);
+  --color-surface-close: var(--palette-black-55);
+  --color-surface-close-hover: var(--palette-black-100);
+  --color-surface-hint: var(--palette-black-35);
+  --color-surface-play: var(--palette-white-20);
+  --color-overlay-gallery: var(--palette-black-85);
+  --color-overlay-case: var(--palette-black-55);
+
+  /* Границы и подчёркивания */
+  --color-border-strong: var(--palette-black-100);
+  --color-border-subtle: var(--palette-neutral-85);
+  --color-border-secondary: var(--palette-neutral-45);
+  --article-quote-stroke: var(--palette-black-100); /* Полоска цитаты: чёрный 100% в светлой теме. */
+  --color-border-tertiary: var(--palette-neutral-90);
+  --color-border-accent: var(--palette-blue-50);
+  --color-border-avatar: var(--palette-white-20);
+  --color-border-play: var(--palette-white-10);
+  --color-link-underline: var(--palette-neutral-75);
+  --color-link-underline-hover: var(--color-accent-hover);
+
+  /* заливки */
+  --color-fill-neutral-soft: var(--palette-neutral-90);
+  --color-fill-neutral-soft-hover: var(--palette-neutral-85);
+  --color-fill-neutral-subtle: var(--palette-neutral-95);
+
+  /* Акценты и состояния */
+  --color-action-primary: var(--palette-blue-50);
+  --color-action-primary-hover: var(--palette-blue-hover);
+  --color-status-available: var(--palette-green-45);
+  --status-dot-size: 8px;
+  --duration-status-pulse: 2s; /* Мигание статуса от видимого до прозрачного и обратно: полный цикл */
+  --color-accent-hover: var(--palette-red-base);
+  --color-focus-ring: var(--color-text-primary);
+  --color-selection-background: var(--palette-green-lime);
+  --color-selection-text: var(--palette-black-100);
+  --color-scrollbar: var(--palette-blue-50);
+  --color-scrollbar-hover: var(--palette-red-bright);
+  --color-shadow-video: var(--palette-black-30);
+
+  /* ТИПОГРАФИКА */
+  --font-golos: "Golos Text", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-main: "Geist Mono", ui-monospace, "SFMono-Regular", Consolas, monospace; /* Основной текст главной */
+  /* Моноширинный текст на главной: независимые настройки, без влияния на кейсы и Roboto/Lebowski. */
+  --main-font-line-height: 16px;
+  --main-font-letter-spacing: -0.02em;
+  --main-font-text-rendering: geometricPrecision;
+  --font-roboto: "Roboto Flex", "Arial Narrow", Arial, sans-serif;
+  --font-section-heading: "Lebowski", var(--font-main); /* Имя, Работы, Архивное, Артефакты, Обо мне, Публикации, Контакты */
+  --font-stretch-condensed: 5%;
+  --font-axes-contact: "GRAD" 0, "XOPQ" 96, "XTRA" 468, "YOPQ" 79, "YTAS" 750, "YTDE" -203, "YTFI" 738, "YTLC" 514, "YTUC" 712, "slnt" 0;
+  --font-axes-publication: "GRAD" 150, "XOPQ" 96, "XTRA" 468, "YOPQ" 79, "YTAS" 750, "YTDE" -203, "YTFI" 738, "YTLC" 514, "YTUC" 712, "slnt" 0;
+  --fs-publication-title: 20px;
+  --font-axes-footer: "GRAD" 0, "XOPQ" 96, "XTRA" 323, "YOPQ" 79, "YTAS" 750, "YTDE" -203, "YTFI" 738, "YTLC" 514, "YTUC" 712, "slnt" 0;
+  
+  /* НАЧЕРТАНИЯ
+     В CSS можно писать font-weight: 450; или менять значения токенов ниже.
+     Variable: Geist Mono 100–900 (включая курсив), Golos Text 400–900,
+     Roboto Flex 100–1000. Промежуточные значения, например 450, работают.
+     Не задавайте "wght" в font-variation-settings: это переопределит font-weight.
+     Статический Lebowski: 100–900 с шагом 100.
+     У статических шрифтов промежуточный вес выбирает ближайшее доступное начертание.
+     Текущие веса компонентов сохранены. */
+  --fw-light: 300;
+  --fw-regular: 400; /* regular */
+  --fw-medium: 600;
+  --fw-contact: 850;
+  --fw-semibold: 600; /* Полужирное выделение текста и заголовки таблиц в кейсах */
+  --fw-bold: 700;
+  --fw-extrabold: 800; /* Lebowski: заголовки и пункты раскрывающегося меню */
+
+  /* МЕЖБУКВЕННЫЕ ИНТЕРВАЛЫ — letter-spacing в em, относительно размера шрифта. -0.01em = -1% размера шрифта;*/
+  --ls-neg-5pct: -0.05em;
+  --ls-neg-3pct: -0.03em;
+  --ls-tight: -0.02em;
+  --ls-compact: -0.01em;
+  --ls-wide: 0.04em;
+  --ls-normal: 0em;
+
+  /* Размеры шрифтов */
+  --fs-base: 13px; /* Основной текст, ссылки, кнопки, подпись аватарки */
+  --fs-small: 14px; /* Контакты и футер; в блоках основного текста переопределён через --fs-base */
+  --fs-name: 20px; /* Имя над аватаркой */
+  --fs-close: var(--icon-size-video-close); /* Резерв для текстового крестика; Heroicons использует --icon-size-video-close */
+
+  /* Межстрочные интервалы — множители, без единиц измерения */
+  --lh-single: 1; /* Крестик и время видео: строка равна размеру шрифта */
+  --lh-tight: 1.2; 
+  --lh-compact: 1.3; 
+  --lh-heading: 1.4; 
+  --lh-normal: 1.5;
+  --lh-base: 1.6;
+  --lh-relaxed: 1.8;
+
+
+  /* BLUR — размытие фона под полупрозрачной поверхностью, в px */
+  --blur-mobile-menu: 40px;
+  --blur-mobile-header: 40px; /* Равномерный blur плавающей шапки, без градиента */
+  --blur-sm: 4px;
+  --blur-md: 10px;
+  --button-outline-blur: var(--blur-md); /* Размытие фона под outline-кнопками */
+
+  /* ТЕНИ — полное значение box-shadow, отдельно от spacing.
+     Порядок: смещение X | смещение Y | размытие | цвет */
+  --shadow-video: 0 16px 32px var(--color-shadow-video);
+
+  /* ДЛИТЕЛЬНОСТИ — время переходов; значения в миллисекундах (1000ms = 1s)*/
+  --duration-fast: 200ms;
+  --duration-short: 250ms;
+  --duration-normal: 300ms;
+  --duration-long: 350ms;
+  --duration-slow: 400ms;
+  /* Появление страницы: длительность, шаг очереди и начальное размытие.
+     Только при загрузке/обновлении; задержка ограничена шестью шагами. */
+  --page-enter-duration: 800ms;
+  --page-enter-stagger: 100ms;
+  --page-enter-blur: 8px;
+  --page-enter-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* SPACING — margin (снаружи), padding (внутри), gap (между элементами).
+     Одна шкала для обеих осей и всех размеров экрана. 1 шаг = 4px */
+  --space-0: 0px;
+  --space-0-5: 2px;
+  --space-1: 4px;
+  --space-1-5: 6px;
+  --space-2: 8px;
+  --space-2-5: 10px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-14: 56px;
+  --space-15: 60px;
+  --space-16: 64px;
+
+  /* РАЗМЕРЫ ИКОНОК — ширина и высота в px, одинаковые для обеих тем*/
+  --icon-size-navigation: 20px;
+  --icon-size-back-to-top: 16px; /* Стрелка в футере */
+  --control-size-back-to-top: 36px; /* Высота кнопки в футере */
+  --control-size-header: 40px; /* Ширина компактных кнопок плавающей шапки */
+  --control-height-header: 32px; /* Высота всех элементов плавающей шапки */
+  --control-language-top: 50px;
+  --icon-size-telegram: 16px;
+  --icon-size-viewer: 20px; /* Только шевроны влево/вправо в просмотрщике */
+  --icon-size-play: 16px;
+  --control-size-play: 32px;
+  --icon-size-video-close: var(--icon-size-navigation);
+  --control-size-video-close: 32px;
+
+  /* ТОЛЩИНЫ ОБВОДОК*/
+  --border-width-none: 0px;
+  --border-width-thin: 1px;
+  --border-width-md: 2px;
+  --border-width-l: 3px;
+  --border-width-xl: 4px;
+  --outline-width-focus: 2px;
+  --underline-width: 1px;
+  --stroke-width-icon: 1.5; /* Резерв: линии встроенных SVG */
+  --stroke-width-viewer: 2; /* Резерв: линии встроенных SVG просмотрщика */
+
+  /* СКРУГЛЕНИЯ — единая шкала xs → sm → md → l → xl → 2xl*/
+  --radius-none: 0px;
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-l: 16px;
+  --radius-xl: 32px;
+  --radius-2xl: 100px;
+  --radius-full: 999px; /* Кнопки через --button-radius и плашка Play */
+  --radius-circle: 50%; /* Крестики закрытия, точка статуса и значок видео */
+
+  /* Ширина аватарки в hero; от неё же зависит ширина текстового блока */
+  --hero-avatar-size: 200px; /* Ширина центральной колонки hero на десктопе */
+  --hero-avatar-ratio: 1 / 1; /* Пропорции аватарки и её заглушки на всех экранах */
+  --about-video-width: 380px; /* Ширина открытого видео; вертикальное 9:16 будет высотой около 676px, если хватает места */
+  /* Плавающая шапка: общий радиус в обоих состояниях и длительность раскрытия. */
+  --mobile-header-radius: 20px;
+  --mobile-header-transition: var(--duration-long);
+  --mobile-header-offset: var(--space-2); /* 8px сверху и по бокам плавающей шапки */
+  --mobile-header-height: var(--space-10); /* 40px в закрытом состоянии */
+  --mobile-hero-width: 200px; /* Исключение из общей мобильной колонки */
+  --fs-mobile-display: 20px; /* Имя, мобильные заголовки секций и пункты раскрытого меню */
+  --section-description-width: 300px; /* Ширина описаний под заголовками секций */
+  /* Нижние блоки: ширина контента и минимальная ширина колонки masonry. */
+  /* Ширина текста под всеми кейсами. На мобильном ужимается до доступной ширины. */
+  --archive-width: 440px; /* Архив работ: десктоп и планшет; на телефоне — доступная ширина */
+  --archive-cover-width: 200px; /* Все обложки архива: ширина 200px, высота по формату 16:9; на узких экранах уменьшаются */
+  --case-description-width: 440px; /* Описания карточек и обложки с шириной min в site.md */
+  --content-width-wide: 1100px;
+  --content-width-about: 720px;
+  --about-panel-width: 440px; /* Фото, вступление, сводка, опыт и инструменты: десктоп и планшет */
+  --disclosure-icon-size: 13px; /* Шеврон раскрытия инструментов */
+  --about-tools-lines: 3; /* Сколько строк инструментов видно до раскрытия */
+  --experience-avatar-size: 48px; /* Одинаковые квадратные логотипы работодателей во всех адаптивах, независимо от текста */
+  --fs-footer: 14px; /* Метаданные и примечание футера; семейство Roboto Flex сохраняется */
+  --case-sheet-height: 90dvh; /* Высота панели кейса только на телефонах */
+  --case-sheet-handle-width: 32px; /* Полоска-подсказка свайпа вверху панели */
+  --case-sheet-handle-height: 4px;
+  --case-sheet-handle-area-height: max(var(--space-8), var(--radius-xl)); /* Статья начинается ниже верхних скруглений панели. */
+  --color-case-sheet-handle: var(--palette-black-25);
+  --case-modal-scrollbar-width: 4px; /* Вертикальная и горизонтальная полосы в кейсах на десктопе; внешняя — 8px */
+  --color-case-modal-scrollbar: var(--palette-neutral-55); /* Средний серый, между neutral-50 и neutral-60 */
+  --color-case-modal-scrollbar-hover: var(--color-scrollbar-hover); /* Общий красный hover */
+  --color-case-sheet-backdrop: var(--palette-black-60); /* Затемнение сайта под панелью */
+  --case-modal-width: 1000px; /* Максимальная ширина поверхности модального окна кейса */
+  --case-modal-gutter: calc(var(--space-16) + var(--space-6)); /* 88px по краям: место для внешнего крестика и правой навигации */
+  --gallery-content-width: 700px; /* Ширина дизайн-артефактов на десктопе */
+  --gallery-column-min: 240px;
+  --icon-size-inline: 20px; /* Логотипы компаний и инструментов в «Обо мне» */
+  --fs-contact: 96px; /* Максимальный кегль крупных контактных ссылок */
+  --fs-contact-min: 36px; /* Кегль контактных ссылок на узких экранах */
+  --footer-content-width: 200px; /* Одинаковая ширина футера на телефоне, планшете и десктопе */
+  --nav-mark-width: 32px; /* Компактная версия логотипа в навигации; высота пропорциональна */
+  --footer-mark-width: 56px; /* Ширина логотипа футера во всех адаптивах; высота пропорциональная */
+  --footer-mark-height: calc(
+    var(--footer-mark-width) * 24 / 61
+  ); /* Сохраняем пропорции SVG */
+}
+
+/* --------------------------------------------
+   3. Тёмная тема
+   -------------------------------------------- */
+[data-theme="dark"] {
+  --color-surface-page: var(--palette-black-100);
+  --color-surface-case: var(
+    --palette-neutral-10
+  ); /* Фон кейса чуть светлее фона сайта */
+  --color-border-case: var(
+    --palette-neutral-15
+  ); /* Обводка кейса вместо тени в тёмной теме */
+  --color-surface-secondary: var(
+    --palette-neutral-15
+  ); /* Лёгкая заливка шапок таблиц в тёмной теме */
+  --color-mobile-header: var(--palette-black-80);
+  --color-case-sheet-handle: var(--palette-white-25);
+  --color-border-mobile-header: var(--palette-white-15);
+  --color-border-header-cv: var(--palette-white-20);
+  --back-to-top-bg: var(--palette-white-0);
+  --back-to-top-bg-hover: var(--palette-white-10);
+  --back-to-top-text: var(--palette-white-100);
+  --back-to-top-text-hover: var(--palette-white-100);
+  --back-to-top-stroke: var(--palette-neutral-25);
+  --back-to-top-stroke-hover: var(--palette-neutral-50);
+  --color-mobile-menu: var(--palette-black-60);
+  --color-text-primary: var(--palette-white-100);
+  --color-text-secondary: var(--palette-neutral-90);
+  /* Меню и язык: белый с непрозрачностью 40%. */
+  --color-text-secondary-alpha: var(--palette-white-40);
+  --color-text-tertiary: var(--palette-neutral-60);
+  --color-border-strong: var(--palette-white-100);
+  --color-border-tertiary: var(--palette-neutral-25);
+  --color-border-secondary: var(--palette-neutral-50);
+  --article-quote-stroke: var(--color-border-secondary); /* В тёмной теме сохраняем прежний цвет. */
+  --color-border-subtle: var(--palette-neutral-20);
+  --color-link-underline: var(--palette-neutral-35);
+  --color-fill-neutral-soft: var(--palette-neutral-10);
+  --color-fill-neutral-soft-hover: var(--palette-neutral-15);
+  --color-fill-neutral-subtle: var(--palette-neutral-5);
+  --color-surface-close: var(--palette-white-20);
+  --color-surface-close-hover: var(--palette-white-25); /* Hover: непрозрачность белого 20% → 25% */
+  --color-surface-hint: var(
+    --color-surface-close
+  ); /* Подсказка о звуке — как подложка крестика */
+  --color-focus-ring: var(--color-text-primary);
+}
+
+/* КНОПКИ */
+:root,
+[data-theme] {
+  --button-height-xs: 28px;
+  --button-height-sm: 32px;
+  --button-height-md: calc(
+    var(--fs-base) * var(--lh-tight) + var(--space-2-5) * 2 +
+      var(--border-width-thin) * 2
+  );
+  --button-height-l: 48px;
+  --button-height-xl: 56px;
+  --button-padding-xs: var(--space-2);
+  --button-padding-sm: var(--space-3);
+  --button-padding-md: var(--space-4);
+  --button-padding-l: var(--space-5);
+  --button-padding-xl: var(--space-6);
+  /* Текст одинаковый во всех размерах: 13px через --fs-base.
+     Размер кнопки меняет только её высоту и отступы. */
+  --button-font-xs: var(--fs-base);
+  --button-font-sm: var(--fs-base);
+  --button-font-md: var(--fs-base);
+  --button-font-l: var(--fs-base);
+  --button-font-xl: var(--fs-base);
+  /* Иконки одинаковые во всех размерах: прежние 16px. */
+  --button-icon-xs: var(--icon-size-telegram);
+  --button-icon-sm: var(--icon-size-telegram);
+  --button-icon-md: var(--icon-size-telegram);
+  --button-icon-l: var(--icon-size-telegram);
+  --button-icon-xl: var(--icon-size-telegram);
+  --button-gap: var(--space-2);
+  --button-radius: var(--radius-full);
+  --button-border-width: var(--border-width-thin);
+  --button-font-weight: var(--fw-regular);
+  --button-line-height: var(--lh-tight);
+  --button-transition: var(--duration-fast);
+  --button-press-scale: 0.97; /* Масштаб любой кнопки во время зажатия */
+  --button-press-duration: 150ms; /* Возврат к обычному размеру */
+  /* Brand / Telegram / fill — собственный стиль, независимый от primary. */
+  --button-telegram-bg: var(--palette-telegram-55);
+  --button-telegram-text: var(--palette-white-100);
+  --button-telegram-hover-brightness: 1.1;
+  --button-telegram-gradient: radial-gradient(95% 85% at 50% 90%, hsl(205deg 100% 30%) 0%, rgba(0, 136, 204, 0.00) 90%), radial-gradient(100% 60% at 50% 10%, hsl(200deg 100% 80%) 0%, rgba(153, 221, 255, 0.00) 70%, rgba(153, 221, 255, 0.00) 100%);
+  --button-telegram-inset: 0 -4px 4px 0 color(srgb 1 1 1 / 0.3) inset, 0 -8px 10px 0 hsl(199.9127deg 100% 60%) inset;
+}
+
+/* ЦВЕТА КНОПОК */
+
+/* Базовые цвета кнопок; Telegram переопределяет их своим brand-стилем. */
+.btn {
+  --btn-bg: var(--palette-telegram-50);
+  --btn-bg-hover: var(--palette-telegram-40);
+  --btn-text: var(--palette-white-100);
+  --btn-text-hover: var(--palette-white-100);
+  --btn-border: var(--palette-black-0);
+  --btn-border-hover: var(--palette-black-0);
+}
+
+/* SECONDARY / ACCENT / FILL */
+.btn--secondary:not(.btn--neutral) {
+  --btn-bg: var(--palette-blue-50) ;
+  --btn-bg-hover: var(--palette-blue-60);
+  --btn-text: var(--palette-white-100);
+  --btn-text-hover: var(--palette-white-100);
+}
+/* SECONDARY / ACCENT / FILL в тёмной теме*/
+[data-theme="dark"] .btn--secondary:not(.btn--neutral) {
+  --btn-bg: var(--palette-blue-50) ;
+  --btn-bg-hover: var(--palette-blue-60);
+  --btn-text: var(--palette-white-100);
+  --btn-text-hover: var(--palette-white-100);
+  /* backdrop-filter: blur(var(--blur-md)); */
+  /* -webkit-backdrop-filter: blur(var(--blur-md)); */
+  /* --btn-border: var(--palette-white-10); */
+  /* --btn-border-hover: var(--palette-white-10); */
+  /* --btn-border: var(--palette-black-0); */
+  /* --btn-border-hover: var(--palette-black-0); */
+}
+
+/* TERTIARY / ACCENT / FILL */
+.btn--tertiary:not(.btn--neutral) {
+  --btn-bg: var(--palette-blue-alpha-6);
+  --btn-bg-hover: var(--palette-blue-alpha-12);
+  --btn-text: var(--palette-blue-50);
+  --btn-text-hover: var(--palette-blue-hover);
+  --btn-border: var(--palette-black-0);
+  --btn-border-hover: var(--palette-black-0);
+}
+
+/* PRIMARY / NEUTRAL / FILL */
+.btn--neutral {
+  --btn-bg: var(--palette-black-100);
+  --btn-bg-hover: var(--palette-neutral-45);
+  --btn-text: var(--palette-white-100);
+  --btn-text-hover: var(--palette-white-100);
+  --btn-border: var(--palette-black-0);
+  --btn-border-hover: var(--palette-black-0);
+}
+
+/* SECONDARY / NEUTRAL / FILL */
+.btn--neutral.btn--secondary {
+  --btn-bg: var(--palette-neutral-90);
+  --btn-bg-hover: var(--palette-neutral-85);
+  --btn-text: var(--palette-black-100);
+  --btn-text-hover: var(--palette-black-100);
+  --btn-border: var(--palette-black-0);
+  --btn-border-hover: var(--palette-black-0);
+}
+
+/* TERTIARY / NEUTRAL / FILL */
+.btn--neutral.btn--tertiary {
+  --btn-bg: var(--palette-neutral-95);
+  --btn-bg-hover: var(--palette-neutral-90);
+  --btn-text: var(--palette-black-100);
+  --btn-text-hover: var(--palette-black-100);
+  --btn-border: var(--palette-black-0);
+  --btn-border-hover: var(--palette-black-0);
+}
+
+/* PRIMARY / ACCENT / OUTLINE */
+.btn--outline:not(.btn--neutral) {
+  --btn-bg: var(--palette-black-0);
+  --btn-bg-hover: var(--palette-blue-hover);
+  --btn-text: var(--palette-blue-50);
+  --btn-text-hover: var(--palette-blue-hover);
+  --btn-border: var(--palette-blue-50);
+  --btn-border-hover: var(--palette-blue-hover);
+}
+
+/* SECONDARY / ACCENT / OUTLINE */
+.btn--outline.btn--secondary:not(.btn--neutral) {
+  /* --btn-bg: var(--palette-white-100); */
+  --btn-bg-hover: var(--palette-blue-alpha-6);
+  --btn-text: var(--palette-blue-50);
+  /* --btn-text-hover: var(--palette-blue-hover); */
+  --btn-border: var(--palette-blue-50);
+  /* --btn-border-hover: var(--palette-blue-50); */
+}
+
+/* TERTIARY / ACCENT / OUTLINE */
+.btn--outline.btn--tertiary:not(.btn--neutral) {
+  --btn-bg: var(--palette-black-0);
+  --btn-bg-hover: var(--palette-blue-alpha-12);
+  --btn-text: var(--palette-blue-50);
+  --btn-text-hover: var(--palette-blue-hover);
+  --btn-border: var(--palette-blue-alpha-20);
+  --btn-border-hover: var(--palette-blue-alpha-40);
+}
+
+/* PRIMARY / NEUTRAL / OUTLINE */
+.btn--neutral.btn--outline {
+  --btn-bg: var(--palette-black-0);
+  --btn-bg-hover: var(--palette-neutral-45);
+  --btn-text: var(--palette-black-100);
+  --btn-text-hover: var(--palette-black-100);
+  --btn-border: var(--palette-black-100);
+  --btn-border-hover: var(--palette-neutral-45);
+}
+
+/* SECONDARY / NEUTRAL / OUTLINE — «Скачать CV», светлая тема */
+.btn--neutral.btn--secondary.btn--outline {
+  --btn-bg: var(--palette-black-0);
+  --btn-bg-hover: var(--palette-neutral-95);
+  --btn-text: var(--palette-black-100);
+  --btn-text-hover: var(--palette-black-100);
+  --btn-border: var(--palette-neutral-80);
+  --btn-border-hover: var(--palette-neutral-45);
+}
+
+/* TERTIARY / NEUTRAL / OUTLINE */
+.btn--neutral.btn--tertiary.btn--outline {
+  --btn-bg: var(--palette-black-0);
+  --btn-bg-hover: var(--palette-neutral-90);
+  --btn-text: var(--palette-black-100);
+  --btn-text-hover: var(--palette-black-100);
+  --btn-border: var(--palette-neutral-90);
+  --btn-border-hover: var(--palette-neutral-80);
+}
+
+/* ТЁМНАЯ ТЕМА — только нейтральные кнопки; акцентные используют цвета выше. */
+
+/* PRIMARY / NEUTRAL / FILL */
+[data-theme="dark"] .btn--neutral {
+  --btn-bg: var(--palette-white-100);
+  --btn-bg-hover: var(--palette-neutral-65);
+  --btn-text: var(--palette-black-100);
+  --btn-text-hover: var(--palette-black-100);
+  --btn-border: var(--palette-white-0);
+  --btn-border-hover: var(--palette-white-0);
+}
+
+/* SECONDARY / NEUTRAL / FILL */
+[data-theme="dark"] .btn--neutral.btn--secondary {
+  --btn-bg: var(--palette-neutral-10);
+  --btn-bg-hover: var(--palette-neutral-15);
+  --btn-text: var(--palette-white-100);
+  --btn-text-hover: var(--palette-white-100);
+  --btn-border: var(--palette-white-0);
+  --btn-border-hover: var(--palette-white-0);
+}
+
+/* TERTIARY / NEUTRAL / FILL */
+[data-theme="dark"] .btn--neutral.btn--tertiary {
+  --btn-bg: var(--palette-neutral-5);
+  --btn-bg-hover: var(--palette-neutral-10);
+  --btn-text: var(--palette-white-100);
+  --btn-text-hover: var(--palette-white-100);
+  --btn-border: var(--palette-white-0);
+  --btn-border-hover: var(--palette-white-0);
+}
+
+/* PRIMARY / NEUTRAL / OUTLINE */
+[data-theme="dark"] .btn--neutral.btn--outline {
+  --btn-bg: var(--palette-white-0);
+  --btn-bg-hover: var(--palette-neutral-65);
+  --btn-text: var(--palette-white-100);
+  --btn-text-hover: var(--palette-white-100);
+  --btn-border: var(--palette-white-100);
+  --btn-border-hover: var(--palette-neutral-65);
+}
+
+/* SECONDARY / NEUTRAL / OUTLINE — «Скачать CV», тёмная тема */
+[data-theme="dark"] .btn--neutral.btn--secondary.btn--outline {
+  --btn-bg: var(--palette-white-0);
+  --btn-bg-hover: var(--palette-white-10);
+  --btn-text: var(--palette-white-100);
+  --btn-text-hover: var(--palette-white-100);
+  --btn-border: var(--palette-neutral-25);
+  --btn-border-hover: var(--palette-neutral-50);
+}
+
+/* TERTIARY / NEUTRAL / OUTLINE */
+[data-theme="dark"] .btn--neutral.btn--tertiary.btn--outline {
+  --btn-bg: var(--palette-white-0);
+  --btn-bg-hover: var(--palette-neutral-10);
+  --btn-text: var(--palette-white-100);
+  --btn-text-hover: var(--palette-white-100);
+  --btn-border: var(--palette-neutral-10);
+  --btn-border-hover: var(--palette-neutral-25);
+}
+
+/* ============================================
+   СТАТЬИ КЕЙСОВ — отдельные настройки Markdown.
+   Размеры заголовков H1–H6, текста, подписи и отступов
+   можно менять здесь, не затрагивая главную страницу.
+   ============================================ */
+/* Цвета только для статей кейсов. Меняйте значения справа независимо от сайта.
+   [data-theme] пересчитывает ссылки на цветовые токены при смене темы. */
+:root,
+[data-theme] {
+  --article-text-color: var(--color-text-secondary); /* Обычный текст, списки, ячейки и цитаты */
+  --article-heading-color: var(--color-text-primary); /* H1–H6 и заголовки таблиц */
+  --article-strong-color: var(--color-text-primary); /* Жирные выделения strong и b */
+  --article-caption-color: var(--color-text-tertiary); /* Подписи к медиа и таблицам */
+  /* Ссылки внутри статьи: отдельно от --link-* основного сайта. */
+  --article-link-color: var(--palette-blue-50); /* Текст ссылки */
+  --article-link-underline-color: var(--palette-blue-alpha-40); /* Подчёркивание */
+  --article-link-underline-offset: var(--space-1); /* Отступ подчёркивания от текста только в кейсах */
+  --article-link-underline-width: auto; /* Толщина линии только в кейсах: auto сохраняет выбор браузера; можно поставить, например, 1px */
+  --article-link-hover-color: var(--palette-red-base); /* Текст при наведении / нажатии на сенсорном экране */
+  --article-link-underline-hover-color: var(--palette-red-base); /* Подчёркивание при наведении / нажатии */
+}
+[data-theme="dark"] {
+  --article-link-color: var(--palette-blue-60);
+  --article-link-underline-color: color-mix(in srgb, var(--palette-blue-70) 60%, transparent);
+}
+:root {
+  --article-font-heading: var(--font-golos); /* Golos, как и весь текст кейса */
+  --article-font-body: var(--font-golos); /* Golos */
+  --article-content-width: 440px; /* Текст и таблицы на планшете/десктопе; медиа шире этой колонки */
+  --article-media-padding: var(--space-4); /* 16px от медиа до боковых краёв модалки */
+  --article-heading-axes: normal; /* Без специальных осей Roboto Flex */
+  --article-heading-weight: var(--fw-semibold);
+  --article-heading-line-height: 1.15;
+  --article-font-size: 13px; /* Наборный текст и таблицы на всех экранах */
+  --article-line-height: 1.4; /* 140% */
+  --article-caption-line-height: var(--lh-compact); /* 130% для подписей к медиа и таблицам */
+  --article-strong-weight: var(--fw-semibold);
+  --article-table-heading-weight: var(--fw-semibold);
+  --article-caption-size: 12px; /* Подписи в кейсах: одинаковый размер на всех экранах */
+  --article-h1: 28px;
+  --article-h1-mobile: 24px; /* Заголовки статьи на телефоне (до 767px) */
+  --article-h2-mobile: 20px;
+  --article-h3-mobile: 18px;
+  --article-h4-mobile: 16px;
+  --article-h5-mobile: 14px;
+  --article-h6-mobile: 14px;
+  --article-h2: 24px;
+  --article-h3: 20px;
+  --article-h4: 18px;
+  --article-h5: 16px;
+  --article-h6: 14px;
+  --article-padding: var(--space-8); /* 32px внутри статьи */
+  --article-padding-mobile: var(--space-4); /* 16px на телефонах */
+  --article-block-gap: var(--space-6); /* 24px между блоками */
+  --article-heading-text-gap: var(--space-4); /* 16px от заголовка до текста, списков и таблиц */
+  --article-heading-gap: var(--space-10); /* 40px перед разделом */
+  --shadow-case: 0 16px 64px var(--palette-black-30);
+}
+
+/* ССЫЛКИ — настройки компонента .link (правила в css/main.css рядом с кнопками).
+   Цвета пересчитываются на [data-theme]. Размеры и шрифты обычных ссылок
+   сохраняются из контекста; крупные контакты — отдельный вариант display.
+   inline — текст и футер; accent — ссылки проектов; article — текст кейса;
+   plain — название кейса; nav — меню; display — контакты; card — вся карточка.
+   Чтобы убрать подчёркивание обычных ссылок, замените underline на none.
+   Кнопки .btn этих настроек не используют. */
+:root,
+[data-theme] {
+  --link-color: var(--color-text-primary);
+  --link-color-accent: var(--color-action-primary);
+  --link-accent-underline-color: var(
+    --palette-blue-alpha-40
+  ); /* Акцентный синий с непрозрачностью 40% */
+  --link-color-muted: var(--color-text-tertiary);
+  --link-color-hover: var(--color-accent-hover);
+  --link-underline-color: var(--color-link-underline);
+  --link-underline-color-hover: var(--color-link-underline-hover);
+  --link-decoration: underline;
+  --link-underline-width: auto;
+  --link-inline-underline-width: var(--underline-width);
+  --link-underline-offset: 3px;
+  --link-accent-underline-offset: var(--space-1);
+  --link-display-underline-offset: var(--space-2); /* 8px: отступ линии у крупных ссылок в контактах */
+  --link-display-underline-offset-mobile: var(--space-1); /* 4px: линия ближе к тексту на телефонах */
+  --link-display-underline-color: var(--color-border-tertiary);
+  --link-display-underline-width: var(--border-width-thin);
+  --link-display-font: var(--font-roboto);
+  --link-display-size: clamp(var(--fs-contact-min), 14cqi, var(--fs-contact));
+  --link-display-weight: var(--fw-contact);
+  --link-display-axes: var(--font-axes-contact);
+  --link-display-stretch: var(--font-stretch-condensed);
+  --link-display-line-height: var(--lh-single);
+  --link-display-letter-spacing: var(--ls-normal);
+  --link-display-transform: uppercase;
+  --link-transition: 750ms; /* Уход курсора: красный цвет гаснет за 0,75 секунды */
+  --link-transition-hover: 0ms; /* Наведение: красный цвет появляется мгновенно */
+  --link-nav-hover-scale: 1.1; /* Пункты меню увеличиваются на 10%, как в старом сайте */
+}
+
+/* Синие ссылки в тёмной теме: светлее текст и полупрозрачная линия.
+   Настройки относятся только к link, цвета кнопок остаются отдельными. */
+[data-theme="dark"] {
+  --link-color-accent: var(--palette-blue-60);
+  --link-accent-underline-color: color-mix(in srgb, var(--palette-blue-70) 60%, transparent);
+}
+
+/* Загрузка медиа: фон заглушек и временные пропорции неизвестного файла. */
+:root {
+  --media-placeholder-bg: var(--palette-neutral-95);
+  --media-placeholder-text: var(--palette-neutral-45);
+  --media-placeholder-ratio: 16 / 9;
+  /* Блик skeleton: neutral в обеих темах; длительность одного прохода. */
+  --skeleton-highlight: var(--palette-neutral-85);
+  --skeleton-duration: 1.8s;
+}
+[data-theme="dark"] {
+  --media-placeholder-bg: var(--palette-neutral-15);
+  --skeleton-highlight: var(--palette-neutral-25);
+  --media-placeholder-text: var(--palette-neutral-70);
+}
+
+/* Toast: оформление уведомления о копировании. */
+:root {
+  --toast-icon-size: 20px;
+  --toast-display-duration: 3000ms;
+  --toast-transition-duration: 180ms;
+}
+[data-theme] {
+  --toast-bg: var(--palette-white-100); /* Белая плашка в обеих темах */
+  --toast-text: var(
+    --palette-black-100
+  ); /* Контрастный текст на белой плашке */
+  --toast-shadow: var(--shadow-case); /* Та же тень, что у модалки кейса */
+  --toast-success: var(--color-status-available);
+  --toast-error: var(--color-accent-hover);
+}
+
+/* КУРСОРЫ */
+:root {
+  --cursor-default-ru: url("../assets/cursors/cursor-default-ru.svg?v=92b6601f9e75") 0 0, default;
+  --cursor-default-en: url("../assets/cursors/cursor-default-eng.svg?v=cd104334dd6b") 0 0, default;
+  --cursor-link-ru: url("../assets/cursors/cursor-pointer-ru.svg?v=7fd69b31583b") 0 0, pointer;
+  --cursor-link-en: url("../assets/cursors/cursor-pointer-eng.svg?v=203fd967efcd") 0 0, pointer;
+  --cursor-email-ru: url("../assets/cursors/cursor-mail-ru.svg?v=987fda16ba5b") 0 0, pointer;
+  --cursor-email-en: url("../assets/cursors/cursor-mail-eng.svg?v=db7d6f950990") 0 0, pointer;
+  --cursor-avatar-ru: url("../assets/cursors/cursor-avatar-ru.svg?v=86e40f8dacfc") 0 0, pointer;
+  --cursor-avatar-en: url("../assets/cursors/cursor-avatar-eng.svg?v=d084b209254d") 0 0, pointer;
+  --cursor-close: url("../assets/cursors/cursor-close-modal.svg?v=3154ad4d7f82") 0 0, pointer;
+  --cursor-text: url("../assets/cursors/cursor-text.svg?v=ed12d94f6f3e") 12 14, text;
+  --cursor-default: var(--cursor-default-ru);
+  --cursor-link: var(--cursor-link-ru);
+  --cursor-email: var(--cursor-email-ru);
+  --cursor-avatar: var(--cursor-avatar-ru);
+}
+html[lang="en"] {
+  --cursor-default: var(--cursor-default-en);
+  --cursor-link: var(--cursor-link-en);
+  --cursor-email: var(--cursor-email-en);
+  --cursor-avatar: var(--cursor-avatar-en);
+}
+
+/* ТЕГИ КЕЙСОВ — базовые цвета выбираются по имени в site.md.
+   HSL можно менять здесь для всех тегов одного цвета сразу.
+   Сила цвета — его доля при смешивании с белым/чёрным для каждой темы. */
+:root {
+  --tag-height: 22px; /* Высота однострочного тега; длинный текст может переноситься. */
+  --tag-padding-inline: var(--space-1-5); /* 6px слева и справа */
+  --tag-radius: var(--radius-xs); /* 4px */
+  --tag-blue: hsl(215deg 75% 40%);
+  --tag-violet: hsl(258deg 60% 45%);
+  --tag-pink: hsl(320deg 70% 40%);
+  --tag-lime: hsl(85deg 65% 27%);
+  --tag-orange: hsl(18deg 85% 37%);
+  --tag-green: hsl(155deg 80% 25%);
+  --tag-gray: var(--palette-neutral-40);
+  /* Тёмные базовые оттенки обеспечивают читаемый текст на светлой плашке.
+     В тёмной теме текст осветляется, а подложка затемняется правилами ниже. */
+  --tag-red: hsl(0deg 75% 40%);
+  --tag-yellow: hsl(50deg 95% 24%);
+  --tag-amber: hsl(38deg 90% 28%);
+  --tag-cyan: hsl(190deg 85% 28%);
+  --tag-teal: hsl(175deg 70% 25%);
+  --tag-purple: hsl(280deg 65% 40%);
+  --tag-indigo: hsl(240deg 60% 42%);
+  --tag-brown: hsl(25deg 50% 32%);
+  --tag-text-strength: 100%;
+  --tag-text-mix: var(--palette-black-100);
+  --tag-bg-strength: 16%;
+  --tag-bg-mix: var(--palette-white-100);
+}
+[data-theme="dark"] {
+  --tag-text-strength: 45%;
+  --tag-text-mix: var(--palette-white-100);
+  --tag-bg-strength: 28%;
+  --tag-bg-mix: var(--palette-black-100);
+}

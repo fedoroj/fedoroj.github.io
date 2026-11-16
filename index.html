@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="js/content-state.js?v=d3f542599bb0"></script>
+    <script src="js/page-enter.js?v=f36d7151285d"></script>
+    <title></title>
+    <link id="siteFavicon" rel="icon" />
+    <link
+      rel="preload"
+      href="assets/fonts/golos-text-variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="css/reset.css?v=0696d3973d23" />
+    <link rel="stylesheet" href="css/variables.css?v=f10cba5e998d" />
+    <link rel="stylesheet" href="css/base.css?v=b433fd839059" />
+    <link rel="stylesheet" href="css/layout.css?v=4290191e75d5" />
+    <link rel="stylesheet" href="css/main.css?v=56db99116e79" />
+    <link rel="modulepreload" href="js/ui-sounds.js?v=d06a4a3a5b90">
+    <!-- Open Graph: generated from site.md -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Сергей Фёдоров — Продуктовый дизайнер" />
+    <meta property="og:url" content="https://fedoroj.github.io/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Сергей Фёдоров — Продуктовый дизайнер" />
+    <!-- /Open Graph -->
+    <!-- Картинка превью: замените # в обоих тегах полным URL изображения. -->
+    <meta property="og:image" content="https://fedoroj.github.io/assets/preview/avatar-hero.jpg" />
+    <meta name="twitter:image" content="https://fedoroj.github.io/assets/preview/avatar-hero.jpg" />
+</head>
+  <body data-theme="light">
+    <script src="js/theme.js?v=6568f0285592"></script>
+
+    <header class="site-header">
+      <!-- Fixed Navigation -->
+      <div class="fixed-nav">
+        <button
+          class="logo"
+          type="button"
+          aria-label="На главную"
+          data-aria-ru="На главную"
+          data-aria-en="Back to home"
+        >
+          <img
+            class="nav-mark"
+            src="assets/logos/sf-logo.svg"
+            width="61"
+            height="24"
+            alt=""
+          />
+        </button>
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primaryNavigation"
+          aria-label="Navigation menu"
+          data-aria-en="Navigation menu"
+          data-aria-ru="Меню навигации"
+        >
+          <span data-ru="МЕНЮ" data-en="MENU">МЕНЮ</span>
+          <span class="icon icon--down menu-toggle__chevron" aria-hidden="true"></span>
+        </button>
+        <nav id="primaryNavigation"></nav>
+      </div>
+
+      <!-- Fixed Theme Toggle -->
+      <div class="fixed-preferences">
+        <div class="fixed-theme">
+          <button class="theme-switch header-outline btn--secondary btn--neutral btn--outline" id="themeBtn" aria-label="Toggle theme">
+            <span class="icon icon--sun" id="sunIcon" aria-hidden="true"></span>
+            <span
+              class="icon icon--moon"
+              id="moonIcon"
+              aria-hidden="true"
+            ></span>
+          </button>
+        </div>
+
+        <!-- Fixed Language Toggle -->
+        <div class="fixed-lang">
+          <button class="lang-btn active header-outline btn--secondary btn--neutral btn--outline" data-lang="en">EN</button>
+          <button class="lang-btn header-outline btn--secondary btn--neutral btn--outline" data-lang="ru">RU</button>
+        </div>
+<div class="header-actions" id="headerActions" hidden>
+  <a class="btn btn--secondary btn--neutral btn--outline btn--md" id="headerCvCTA">CV</a>
+  <a class="btn btn--brand-telegram btn--fill btn--md" id="headerContactCTA"><span class="header-contact-label"></span><span class="icon icon--telegram" aria-hidden="true"></span></a>
+</div>
+
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section id="hero" data-cms-pending>
+        <div id="heroLoading"></div>
+        <h1
+          class="section-label"
+          id="heroName"
+         
+         
+        ></h1>
+        <p
+          class="section-hint"
+          id="heroSubtitle"
+         
+         
+        ></p>
+        <div class="hero-image">
+          <button
+            class="avatar"
+            id="avatar"
+            type="button"
+            aria-haspopup="dialog"
+            aria-controls="aboutVideoDialog"
+            aria-labelledby="avatarCaption"
+          >
+            <img
+              class="avatar__image"
+             
+              alt=""
+              decoding="async"
+            />
+            <span class="avatar__control">
+              <span
+                class="icon icon--play avatar__play"
+                aria-hidden="true"
+              ></span>
+              <span class="avatar__time" id="avatarTime" hidden
+                ><span
+                  class="avatar__duration"
+                  id="avatarDuration"
+                  data-en=""
+                  data-ru=""
+                ></span
+              ></span>
+            </span>
+          </button>
+          <div
+            class="avatar__caption"
+            id="avatarCaption"
+           
+           
+          ></div>
+        </div>
+        <h1 id="heroDescription"></h1>
+        <p class="hero-sub hero-status">
+          <span class="hero-status__dot" aria-hidden="true"></span
+          ><span id="heroStatus"
+            ></span
+          >
+        </p>
+        <div class="hero-actions">
+          <a
+            class="btn btn--brand-telegram btn--fill btn--l"
+            id="telegramCTA"
+           
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span
+              ></span
+            >
+            <span
+              class="icon icon--telegram btn__telegram-icon"
+              aria-hidden="true"
+            ></span>
+          </a>
+          <a
+            class="btn btn--secondary btn--neutral btn--outline btn--l"
+            id="cvCTA"
+           
+           
+           
+           
+            ></a
+          >
+          <a
+            class="link link--inline hero-presentation"
+            id="presentationCTA"
+           
+           
+           
+            ></a
+          >
+        </div>
+      </section>
+
+      <!-- Selected works → Artifacts → About → Contacts → Footer -->
+      <section id="works">
+        <div
+          class="section-label"
+         
+         
+        ></div>
+        <p class="section-hint" id="worksDescription" hidden></p>
+        <div class="works-list" aria-busy="true"></div>
+        <div class="archive" id="worksArchive" hidden>
+          <div class="archive-header">
+            <h3 class="section-label" id="archiveTitle"></h3>
+            <p class="archive-hint" id="archiveHint"></p>
+          </div>
+          <div class="archive-list"></div>
+        </div>
+        <p
+          class="works-status"
+          role="status"
+          data-ru="Загружаю работы…"
+          data-en="Loading works…"
+        >
+          Загружаю работы…
+        </p>
+        <noscript>Для загрузки работ из Markdown включите JavaScript.</noscript>
+      </section>
+      <section id="gallery">
+        <h2 class="section-label">
+          <span
+            ></span
+          >
+        </h2>
+        <p
+         
+         
+          class="section-hint"
+        ></p>
+        <div class="gallery-grid"></div>
+      </section>
+      <section id="about">
+        <h2 class="section-label">
+          <span></span>
+        </h2>
+        <figure class="about-photo" id="aboutPhoto" hidden></figure>
+        <div class="about-intro" id="aboutDescription" hidden></div>
+        <div id="aboutContent"></div>
+      </section>
+      <section id="publications">
+        <h2 class="section-label">
+          <span></span>
+        </h2>
+        <p class="section-hint" id="publicationsDescription" hidden></p>
+        <div class="gallery-grid publications-grid"></div>
+      </section>
+      <section id="contacts">
+        <h2 class="section-label">
+          <span></span>
+        </h2>
+        <p
+         
+         
+          class="section-hint"
+        ></p>
+        <div class="contact-links"></div>
+      </section>
+      <footer id="footer">
+        <img
+          class="footer-mark"
+          src="assets/logos/sf3d.gif"
+          width="81"
+          height="32"
+          alt="СФ"
+        />
+        <div class="footer-meta"></div>
+        <div class="footer-note"></div>
+      <button class="btn back-to-top" id="backToTop" type="button" aria-label="Наверх" data-aria-ru="Наверх" data-aria-en="Back to top">
+  <span class="icon icon--up" aria-hidden="true"></span>
+</button>
+</footer>
+    </main>
+
+    <!-- Общая оболочка для самостоятельных Markdown-статей. -->
+    <dialog
+      class="case-modal"
+      id="caseDialog"
+      aria-label="Кейс"
+      data-aria-ru="Кейс"
+      data-aria-en="Case study"
+    >
+      <button
+        class="modal-close case-modal__close"
+        data-case-close
+        type="button"
+        aria-label="Закрыть кейс"
+        data-aria-ru="Закрыть кейс"
+        data-aria-en="Close case"
+      >
+        <span class="icon icon--close" aria-hidden="true"></span>
+      </button>
+      <div class="case-modal__handle" aria-hidden="true"><span></span></div>
+      <div class="case-modal__body">
+        <article class="case-modal__content" id="caseContent"></article>
+      </div>
+      <button
+        class="btn btn--primary btn--neutral btn--fill btn--l case-modal__close-action"
+        data-case-close
+        type="button"
+       
+       
+      ></button>
+    </dialog>
+
+    <dialog
+      class="about-video"
+      id="aboutVideoDialog"
+      aria-labelledby="avatarCaption"
+      aria-describedby="aboutVideoHint"
+    >
+      <button
+        class="modal-close about-video__close"
+        type="button"
+        aria-label="Close video"
+        data-aria-en="Close video"
+        data-aria-ru="Закрыть видео"
+      >
+        <span class="icon icon--close" aria-hidden="true"></span>
+      </button>
+      <video
+        id="aboutVideo"
+        class="about-video__player"
+       
+        controls
+        playsinline
+        preload="metadata"
+      ></video>
+      <p
+        class="about-video__hint"
+        id="aboutVideoHint"
+       
+       
+      ></p>
+    </dialog>
+
+    <div
+      class="toast"
+      id="siteToast"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      hidden
+    >
+      <span class="icon icon--check" aria-hidden="true"></span
+      ><span class="toast__message"></span>
+    </div>
+    <script src="js/main.js?v=aaa382a2bebd"></script>
+
+    <script src="assets/vendor/marked.min.js?v=15fabce5b658"></script>
+    <script src="js/cases.js?v=803bf2a7bf79"></script>
+    <script
+      async
+      src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js"
+      id="galleryLibrary"
+    ></script>
+  </body>
+</html>

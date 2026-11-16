@@ -1,0 +1,267 @@
+/* LAYOUT.CSS — Каркас страницы
+   1. Контейнер (body) и отступы
+   2. Ширина блоков
+   3. Фиксированные элементы управления
+   4. Адаптив */
+
+/* 1. Контейнер и отступы */
+html {
+  /* Место под полосу прокрутки зарезервировано всегда: когда просмотрщик
+     её скрывает, ширина документа не меняется и страница не дёргается */
+  scrollbar-gutter: stable;
+}
+
+/* База раскладки: страница отступает по 16px от всех краёв, общей
+   колонки-капа нет. Ширину блока задаёт его контент, а max-width: 100%
+   не даёт выйти за отступы. */
+body {
+  padding: var(--space-4);
+  position: relative;
+  min-height: 100vh;
+}
+
+main {
+  padding: var(--space-0);
+}
+
+/* 2. Ширина блоков */
+
+/* Ширина нижних секций задаётся токенами в variables.css.
+   Работы сохраняют собственные размеры карточек (см. main.css).
+   Все блоки центрируются; max-width не даёт выйти за доступную колонку. */
+#about,
+#contacts {
+  width: var(--content-width-about);
+  max-width: 100%;
+  margin: var(--space-0) auto;
+}
+
+#gallery,
+#publications,
+#footer {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+#gallery,
+#publications {
+  width: var(--gallery-content-width);
+}
+#footer {
+  width: var(--footer-content-width);
+}
+#works,
+#gallery,
+#about,
+#publications,
+#contacts {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+}
+
+/* 3. Фиксированные элементы управления */
+
+/* Навигация — слева */
+.fixed-nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--space-4) var(--space-4);
+  gap: var(--space-1);
+}
+
+/* Ширина правой группы равна самому широкому элементу (EN/RU или иконке).
+   Общий padding совпадает с меню слева; внутреннего запаса ширины нет. */
+.fixed-preferences {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  display: grid;
+  grid-template-columns: max-content;
+  grid-template-rows: var(--control-language-top) auto 1fr;
+  justify-items: center;
+  align-items: start;
+  padding: var(--space-0) var(--space-4);
+  /* Пустая область между переключателями и стрелкой не перехватывает клики. */
+  pointer-events: none;
+}
+
+.fixed-theme,
+.fixed-lang {
+  pointer-events: auto;
+}
+
+/* Переключатель темы — по общей центральной оси с EN/RU. */
+.fixed-theme {
+  padding-top: var(--space-5);
+}
+
+/* Переключатель языка — справа, вертикально */
+.fixed-lang {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-0);
+}
+
+
+/* 4. Адаптив */
+
+/* На десктопе оболочка не меняет расположение существующей навигации. */
+.site-header {
+  display: contents;
+}
+
+/* Мобильная шапка фиксирована; остальные блоки сохраняют поля 16px. */
+@media (max-width: 1024px) {
+  body {
+    display: block;
+    padding: var(--space-4);
+  }
+  .site-header {
+    position: fixed;
+    inset: var(--mobile-header-offset) var(--mobile-header-offset) auto;
+    height: auto;
+    z-index: 100;
+    display: grid;
+    /* Логотип 32px внутри области 40px;
+       до текста меню — 12px с учётом его padding и margin. */
+    grid-template-columns: calc(var(--control-size-header) + var(--space-2) - var(--border-width-thin)) max-content minmax(0, 1fr);
+    grid-template-rows: calc(var(--mobile-header-height) - 2 * var(--border-width-thin)) 0fr;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: calc(var(--space-1) - var(--border-width-thin)); /* 3px + обводка 1px */
+    background: var(--color-mobile-header);
+    -webkit-backdrop-filter: blur(var(--blur-mobile-header));
+    backdrop-filter: blur(var(--blur-mobile-header));
+    border: var(--border-width-thin) solid var(--color-border-mobile-header);
+    border-radius: var(--mobile-header-radius);
+    overflow: hidden;
+    transition: grid-template-rows var(--mobile-header-transition) ease,
+      border-radius var(--mobile-header-transition) ease;
+  }
+  .site-header:has(.fixed-nav.is-open) {
+    grid-template-rows: calc(var(--mobile-header-height) - 2 * var(--border-width-thin)) 1fr;
+  }
+  .fixed-nav {
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-0);
+  }
+  .fixed-preferences {
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    width: auto;
+    padding: var(--space-0);
+  }
+  .fixed-theme {
+    order: 1;
+    padding-top: var(--space-0);
+  }
+  .fixed-lang {
+    order: 0;
+    flex-direction: row;
+  }
+  main {
+    min-width: 0;
+    width: 100%;
+    /* Контент начинается ниже плавающей шапки с её верхним отступом. */
+    padding-top: calc(var(--mobile-header-height) + var(--mobile-header-offset) - var(--space-4));
+  }
+  #about,
+  #contacts {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* До 768px артефакты занимают ширину страницы с полями по 16px.
+   На 768px остаются две колонки; выше — десктопная ширина 700px. */
+@media (max-width: 768px) {
+  #gallery,
+  #publications {
+    width: 100%;
+  }
+}
+
+/* Только на телефонах masonry перестраивается в одну колонку. */
+@media (max-width: 767px) {
+  .link--display {
+    --link-display-underline-offset: var(--link-display-underline-offset-mobile);
+  }
+  :is(#gallery, #publications) .gallery-grid {
+    column-count: 1;
+  }
+  #gallery .gallery-item figcaption {
+    padding-inline: var(--space-0);
+    text-align: center;
+  }
+}
+
+/* CTA шапки повторяют адреса hero; на узком телефоне контакт представлен иконкой. */
+.header-actions { display: none; pointer-events: auto; }
+@media (max-width: 1024px) {
+  .header-actions:not([hidden]) { display: contents; }
+  #headerCvCTA { order: 2; }
+  #headerContactCTA { order: 3; }
+  /* Прозрачные области клика одинаковы до и после появления CTA. */
+  .site-header .fixed-nav {
+    /* Дочерние элементы участвуют в сетке шапки: управление сверху, меню ниже. */
+    display: contents;
+  }
+  .site-header .fixed-nav .logo { grid-column: 1; grid-row: 1; justify-self: end; }
+  .site-header .menu-toggle { grid-column: 2; grid-row: 1; margin-left: var(--space-1); }
+  .site-header .fixed-preferences {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+    gap: var(--space-1);
+    flex-shrink: 0;
+  }
+  .site-header :is(.logo, .menu-toggle, .theme-switch, .lang-btn) {
+    width: var(--control-size-header);
+    height: var(--control-height-header);
+    min-height: var(--control-height-header);
+    padding: var(--space-0);
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  /* Надпись с шевроном занимает свою ширину, остальные кнопки остаются квадратными. */
+  .site-header .menu-toggle {
+    width: auto;
+    padding-inline: var(--space-1);
+  }
+  .site-header .menu-toggle__chevron { width: var(--icon-size-navigation); height: var(--icon-size-navigation); }
+  .site-header .lang-btn:not(.active) { display: flex; }
+  .header-actions .btn {
+    --btn-height: var(--control-height-header);
+    flex: none;
+    width: auto;
+    height: var(--control-height-header);
+    padding-block: var(--space-0);
+    white-space: nowrap;
+  }
+  #headerCvCTA { --btn-border: var(--color-border-header-cv); }
+  /* У плавающей шапки уже есть общий blur, кнопкам второй слой не нужен. */
+  .site-header .btn--outline {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .header-actions .icon--telegram { display: none; }
+}
+@media (max-width: 600px) {
+  .header-actions .btn { width: var(--control-size-header); padding-inline: var(--space-0); }
+  .header-contact-label { display: none; }
+  .header-actions .icon--telegram { display: block; }
+}
