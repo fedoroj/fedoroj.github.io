@@ -1,4 +1,4 @@
-![Обложка проекта](assets/cover.jpg)
+![](../../assets/images/cases/case_3_2.jpg)
 
 # Натали&nbsp;— оптовый маркетплейс
 

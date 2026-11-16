@@ -1,4 +1,4 @@
-![Обложка проекта](assets/cover.jpg)
+![](../../assets/video/video_case_2-35-1.mp4)
 
 # Zinda&nbsp;— кабинет для бизнеса
 

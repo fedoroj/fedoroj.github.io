@@ -114,11 +114,28 @@ def check_sections():
                 fail(f'site.md: {label} «{name}» объявлен {names.count(name)} раза')
 
 
+
+def check_glyphs():
+    """Символы, которых нет в шрифтах сайта, браузер дорисовывает чужим шрифтом.
+
+    Пример: неразрывный дефис U+2011 в Geist Mono отсутствует — «тг‑канал»
+    на первом экране выглядел сломанным.
+    """
+    missing = {0x2011: 'неразрывный дефис U+2011 (нет в Geist Mono и Roboto Flex)'}
+    files = [ROOT / 'site.md'] + sorted(ROOT.glob('cases/*/*.md'))
+    for path in files:
+        text = path.read_text(encoding='utf-8')
+        for code, label in missing.items():
+            if chr(code) in text:
+                fail(f'{path.relative_to(ROOT)}: {label}')
+
+
 def main():
     check_html()
     check_styles()
     check_content()
     check_sections()
+    check_glyphs()
 
     if errors:
         print(f'Проверка не пройдена, проблем: {len(errors)}\n')

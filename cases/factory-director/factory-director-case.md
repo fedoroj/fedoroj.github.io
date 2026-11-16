@@ -1,4 +1,4 @@
-![Обложка проекта](assets/cover.jpg)
+![](../../assets/images/cases/case_21_9.jpg)
 
 # Factory Director&nbsp;— платформа для производств
 
