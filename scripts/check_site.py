@@ -121,7 +121,10 @@ def check_glyphs():
     Пример: неразрывный дефис U+2011 в Geist Mono отсутствует — «тг‑канал»
     на первом экране выглядел сломанным.
     """
-    missing = {0x2011: 'неразрывный дефис U+2011 (нет в Geist Mono и Roboto Flex)'}
+    missing = {
+        0x2011: 'неразрывный дефис U+2011 (нет в Geist Mono и Roboto Flex)',
+        0x2060: 'склейщик слов U+2060 (попадает в текст при копировании и парсинге)',
+    }
     files = [ROOT / 'site.md'] + sorted(ROOT.glob('cases/*/*.md'))
     for path in files:
         text = path.read_text(encoding='utf-8')
