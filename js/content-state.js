@@ -8,11 +8,15 @@
     'Обновить': { ru: 'Обновить страницу', en: 'Reload page' }
   };
   let labels = { ...defaults };
+  // Локально контент читается всегда заново (правки видны сразу), на сайте — из кэша
+  // с проверкой свежести: GitHub Pages отдаёт файл повторно только после max-age.
+  const localPreview = ['localhost', '127.0.0.1', '[::1]', ''].includes(location.hostname);
+  const cachePolicy = localPreview ? 'no-store' : 'default';
   async function fetchMarkdown(address) {
     // Один повтор при временном сетевом сбое; таймаут действует и на тело ответа.
     for (let attempt = 0; attempt < 2; attempt++) {
       try {
-        const response = await fetch(address, { cache: 'no-store', priority: 'high', signal: AbortSignal.timeout(10000) });
+        const response = await fetch(address, { cache: cachePolicy, priority: 'high', signal: AbortSignal.timeout(10000) });
         if (!response.ok) throw new Error('HTTP ' + response.status);
         return await response.text();
       } catch (error) { if (attempt) throw error; }
