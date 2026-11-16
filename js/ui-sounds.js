@@ -1,3 +1,6 @@
+// It deliberately keeps the source behavior: no files, no preload, no state
+// except one lazy AudioContext, random noise per playback, and Reduce Motion.
+
 let audioContext = null;
 
 function createNoiseLayer(context, startTime, frequency, options = {}) {
@@ -56,94 +59,16 @@ const effects = {
   },
 };
 
-// Создание и resume происходят непосредственно внутри пользовательского жеста.
-// Пока Safari возобновляет контекст, не планируем короткий звук в прошлом.
-export function unlockUISounds() {
-  try {
-    const Context = window.AudioContext || window.webkitAudioContext;
-    if (!Context) return Promise.resolve(null);
-    if (!audioContext || audioContext.state === 'closed') audioContext = new Context();
-    const context = audioContext;
-    if (context.state === 'running') return Promise.resolve(context);
-    // На touch-устройствах pointerdown может прийти до активации аудио.
-    // Каждый следующий доверенный жест повторяет resume, даже если предыдущий
-    // Promise ещё ожидает разрешения браузера (Android Chrome / iOS Safari).
-    const resumed = context.resume();
-    // iOS Safari разблокирует звук, только если внутри жеста прозвучал реальный
-    // буфер. Одного resume недостаточно, поэтому играем один тихий сэмпл.
-    const source = context.createBufferSource();
-    source.buffer = context.createBuffer(1, 1, context.sampleRate);
-    source.connect(context.destination);
-    source.start();
-    source.onended = () => source.disconnect();
-    return Promise.resolve(resumed).then(() => context).catch(() => null);
-  } catch { return Promise.resolve(null); }
-}
-
-// Звук — часть обратной связи интерфейса, а не анимация. Раньше здесь стояла
-// проверка prefers-reduced-motion, и на iPhone с включённым «Уменьшением движения»
-// звук молчал полностью. Теперь настройка влияет только на декоративный hover.
-const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-// Время последнего запуска звука: по нему гасим дубль в одном и том же клике.
-let lastSoundAt = 0;
-
+/** Exact source-site entry point: `playUISound('tap')`. */
 export function playUISound(name, intensity = 1) {
-  if (!effects[name] || (name === 'hover' && reducedMotion())) return;
-  const requestedAt = performance.now();
-  const play = context => {
-    if (!context || context.state !== 'running' || performance.now() - requestedAt > 300) return;
-    try { effects[name](context, context.currentTime, intensity); } catch { /* Audio is optional. */ }
-  };
-  if (audioContext?.state === 'running') play(audioContext);
-  else unlockUISounds().then(play);
-  lastSoundAt = performance.now();
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  try {
+    audioContext ||= new AudioContext();
+    if (audioContext.state === 'suspended') audioContext.resume();
+    effects[name](audioContext, audioContext.currentTime, intensity);
+  } catch {
+    // Same intentional no-op failure behavior as the source site.
+  }
 }
-
-// Звук включается любым доверенным касанием или нажатием — в том числе по пустому
-// месту и тексту. capture-фаза нужна, чтобы разблокировка шла раньше обработчиков
-// элементов: iOS Safari открывает аудио только внутри самого жеста.
-// touchstart/pointerdown дают самое раннее срабатывание, touchend/click —
-// повторную попытку, если первый жест система не засчитала.
-['touchstart', 'pointerdown', 'touchend', 'pointerup', 'click', 'keydown'].forEach(type => {
-  document.addEventListener(type, event => { if (event.isTrusted) unlockUISounds(); }, { capture: true, passive: true });
-});
-
-// Звук звучит на интерактивных элементах: кнопках, ссылках, карточках кейсов,
-// картинках, которые открываются в просмотрщике. Элементы со своим звуком
-// вызывают playUISound() сами и ставят uiSoundHandled — здесь такой клик
-// пропускается. Клики по пустому месту и обычному тексту не озвучиваются.
-const INTERACTIVE = 'a, button, [role="button"], summary, label, img, input[type="checkbox"], input[type="radio"]';
-const LINK_INTENSITY = 0.7;
-// Порядок обработчиков на странице не гарантирован, поэтому ориентируемся
-// на время: если звук уже сыграл в этом же клике, второй не нужен.
-const SAME_GESTURE_MS = 80;
-
-// Озвучку вешаем следующим тактом: модуль подключается раньше cases.js и
-// main.js, а их обработчики должны успеть сыграть свой звук и поставить
-// uiSoundHandled — иначе получится двойной щелчок на карточках кейсов.
-function attachInteractiveSounds() {
-  document.addEventListener('click', event => {
-    if (!event.isTrusted || event.uiSoundHandled) return;
-    if (event.button !== 0) return;
-    const target = event.target instanceof Element ? event.target : null;
-    if (!target || !target.closest(INTERACTIVE)) return;
-    // Выделение текста и перетаскивание картинки — не клик по смыслу.
-    if (window.getSelection?.()?.toString()) return;
-    if (performance.now() - lastSoundAt < SAME_GESTURE_MS) return;
-    playUISound('tap', LINK_INTENSITY);
-  }, { passive: true });
-
-  // Клавиатура: Enter и пробел по интерактивному элементу звучат так же.
-  document.addEventListener('keydown', event => {
-    if (!event.isTrusted || event.uiSoundHandled) return;
-    if (event.key !== 'Enter' && event.key !== ' ') return;
-    const target = event.target instanceof Element ? event.target : null;
-    if (!target || !target.closest('a, button, [role="button"], summary')) return;
-    if (performance.now() - lastSoundAt < SAME_GESTURE_MS) return;
-    playUISound('press', LINK_INTENSITY);
-  }, { passive: true });
-}
-
-setTimeout(attachInteractiveSounds, 0);
 
 export { createNoiseLayer, effects };

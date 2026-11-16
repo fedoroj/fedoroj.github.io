@@ -10,7 +10,7 @@ document.addEventListener('pointerdown', function() {
 // Процедурные звуки из sound: один AudioContext, разблокировка первым жестом.
 // Импорт не блокирует CMS; если звук недоступен, взаимодействия работают дальше.
 var uiSounds = null;
-import('./ui-sounds.js?v=2827bfb0de84').then(function(module) { uiSounds = module; }).catch(function() {});
+import('./ui-sounds.js?v=11c0feaa3e1b').then(function(module) { uiSounds = module; }).catch(function() {});
 
 // Ручной выбор → первый поддерживаемый язык браузера → русский.
 var languageStorageKey = 'serge-portfolio-language';
@@ -411,14 +411,15 @@ document.addEventListener('click', async function(event) {
 });
 document.addEventListener('languagechange', updateToastLabel);
 
-// Обычные ссылки, в том числе созданные из Markdown. Специальные действия
-// озвучиваются в собственных обработчиках, чтобы на один клик был один звук.
+// Обычные ссылки, в том числе созданные из Markdown, почта и просмотрщик медиа.
+// Специальные действия (карточки кейсов, кнопки) озвучиваются в собственных
+// обработчиках, чтобы на один клик был один звук.
 document.addEventListener('click', function(event) {
   var anchor = event.target.closest('a[href]');
   if (!anchor || event.fromMediaViewer || event.uiSoundHandled || event.defaultPrevented ||
-      anchor.matches('[data-open-case], [data-fancybox], [aria-disabled="true"]') ||
-      anchor.closest('.fancybox__container') || /^mailto:/i.test(anchor.getAttribute('href'))) return;
-  var primary = anchor.matches('#telegramCTA, #cvCTA, #headerContactCTA, #headerCvCTA, .work-item__frame, .work-title');
+      anchor.matches('[data-open-case], [aria-disabled="true"]') ||
+      anchor.closest('.fancybox__container')) return;
+  var primary = anchor.matches('#telegramCTA, #cvCTA, #headerContactCTA, #headerCvCTA, .work-item__frame, .work-title, [data-fancybox]');
   uiSounds?.playUISound(primary ? 'tap' : 'click');
   event.uiSoundHandled = true;
 });
