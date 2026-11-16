@@ -10,7 +10,7 @@ document.addEventListener('pointerdown', function() {
 // Процедурные звуки из sound: один AudioContext, разблокировка первым жестом.
 // Импорт не блокирует CMS; если звук недоступен, взаимодействия работают дальше.
 var uiSounds = null;
-import('./ui-sounds.js?v=d06a4a3a5b90').then(function(module) { uiSounds = module; }).catch(function() {});
+import('./ui-sounds.js?v=ed007dfb1f04').then(function(module) { uiSounds = module; }).catch(function() {});
 
 // Ручной выбор → первый поддерживаемый язык браузера → русский.
 var languageStorageKey = 'serge-portfolio-language';

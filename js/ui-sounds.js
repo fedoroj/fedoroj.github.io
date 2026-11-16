@@ -59,7 +59,6 @@ const effects = {
 // Создание и resume происходят непосредственно внутри пользовательского жеста.
 // Пока Safari возобновляет контекст, не планируем короткий звук в прошлом.
 export function unlockUISounds() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return Promise.resolve(null);
   try {
     const Context = window.AudioContext || window.webkitAudioContext;
     if (!Context) return Promise.resolve(null);
@@ -70,6 +69,8 @@ export function unlockUISounds() {
     // Каждый следующий доверенный жест повторяет resume, даже если предыдущий
     // Promise ещё ожидает разрешения браузера (Android Chrome / iOS Safari).
     const resumed = context.resume();
+    // iOS Safari разблокирует звук, только если внутри жеста прозвучал реальный
+    // буфер. Одного resume недостаточно, поэтому играем один тихий сэмпл.
     const source = context.createBufferSource();
     source.buffer = context.createBuffer(1, 1, context.sampleRate);
     source.connect(context.destination);
@@ -79,8 +80,13 @@ export function unlockUISounds() {
   } catch { return Promise.resolve(null); }
 }
 
+// Звук — часть обратной связи интерфейса, а не анимация. Раньше здесь стояла
+// проверка prefers-reduced-motion, и на iPhone с включённым «Уменьшением движения»
+// звук молчал полностью. Теперь настройка влияет только на декоративный hover.
+const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 export function playUISound(name, intensity = 1) {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !effects[name]) return;
+  if (!effects[name] || (name === 'hover' && reducedMotion())) return;
   const requestedAt = performance.now();
   const play = context => {
     if (!context || context.state !== 'running' || performance.now() - requestedAt > 300) return;
@@ -90,9 +96,39 @@ export function playUISound(name, intensity = 1) {
   else unlockUISounds().then(play);
 }
 
-// Повторный жест также восстанавливает контекст после блокировки экрана/звонка.
-['pointerdown', 'pointerup', 'touchend', 'click', 'keydown'].forEach(type => {
+// Звук включается любым доверенным касанием или нажатием — в том числе по пустому
+// месту и тексту. capture-фаза нужна, чтобы разблокировка шла раньше обработчиков
+// элементов: iOS Safari открывает аудио только внутри самого жеста.
+// touchstart/pointerdown дают самое раннее срабатывание, touchend/click —
+// повторную попытку, если первый жест система не засчитала.
+['touchstart', 'pointerdown', 'touchend', 'pointerup', 'click', 'keydown'].forEach(type => {
   document.addEventListener(type, event => { if (event.isTrusted) unlockUISounds(); }, { capture: true, passive: true });
 });
+
+// Элементы, у которых есть свой звук, помечают событие флагом uiSoundHandled.
+// Всё остальное — текст, пустая область, фон — получает тихий «тап», поэтому
+// отклик есть на любом участке страницы. Слушаем именно click: обработчики
+// элементов тоже висят на click, поэтому двойных звуков не будет — а на iOS
+// click приходит и при тапе по обычному тексту.
+const FALLBACK_INTENSITY = 0.35;
+
+document.addEventListener('click', event => {
+  if (!event.isTrusted || event.uiSoundHandled) return;
+  if (event.button !== 0) return;
+  const target = event.target instanceof Element ? event.target : null;
+  // Поля ввода и выделение текста озвучивать не нужно.
+  if (target && target.closest('input, textarea, select, [contenteditable="true"]')) return;
+  if (window.getSelection?.()?.toString()) return;
+  playUISound('tap', FALLBACK_INTENSITY);
+}, { passive: true });
+
+// Клавиатура: Enter и пробел по любому месту страницы тоже дают отклик.
+document.addEventListener('keydown', event => {
+  if (!event.isTrusted || event.uiSoundHandled) return;
+  if (event.key !== 'Enter' && event.key !== ' ') return;
+  const target = event.target instanceof Element ? event.target : null;
+  if (target && target.closest('input, textarea, select, [contenteditable="true"]')) return;
+  playUISound('press', FALLBACK_INTENSITY);
+}, { passive: true });
 
 export { createNoiseLayer, effects };
