@@ -73,7 +73,6 @@ section {
    Общий стиль имени и заголовков всех секций. Размер на телефонах — ниже в брейкпоинте.
    -------------------------------------------- */
 .section-label {
-  text-rendering: optimizeLegibility;
   font-family: var(--font-section-heading);
   font-size: var(--fs-mobile-display);
   font-weight: var(--fw-bold);
@@ -405,7 +404,8 @@ section {
 }
 
 /* Крупные контакты: прежняя типографика, теперь настраивается через --link-display-*. */
-.link--display {
+.link--display,
+.not-found__code {
   font-family: var(--link-display-font);
   font-variation-settings: var(--link-display-axes);
   font-optical-sizing: auto;
@@ -1700,7 +1700,6 @@ section {
     /* Верхний и нижний padding берём из общего section, без обнуления сверху. */
   }
   .fixed-nav nav a {
-    text-rendering: optimizeLegibility;
     font-family: var(--font-section-heading);
     font-variation-settings: normal;
     font-stretch: normal;
@@ -1848,6 +1847,47 @@ section {
 }
 [data-theme="dark"] #sunIcon {
   display: block;
+}
+
+/* --------------------------------------------
+   Страница 404. Цифра набрана той же типографикой, что крупные контакты
+   (см. .link--display выше), поэтому правки токенов контактов её тоже меняют.
+   -------------------------------------------- */
+.not-found {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-8) var(--space-4);
+  text-align: center;
+  container-type: inline-size;
+}
+
+.not-found__code {
+  margin: var(--space-0);
+  color: var(--color-text-primary);
+}
+
+.not-found__text {
+  max-width: 34ch;
+  margin: var(--space-0);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-base);
+}
+
+.not-found__text--en {
+  margin-top: calc(var(--space-2) * -1);
+  color: var(--color-text-tertiary);
+}
+
+.not-found__button {
+  /* .btn по умолчанию тянется на всю ширину: на странице 404 кнопка
+     должна быть по размеру текста. */
+  width: auto;
+  align-self: center;
+  margin-top: var(--space-4);
 }
 
 /* Общие состояния блоков и медиа; настройки цветов — в variables.css. */

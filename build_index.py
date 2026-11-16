@@ -15,6 +15,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 
+# Ресурсы, к URL которых добавляется версия содержимого.
+ASSET_PATTERN = (r'(href|src)="((?:css|js|assets/vendor)/[^"?]+\.(?:css|js)'
+                 r'|assets/fonts/[^"?]+\.woff2)(?:\?v=[a-f0-9]+)?"')
+
 
 def version_asset(match):
     """Версия содержимого позволяет браузеру обновить изменённый CSS/JS."""
@@ -72,12 +76,18 @@ def main():
         if updated != source:
             stylesheet.write_text(updated, encoding='utf-8')
 
-    html = re.sub(
-        r'(href|src)="((?:css|js|assets/vendor)/[^"?]+\.(?:css|js)|assets/fonts/[^"?]+\.woff2)(?:\?v=[a-f0-9]+)?"',
-        version_asset,
-        html,
-    )
+    html = re.sub(ASSET_PATTERN, version_asset, html)
     output.write_text(html, encoding='utf-8')
+
+    # Вспомогательные страницы (404) используют те же ресурсы, поэтому версии
+    # в них обновляются по тому же правилу, иначе они разъедутся с index.html.
+    for extra in (ROOT / '404.html',):
+        if not extra.exists():
+            continue
+        source = extra.read_text(encoding='utf-8')
+        updated = re.sub(ASSET_PATTERN, version_asset, source)
+        if updated != source:
+            extra.write_text(updated, encoding='utf-8')
     print(f'Версии ресурсов index.html обновлены: {output.stat().st_size / 1024:.1f} КБ; CSS и JS подключены отдельно.')
 
 

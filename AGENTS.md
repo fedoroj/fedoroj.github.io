@@ -23,6 +23,7 @@
 
 ```
 index.html              оболочка страницы, подключает css и js
+404.html                страховочная страница для несуществующих адресов
 site.md                 контент главной: тексты, пути к медиа, список кейсов
 cases/<slug>/
   <slug>-case.md        статья кейса
@@ -30,8 +31,10 @@ cases/<slug>/
 css/                    reset, variables, base, layout, main
 js/                     content-state, main, cases, theme, page-enter, ui-sounds
 assets/                 fonts, images, video, logos, preview, vendor
-build_index.py          версии css/js + Open Graph из site.md
+build_index.py          версии css/js/шрифтов + Open Graph из site.md
 subset_fonts.py         пересборка подмножеств шрифтов
+scripts/check_site.py   проверки перед публикацией (запускаются в CI)
+.github/workflows/      CI: проверки на каждый пуш
 ```
 
 ## 3. site.md — простая CMS
@@ -252,6 +255,23 @@ GitHub Pages пересобирает сайт за 30–60 секунд.
 
 **Когда сборка НЕ нужна:** добавление кейса, замена картинок/видео,
 правки текстов в `site.md` и `cases/*.md`.
+
+### 10.1. Проверка перед пушем
+
+`python3 scripts/check_site.py` — битые ссылки, пути к медиа, один `h1`,
+валидный JSON-LD, отсутствие `text-rendering: optimizeLegibility` в CSS
+(он ломал шрифты в Safari) и ссылок на WebP. Тот же скрипт плюс проверка
+актуальности версий ресурсов запускается в CI на каждый пуш:
+`.github/workflows/check.yml`. Если проверка упала — публиковать нельзя.
+
+### 10.2. Страница 404
+
+`404.html` — статическая страница для несуществующих адресов. Цифра набрана
+той же типографикой, что крупные контакты (селектор `.link--display,
+.not-found__code` в `main.css`), поэтому меняется вместе с токенами контактов.
+`build_index.py` проставляет в неё те же версии css/js, что и в `index.html` —
+не забывайте про неё при переименовании стилей. Стоит `noindex, follow`:
+сама страница в поиск не попадает, но ссылки с неё обходятся.
 
 ## 11. Чего не делать
 

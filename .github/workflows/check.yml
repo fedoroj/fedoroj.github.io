@@ -1,0 +1,31 @@
+name: Проверка сайта
+
+# Защита от регрессий: битые ссылки, забытая сборка версий, возврат
+# text-rendering: optimizeLegibility (он ломал вариативные шрифты в Safari).
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Ссылки, разметка и стили
+        run: python3 scripts/check_site.py
+
+      - name: Версии ресурсов актуальны
+        run: |
+          python3 build_index.py
+          if ! git diff --quiet; then
+            echo "::error::build_index.py изменил файлы. Запустите его локально и закоммитьте результат."
+            git diff --stat
+            exit 1
+          fi
