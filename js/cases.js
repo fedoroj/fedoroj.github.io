@@ -38,6 +38,36 @@
     }
   }
   sheetQuery.addEventListener('change', syncCaseSheet);
+
+  // Закрытие мобильного bottom sheet: панель уезжает вниз, подложка гаснет,
+  // и только после анимации диалог закрывается. На планшете и десктопе
+  // окно закрывается сразу — там выезда нет.
+  let caseClosing = false;
+  function closeCaseDialog() {
+    if (!dialog.open || caseClosing) return;
+    if (!sheetQuery.matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      dialog.close();
+      return;
+    }
+    caseClosing = true;
+    dialog.classList.add('is-closing');
+    sheetBackdrop.classList.add('is-closing');
+    let finished = false;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      clearTimeout(timer);
+      dialog.removeEventListener('animationend', onEnd);
+      dialog.classList.remove('is-closing');
+      sheetBackdrop.classList.remove('is-closing');
+      caseClosing = false;
+      dialog.close();
+    };
+    const onEnd = event => { if (event.target === dialog) finish(); };
+    dialog.addEventListener('animationend', onEnd);
+    // Страховка: если анимация не запустилась (фон-вкладка, сбой), закрываем сами.
+    const timer = setTimeout(finish, 700);
+  }
   const content = document.getElementById('caseContent');
   const renderer = new marked.Renderer();
   // Явный перенос в ячейке site.md: <br>, <br/> или <br />. Атрибуты и прочий HTML запрещены.
@@ -737,7 +767,7 @@
       if (!event.uiSoundHandled && !event.target.closest('a, button')) {
         uiSounds?.playUISound('press'); event.uiSoundHandled = true;
       }
-      dialog.close();
+      closeCaseDialog();
     }
   });
   document.addEventListener('keydown', event => {
@@ -750,12 +780,12 @@
     }
     if (!event.fromMediaViewer && dialog.open && event.key === 'Escape') {
       if (!event.defaultPrevented) uiSounds?.playUISound('press');
-      event.preventDefault(); dialog.close();
+      event.preventDefault(); closeCaseDialog();
     }
   });
   dialog.querySelectorAll('[data-case-close]').forEach(button => button.addEventListener('click', event => {
     uiSounds?.playUISound('press'); event.uiSoundHandled = true;
-    dialog.close();
+    closeCaseDialog();
   }));
   let sheetGesture = null;
   let sheetGestureListenersAttached = false;

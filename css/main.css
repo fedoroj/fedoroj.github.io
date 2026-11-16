@@ -2172,6 +2172,10 @@ html:has(#aboutVideoDialog[open], #caseDialog[open]),
     background: var(--color-case-sheet-handle);
   }
   .case-modal[open] { animation: case-sheet-in var(--duration-long) ease both; }
+  /* Закрытие: панель уезжает вниз, подложка гаснет. Класс ставит closeCaseDialog()
+     в js/cases.js, после animationend диалог закрывается по-настоящему. */
+  .case-modal.is-closing { animation: case-sheet-out var(--duration-long) ease both; }
+  .case-sheet-backdrop.is-closing { animation: case-backdrop-out var(--duration-normal) ease both; }
   .case-modal[open].is-dragging {
     translate: 0 var(--case-sheet-drag, 0px);
   }
@@ -2199,11 +2203,14 @@ html:has(#aboutVideoDialog[open], #caseDialog[open]),
     width: calc(100% - var(--space-2) * 2);
   }
   @media (prefers-reduced-motion: reduce) {
-    .case-modal[open], .case-sheet-backdrop { animation: none; }
+    .case-modal[open], .case-modal.is-closing,
+    .case-sheet-backdrop, .case-sheet-backdrop.is-closing { animation: none; }
   }
 }
 @keyframes case-sheet-in { from { transform: translateY(100%); } to { transform: translateY(0); } }
 @keyframes case-backdrop-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes case-sheet-out { from { transform: translateY(0); } to { transform: translateY(100%); } }
+@keyframes case-backdrop-out { from { opacity: 1; } to { opacity: 0; } }
 
 /* Появление при загрузке. После animationend класс снимается: эффекты hover
    и существующие анимации компонентов продолжают работать самостоятельно. */

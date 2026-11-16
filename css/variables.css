@@ -851,7 +851,7 @@
   --article-heading-axes: normal; /* Без специальных осей Roboto Flex */
   --article-heading-weight: var(--fw-semibold);
   --article-heading-line-height: 1.15;
-  --article-font-size: 13px; /* Наборный текст и таблицы на всех экранах */
+  --article-font-size: 14px; /* Наборный текст и таблицы на всех экранах */
   --article-line-height: 1.4; /* 140% */
   --article-caption-line-height: var(--lh-compact); /* 130% для подписей к медиа и таблицам */
   --article-strong-weight: var(--fw-semibold);
