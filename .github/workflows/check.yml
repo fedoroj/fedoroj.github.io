@@ -28,7 +28,9 @@ jobs:
       - name: Версии ресурсов актуальны
         run: |
           python3 build_index.py
-          if ! git diff --quiet; then
+          # sitemap.xml исключён: его lastmod считается по дате коммита,
+          # который CI и проверяет, поэтому дата законно отличается на день.
+          if ! git diff --quiet -- . ':(exclude)sitemap.xml'; then
             echo "::error::build_index.py изменил файлы. Запустите его локально и закоммитьте результат."
             git diff --stat
             exit 1
