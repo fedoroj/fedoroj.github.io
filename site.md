@@ -59,7 +59,7 @@
 
 | Поле | Русский | English |
 | --- | --- | --- |
-| Текст | Проектирую продукты для веба и&nbsp;мобильных: b2b, ai, fintech, e-commerce, messaging. 5+&nbsp;лет в&nbsp;продуктовом дизайне. Живу в&nbsp;Москве. Веду [канал в TG](https://t.me/fedoros), пишу [статьи](https://dsgners.ru/fedorov) | I design web and mobile products: b2b, ai, fintech, e-commerce, messaging. 5+ years in product design. Based in Moscow. I run a [telegram channel](https://t.me/fedoros) and write [articles](https://dsgners.ru/fedorov) |
+| Текст | Проектирую продукты для веба и&nbsp;мобильных: b2b, ai, fintech, e-commerce, messaging. 5+&nbsp;лет в&nbsp;продуктовом дизайне. Живу в&nbsp;Москве. Веду [тг‑канал](https://t.me/fedoros), пишу [статьи](https://dsgners.ru/fedorov) | I design web and mobile products: b2b, ai, fintech, e-commerce, messaging. 5+ years in product design. Based in Moscow. I run a [telegram channel](https://t.me/fedoros) and write [articles](https://dsgners.ru/fedorov) |
 
 ## Статус
 
@@ -163,6 +163,54 @@
 | Русский | English | URL RU | URL EN |
 | --- | --- | --- | --- |
 | Читать кейс | Read case | cases/natali/natali-case.md | |
+
+### Кейс: byterm
+
+| Поле | Русский | English |
+| --- | --- | --- |
+| Название | ByTerm — торговый терминал | ByTerm — trading terminal |
+| Год | 2025 | 2025 |
+| Описание | Веб-терминал для торговли: график, стакан, портфель и заявки в одном окне. Выставление заявки сократилось с шести шагов до двух. Роль — продуктовый дизайнер | Web trading terminal: chart, order book, portfolio and orders in one window. Placing an order went from six steps to two. Role — product designer |
+| Теги | Финтех; Web; Trading | Fintech; Web; Trading |
+
+| Параметр | Значение |
+| --- | --- |
+| Цвета тегов | blue; cyan; lime |
+| Медиа | assets/images/artifacts/dribbble-mockup-test3.jpg |
+| Тип | auto |
+| Медиа для мобильных | |
+| Тип для мобильных | auto |
+| Ширина | full |
+| URL RU | cases/byterm/byterm-case.md |
+| URL EN | |
+
+| Русский | English | URL RU | URL EN |
+| --- | --- | --- | --- |
+| Читать кейс | Read case | cases/byterm/byterm-case.md | |
+
+### Кейс: chums
+
+| Поле | Русский | English |
+| --- | --- | --- |
+| Название | Chums — web3-мессенджер | Chums — web3 messenger |
+| Год | 2025 | 2025 |
+| Описание | Мобильный мессенджер с кошельком: чаты, переводы и профили. Онбординг переделан так, чтобы вход не требовал понимания крипты: завершение выросло с 54% до 78%. Роль — продуктовый дизайнер | Mobile messenger with a wallet: chats, transfers and profiles. Onboarding no longer requires crypto knowledge: completion grew from 54% to 78%. Role — product designer |
+| Теги | Web3; App; Messaging | Web3; App; Messaging |
+
+| Параметр | Значение |
+| --- | --- |
+| Цвета тегов | violet; purple; indigo |
+| Медиа | assets/images/cases/case_3_4.jpg |
+| Тип | auto |
+| Медиа для мобильных | |
+| Тип для мобильных | auto |
+| Ширина | 980 |
+| URL RU | cases/chums/chums-case.md |
+| URL EN | |
+
+| Русский | English | URL RU | URL EN |
+| --- | --- | --- | --- |
+| Читать кейс | Read case | cases/chums/chums-case.md | |
 
 ## Архивное
 
