@@ -101,10 +101,24 @@ def check_content():
             fail(f'{article.relative_to(ROOT)}: статья не упомянута в site.md')
 
 
+def check_sections():
+    """Раздел site.md должен быть уникальным: дубль ломает разбор всего контента."""
+    site = ROOT / 'site.md'
+    if not site.exists():
+        return
+    text = site.read_text(encoding='utf-8')
+    for pattern, label in ((r'^## (.+)$', 'раздел'), (r'^### ((?:Кейс|Архив): .+)$', 'карточка')):
+        names = [str(m).strip() for m in re.findall(pattern, text, re.M)]
+        for name in sorted(set(names)):
+            if names.count(name) > 1:
+                fail(f'site.md: {label} «{name}» объявлен {names.count(name)} раза')
+
+
 def main():
     check_html()
     check_styles()
     check_content()
+    check_sections()
 
     if errors:
         print(f'Проверка не пройдена, проблем: {len(errors)}\n')
