@@ -31,7 +31,9 @@ body {
     Helvetica,
     Arial,
     sans-serif;
-  text-rendering: optimizeLegibility;
+  /* text-rendering: optimizeLegibility здесь стоять не должен: в WebKit (iOS Safari)
+     он ломает сопоставление вариативных шрифтов — Roboto Flex молча заменяется
+     системным. Свойство устаревшее и ускорения не даёт. */
 }
 
 /* 4. Медиа-элементы — адаптивность */
