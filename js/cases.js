@@ -79,6 +79,15 @@
     return resolved.href;
   }
   const isMarkdown = href => /\.md$/i.test(new URL(href, base).pathname);
+  const prefetched = new Set();
+  // Подогрев статьи до клика: запрос уходит сразу, ответ ложится в кэш браузера.
+  function prefetchCase(anchor) {
+    if (!anchor.hasAttribute('data-open-case')) return;
+    const address = anchor.href;
+    if (prefetched.has(address)) return;
+    prefetched.add(address);
+    ContentState.read(address).catch(() => prefetched.delete(address));
+  }
   function configureLink(anchor, href) {
     if (typeof href === 'object') {
       anchor.dataset.hrefRu = href.ru; anchor.dataset.hrefEn = href.en;
@@ -95,6 +104,13 @@
       anchor.dataset.openCase = '';
       anchor.setAttribute('aria-haspopup', 'dialog');
       anchor.setAttribute('aria-controls', 'caseDialog');
+      // Заранее подтягиваем статью при наведении или фокусе: окно кейса
+      // открывается без ожидания сети. Повторный запрос отдаёт кэш браузера.
+      if (!anchor.hasAttribute('data-prefetch')) {
+        anchor.dataset.prefetch = '';
+        anchor.addEventListener('pointerenter', () => prefetchCase(anchor), { passive: true });
+        anchor.addEventListener('focus', () => prefetchCase(anchor));
+      }
     } else if (/^https?:/.test(href) && new URL(href).origin !== base.origin) {
       anchor.target = '_blank'; anchor.rel = 'noopener noreferrer';
     }
@@ -308,7 +324,7 @@
     const favicon = tabSettings.Favicon ? url(tabSettings.Favicon.ru, base, true) : null;
     const toastLabels = s['Уведомления'] ? fields(s, 'Уведомления', []) : {};
     const loadingLabels = s['Состояния контента'] ? fields(s, 'Состояния контента', []) : {};
-    return { cursors: cursorValues(s), tabSettings, favicon, toastLabels, loadingLabels, nav, hero, avatar, avatarMedia: url(media['Превью'] || media.GIF, base, true), avatarType: mediaType(media['Превью'] || media.GIF, media['Тип превью'] || 'auto'), video: url(media['Видео'], base, true),
+    return { cursors: cursorValues(s), tabSettings, favicon, toastLabels, loadingLabels, nav, hero, avatar, avatarMedia: url(media['Превью'] || media.GIF, base, true), avatarType: mediaType(media['Превью'] || media.GIF, media['Тип превью'] || 'auto'), avatarPoster: media['Постер'] ? url(media['Постер'], base, true) : null, video: url(media['Видео'], base, true),
       description, state, caseCloseLabel, buttons, works, cards, archive, archiveCards, gallery, artifacts, about, aboutPhoto, aboutSummary, aboutExperience, aboutTools, aboutIntro, publications, publicationItems, contacts, contactLinks, footer };
   }
   // В DOM находится только выбранная обложка: второй файл не загружаем заранее.
@@ -509,8 +525,23 @@
     text('#avatarCaption', data.avatar['Подпись']); text('#heroStatus', data.state);
     text('#aboutVideoHint', data.avatar['Подсказка звука']);
     text('.case-modal__close-action', data.caseCloseLabel);
-    changed('avatarMedia', [data.avatarMedia, data.avatarType], () => {
-      document.querySelector('.avatar__image').replaceWith(previewMedia(data.avatarMedia, data.avatarType, 'avatar__image'));
+    changed('avatarMedia', [data.avatarMedia, data.avatarType, data.avatarPoster], () => {
+      const previous = document.querySelector('.avatar__image');
+      if (!data.avatarPoster || data.avatarType !== 'image') {
+        previous.replaceWith(previewMedia(data.avatarMedia, data.avatarType, 'avatar__image'));
+        return;
+      }
+      // Мгновенно показываем лёгкий статичный кадр, анимацию подставляем,
+      // когда она догрузилась: первый экран не ждёт тяжёлого GIF.
+      const poster = previewMedia(data.avatarPoster, 'image', 'avatar__image');
+      previous.replaceWith(poster);
+      const full = new Image();
+      full.decoding = 'async';
+      full.onload = () => {
+        const current = document.querySelector('.avatar__image');
+        if (current && current.isConnected && current.src !== full.src) current.replaceWith(previewMedia(data.avatarMedia, 'image', 'avatar__image'));
+      };
+      full.src = data.avatarMedia;
     });
     const video = document.getElementById('aboutVideo');
     if (video.src !== data.video) { video.src = data.video; video.load(); }

@@ -68,15 +68,27 @@
     container.replaceChildren(box);
     container.setAttribute('aria-busy', 'true');
   }
+  const texts = new Map();
   window.ContentState = {
     async read(address) {
       if (!firstConsumed && firstRequest && new URL(address).pathname === new URL('site.md', document.baseURI).pathname) {
         firstConsumed = true;
+        const key = String(address);
         const result = await firstRequest;
-        if (!result.error) return result.source;
+        if (!result.error) {
+          texts.set(key, Promise.resolve(result.source));
+          return result.source;
+        }
         throw result.error;
       }
-      return fetchMarkdown(address);
+      // Один запрос на файл: предзагрузка при наведении и открытие окна
+      // используют уже полученный текст, а не качают статью дважды.
+      // Ключ приводим к строке: адрес приходит и как URL, и как строкой.
+      const key = String(address);
+      if (texts.has(key)) return texts.get(key);
+      const request = fetchMarkdown(address);
+      texts.set(key, request);
+      try { return await request; } catch (error) { texts.delete(key); throw error; }
     },
     configure(values) { labels = { ...defaults, ...values }; updateLabels(); },
     panel,
