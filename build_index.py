@@ -23,6 +23,14 @@ def version_asset(match):
     return f'{attribute}="{relative}?v={version}"'
 
 
+def version_font(match):
+    """Версия шрифта в url(...) внутри CSS: ../assets/fonts/name.woff2?v=hash."""
+    relative = match.group(1)
+    path = ROOT / relative.replace('../', '')
+    version = hashlib.sha256(path.read_bytes()).hexdigest()[:12]
+    return f'url("{relative}?v={version}")'
+
+
 def main():
     output = ROOT / 'index.html'
     html = output.read_text(encoding='utf-8')
@@ -51,8 +59,21 @@ def main():
                       lambda _: block, html, flags=re.S)
     else:
         html = html.replace('  </head>', block + '\n  </head>') if '  </head>' in html else html.replace('</head>', block + '\n</head>')
+    # Шрифты: Safari на iOS держит их в кэше особенно упорно и при замене файла
+    # по тому же адресу продолжает отдавать старую копию (или не отдаёт ничего,
+    # и текст падает на системный шрифт). Поэтому версия добавляется в CSS.
+    for stylesheet in (ROOT / 'css').glob('*.css'):
+        source = stylesheet.read_text(encoding='utf-8')
+        updated = re.sub(
+            r'url\("(\.\./assets/fonts/[^"?]+\.woff2)(?:\?v=[a-f0-9]+)?"\)',
+            version_font,
+            source,
+        )
+        if updated != source:
+            stylesheet.write_text(updated, encoding='utf-8')
+
     html = re.sub(
-        r'(href|src)="((?:css|js|assets/vendor)/[^"?]+\.(?:css|js))(?:\?v=[a-f0-9]+)?"',
+        r'(href|src)="((?:css|js|assets/vendor)/[^"?]+\.(?:css|js)|assets/fonts/[^"?]+\.woff2)(?:\?v=[a-f0-9]+)?"',
         version_asset,
         html,
     )
