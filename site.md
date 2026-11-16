@@ -59,7 +59,7 @@
 
 | Поле | Русский | English |
 | --- | --- | --- |
-| Текст | Проектирую продукты для веба и&nbsp;мобильных: b2b, ai, fintech, e-commerce, messaging. 5+&nbsp;лет в&nbsp;продуктовом дизайне. Живу в&nbsp;Москве. Веду [тг‑канал](https://t.me/fedoros), пишу [статьи](https://dsgners.ru/fedorov) | I design web and mobile products: b2b, ai, fintech, e-commerce, messaging. 5+ years in product design. Based in Moscow. I run a [telegram channel](https://t.me/fedoros) and write [articles](https://dsgners.ru/fedorov) |
+| Текст | Проектирую продукты для веба и&nbsp;мобильных: b2b, ai, fintech, e-commerce, messaging. 5+&nbsp;лет в&nbsp;продуктовом дизайне. Живу в&nbsp;Москве.<br>Веду [тг-канал](https://t.me/fedoros), пишу [статьи](https://dsgners.ru/fedorov) | I design web and mobile products: b2b, ai, fintech, e-commerce, messaging. 5+ years in product design. Based in Moscow. I run a [telegram channel](https://t.me/fedoros) and write [articles](https://dsgners.ru/fedorov) |
 
 ## Статус
 
