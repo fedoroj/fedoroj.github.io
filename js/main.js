@@ -320,6 +320,14 @@ function bindGallery() {
   Fancybox.bind('[data-fancybox^="case-image-"], [data-fancybox="about-photo"]', Object.assign({}, galleryOptions, {
     Carousel: { infinite: false, Navigation: false }
   }));
+  // Кадры одного кейса: просмотрщик ограничен его медиа. Видео открывается
+  // с управлением; автоплей решает cases.js по наличию звуковой дорожки.
+  Fancybox.bind('[data-fancybox^="case-gallery-"]', Object.assign({}, galleryOptions, {
+    Html: {
+      videoAutoplay: false,
+      videoTpl: '<video class="fancybox__html5video" playsinline controls preload="metadata"><source src="{{src}}" type="{{format}}"></video>'
+    }
+  }));
 }
 
 // Статические кнопки шапки и возврата наверх.

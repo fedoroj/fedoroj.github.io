@@ -94,6 +94,28 @@
     if (!table) throw new Error('Проверьте таблицу в разделе «' + name + '»');
     return table.rows.map(row => row.map(cell => cell.text.trim())).filter(row => row.some(Boolean));
   }
+  // «Галерея» кейса — необязательная таблица с шапкой: дополнительные кадры
+  // сторителлинга. Строки без медиа пропускаются, подписи необязательны.
+  function caseGallery(tables) {
+    // У таблицы marked шапка лежит отдельно от строк.
+    const header = table => (table.header || []).map(cell => cell.text.trim());
+    const table = tables.find(token => {
+      const titles = header(token);
+      return titles.includes('Медиа') && titles.includes('Подпись RU');
+    });
+    if (!table) return [];
+    const titles = header(table);
+    return table.rows.map(row => {
+      const cell = key => (row[titles.indexOf(key)]?.text || '').trim();
+      const media = cell('Медиа');
+      if (!media) return null;
+      return {
+        source: media, type: mediaType(media, cell('Тип') || 'auto'),
+        width: cell('Ширина') ? imageWidth(cell('Ширина')) : null,
+        caption: pair(cell('Подпись RU'), cell('Подпись EN'))
+      };
+    }).filter(Boolean);
+  }
   const pair = (ru = '', en = '') => ({ ru, en: en || ru });
   const language = () => document.documentElement.lang === 'en' ? 'en' : 'ru';
   function fields(section, name, required) {
@@ -305,8 +327,13 @@
     const works = fields(s, 'Работы', ['Заголовок', 'Описание']);
     const cards = Object.keys(s).filter(name => name.startsWith('Кейс:')).map(name => {
       const copy = fields(s, name, ['Название', 'Год', 'Описание', 'Теги']);
-      const settings = Object.fromEntries(rows(s, name, 1));
-      return { id: name.slice(5).trim(), copy, image: url(settings['Медиа'] || settings['Изображение'], base, true),
+      const parameterRows = rows(s, name, 1);
+      const settings = Object.fromEntries(parameterRows);
+      // Подпись обложки: строка «Подпись | RU | EN», необязательна.
+      const captionRow = parameterRows.find(row => row[0] === 'Подпись') || [];
+      const gallery = caseGallery((s[name] || []).filter(token => token.type === 'table'));
+      return { id: name.slice(5).trim(), copy, gallery, coverCaption: pair(captionRow[1] || '', captionRow[2] || ''),
+        image: url(settings['Медиа'] || settings['Изображение'], base, true),
         type: mediaType(settings['Медиа'] || settings['Изображение'], settings['Тип'] || 'auto'),
         mobileImage: settings['Медиа для мобильных'] ? url(settings['Медиа для мобильных'], base, true) : null,
         mobileType: settings['Медиа для мобильных'] ? mediaType(settings['Медиа для мобильных'], settings['Тип для мобильных'] || 'auto') : null,
@@ -366,6 +393,11 @@
     const type = mobile ? data.mobileType : data.type;
     const key = JSON.stringify([source, type]);
     if (frame.dataset.coverKey === key) return;
+    // Обложка открывается в просмотрщике, а не в модалке: модалку открывают
+    // название и ссылки. Тип нужен Fancybox для видео.
+    frame.href = source;
+    if (type === 'video') frame.dataset.type = 'html5video';
+    else delete frame.dataset.type;
     const previous = frame.querySelector('video');
     frame.style.removeProperty('--media-ratio');
     frame.replaceChildren(previewMedia(source, type, 'work-image'));
@@ -383,10 +415,6 @@
   });
   function card(data) {
     const item = element('article', 'work-item'); item.dataset.case = data.id;
-    item.style.setProperty('--work-image-width', data.width);
-    const frame = translated(link(data.href, null, 'link link--card work-item__frame'), data.copy['Название'], true);
-    caseCovers.set(frame, data);
-    renderCaseCover(frame, data);
     const info = element('div', 'work-info'), heading = element('div', 'work-heading'), title = element('h3', 'work-title-heading');
     title.append(link(data.href, data.copy['Название'], 'link link--plain work-title'));
     heading.append(title, element('span', 'work-year', data.copy['Год'])); info.append(heading);
@@ -411,7 +439,39 @@
     if (ru.length) info.append(tags);
     const extra = element('div', 'work-links'); data.links.forEach(row => extra.append(link(row.href, row.label, 'link link--inline work-link')));
     if (data.links.length) info.append(extra);
-    item.append(frame, info); return item;
+    item.append(info);
+
+    // Сторителлинг: текст сверху, кадры друг за другом снизу. Обложка и кадры
+    // открываются в просмотрщике, ограниченном медиа одного кейса.
+    const group = 'case-gallery-' + data.id;
+    const gallery = element('div', 'work-gallery');
+    const cover = element('figure', 'work-figure');
+    cover.style.setProperty('--work-image-width', data.width);
+    const frame = translated(link(data.href, null, 'link link--card work-item__frame'), data.copy['Название'], true);
+    frame.dataset.fancybox = group;
+    caseCovers.set(frame, data);
+    renderCaseCover(frame, data);
+    cover.append(frame);
+    if (data.coverCaption.ru) cover.append(element('figcaption', 'work-caption', data.coverCaption));
+    gallery.append(cover);
+    data.gallery.forEach((row, index) => gallery.append(workFigure(data, row, group, index)));
+    item.append(gallery);
+    return item;
+  }
+  // Кадр карточки: подпись по центру, ширина — своя или как у обложки.
+  function workFigure(data, row, group, index) {
+    const figure = element('figure', 'work-figure');
+    figure.style.setProperty('--work-image-width', row.width || data.width);
+    const anchor = element('a', 'link link--card work-figure__link');
+    anchor.href = row.source;
+    anchor.dataset.fancybox = group;
+    const fallback = pair(data.copy['Название'].ru + ' — кадр ' + (index + 2), data.copy['Название'].en + ' — frame ' + (index + 2));
+    translated(anchor, row.caption.ru ? row.caption : fallback, true);
+    if (row.type === 'video') anchor.dataset.type = 'html5video';
+    anchor.append(previewMedia(row.source, row.type, 'work-image'));
+    figure.append(anchor);
+    if (row.caption.ru) figure.append(element('figcaption', 'work-caption', row.caption));
+    return figure;
   }
   function archiveCard(data) {
     const item = element('article', 'archive-card');
@@ -545,9 +605,35 @@
     catch { return ''; }
   }
   async function applyVideoAutoplay() {
-    const pending = [...document.querySelectorAll('video')].filter(video => !video.dataset.audioApplied);
-    if (!pending.length) return;
+    const pending = [...document.querySelectorAll('video')].filter(video => !video.dataset.audioApplied && !video.closest('.fancybox__container'));
+    // В просмотрщике кейса видео живёт недолго, поэтому обрабатываем его отдельно.
+    const viewer = [...document.querySelectorAll('.fancybox__container video')].filter(video => !video.dataset.viewerApplied);
+    const unmarked = [...document.querySelectorAll('a[data-fancybox^="case-gallery-"]:not([data-audio-marked])')];
+    if (!pending.length && !viewer.length && !unmarked.length) return;
     const manifest = await readAudioManifest();
+    for (const video of viewer) {
+      const source = video.currentSrc || video.getAttribute('src') || video.querySelector('source')?.getAttribute('src');
+      if (!source) continue;
+      const hasSound = manifest[mediaPath(source)];
+      if (hasSound === undefined) continue;
+      video.dataset.viewerApplied = '';
+      if (hasSound) {
+        // С дорожкой: показываем управление и ждём решения пользователя.
+        video.controls = true; video.muted = false;
+        if (!video.paused) video.pause();
+      } else {
+        video.controls = true; video.muted = true; video.loop = true;
+        video.play().catch(() => {});
+      }
+    }
+    // Просмотрщик кейса: беззвучный ролик запускаем сами, со звуком — по кнопке.
+    for (const anchor of unmarked) {
+      const source = mediaPath(anchor.getAttribute('href') || '');
+      if (!/\.(mp4|webm|mov)$/i.test(source)) continue;
+      anchor.dataset.audioMarked = '';
+      if (!manifest[source]) anchor.dataset.silent = '';
+    }
+    if (!pending.length) return;
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     for (const video of pending) {
       const source = video.currentSrc || video.getAttribute('src') || video.querySelector('source')?.getAttribute('src');

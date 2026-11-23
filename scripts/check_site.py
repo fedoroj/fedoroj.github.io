@@ -84,6 +84,19 @@ def check_content():
         if MEDIA.search(ref) and not (ROOT / ref).exists():
             fail(f'site.md: файл не найден — {ref}')
 
+    # Карточка — мини-сторителлинг: обложка и не больше пяти кадров в «Галерее».
+    for block in re.split(r'(?m)^### Кейс: ', text)[1:]:
+        name = block.splitlines()[0].strip()
+        gallery = re.search(
+            r'(?m)^\| Медиа \| Тип \| Ширина \| Подпись RU \| Подпись EN \|\n\|[^\n]*\|\n((?:\|[^\n]*\n?)*)',
+            block,
+        )
+        if not gallery:
+            continue
+        frames = [line for line in gallery.group(1).splitlines() if line.startswith('|')]
+        if len(frames) > 5:
+            fail(f'site.md: кейс «{name}»: кадров {len(frames)}, максимум 5 (+ обложка)')
+
     # Статьи кейсов: ссылки внутри md считаются от папки статьи.
     for article in sorted(ROOT.glob('cases/*/*.md')):
         body = article.read_text(encoding='utf-8')

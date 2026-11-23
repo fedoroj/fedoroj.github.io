@@ -1057,32 +1057,54 @@ section {
 }
 
 .work-item {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   min-width: 0;
   color: var(--color-text-primary);
 }
-.work-item__frame {
-  display: block;
+/* Сторителлинг: текст сверху, кадры друг за другом снизу, по центру. */
+.work-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  margin-top: var(--space-6);
+}
+.work-figure {
   width: min(100%, var(--work-image-width, 100%));
-  margin-inline: auto;
+  margin: var(--space-0) auto;
+}
+.work-item__frame,
+.work-figure__link {
+  display: block;
   overflow: hidden;
   border-radius: var(--radius-sm);
 }
+.work-item__frame { width: 100%; }
 .work-item :is(img, video) {
   display: block;
   width: 100%;
   height: auto;
   transition: transform var(--duration-long) ease;
 }
+.work-caption {
+  padding: var(--space-2) var(--space-0) var(--space-0);
+  font-size: var(--fs-small);
+  line-height: var(--main-copy-line-height, var(--lh-heading));
+  color: var(--color-text-tertiary);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
 @media (hover: hover) and (pointer: fine) {
-.work-item:hover .work-item__frame :is(img, video),
+.work-figure__link:hover :is(img, video),
 .archive-card:hover .archive-image,
 .about-photo__link:hover .about-photo__image {
   transform: scale(1.06);
 }
 }
 @media (hover: none), (pointer: coarse) {
-.work-item:active .work-item__frame :is(img, video),
+.work-figure__link:active :is(img, video),
 .archive-card:active .archive-image,
 .about-photo__link:active .about-photo__image {
   transform: scale(1.06);
@@ -1091,7 +1113,7 @@ section {
 .work-info {
   width: var(--case-description-width);
   max-width: 100%;
-  margin: var(--space-4) auto var(--space-0);
+  margin: var(--space-0) auto;
   font-size: var(--fs-small);
   font-weight: var(--fw-regular);
   line-height: var(--main-copy-line-height, var(--lh-heading));
@@ -1780,7 +1802,7 @@ section {
    На 1024px и выше действуют размеры карточек из site.md. */
 @media (max-width: 768px) {
   #works .work-info,
-  #works .work-item__frame {
+  #works .work-figure {
     width: 100%;
   }
 }
