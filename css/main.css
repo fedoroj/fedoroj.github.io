@@ -1068,7 +1068,7 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-8);
+  gap: var(--space-3);
   margin-top: var(--space-6);
 }
 .work-figure {
@@ -1089,12 +1089,15 @@ section {
   transition: transform var(--duration-long) ease;
 }
 .work-caption {
-  padding: var(--space-2) var(--space-0) var(--space-0);
+  padding: var(--space-1) var(--space-0) var(--space-0);
   font-size: var(--fs-small);
   line-height: var(--main-copy-line-height, var(--lh-heading));
   color: var(--color-text-tertiary);
   text-align: center;
-  overflow-wrap: anywhere;
+  /* В карточке подпись всегда одна строка; полный текст — в просмотрщике. */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 @media (hover: hover) and (pointer: fine) {
 .work-figure__link:hover :is(img, video),

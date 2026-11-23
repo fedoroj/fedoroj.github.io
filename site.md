@@ -100,12 +100,8 @@
 | Параметр | Значение | 
 | --- | --- |
 | Цвета тегов | lime; cyan; violet |
-| Медиа | assets/video/video_case_2-35-1.mp4 |
-| Тип | auto |
 | Медиа для мобильных | |
 | Тип для мобильных | auto |
-| Ширина | full |
-| Подпись | Платёжное поручение: от создания до подтверждения банком | Payment instruction: from creation to bank confirmation |
 | URL RU | cases/design-system/design-system-case.md |
 | URL EN | |
 <!-- Цвета тегов: red, orange, amber, yellow, lime, green, teal, cyan, blue, indigo, violet, purple, pink, brown, gray. Синонимы: grey, turquoise, aqua, gold. В строке «Цвета тегов» разделяйте значения точкой с запятой (;). -->
@@ -117,12 +113,12 @@
 | Google Play | Google Play | cases/design-system/design-system-case.md | |
 | Zinda.tj | Zinda.tj | cases/design-system/design-system-case.md | |
 
-| Медиа | Тип | Ширина | Подпись RU | Подпись EN |
-| --- | --- | --- | --- | --- |
-| cases/design-system/assets/process.jpg | auto | | Карта сценария платежа: от поручения до подтверждения банком | Payment flow map: from instruction to bank confirmation |
-| cases/design-system/assets/interaction.gif | auto | | Анимация перехода между шагами платежа | Transition between payment steps |
-| cases/design-system/assets/detail.jpg | auto | | Выписка: фильтры, группировка по контрагентам и повтор платежа | Statement: filters, grouping by counterparty and payment repeat |
-
+| Медиа | Подпись RU | Подпись EN | Ширина |
+| --- | --- | --- | --- |
+| assets/video/video_case_2-35-1.mp4 | Платёжное поручение в кабинете | Payment instruction in the dashboard | full |
+| cases/design-system/assets/process.jpg | Карта сценария платежа | Payment flow map | 980 |
+| cases/design-system/assets/interaction.gif | Анимация шагов платежа | Payment steps animation | min |
+| cases/design-system/assets/detail.jpg | Выписка с фильтрами | Statement with filters | 760 |
 ### Кейс: factory-director
 
 | Поле | Русский | English |
@@ -135,12 +131,8 @@
 | Параметр | Значение |
 | --- | --- |
 | Цвета тегов | cyan; blue; violet |
-| Медиа | assets/images/cases/case_21_9.jpg |
-| Тип | auto |
 | Медиа для мобильных | |
 | Тип для мобильных | auto |
-| Ширина | full |
-| Подпись | Экран директора: заказы, статусы и узкие места | Director screen: orders, statuses and bottlenecks |
 | URL RU | cases/factory-director/factory-director-case.md |
 | URL EN | |
 
@@ -148,11 +140,11 @@
 | --- | --- | --- | --- |
 | Читать кейс | Read case | cases/factory-director/factory-director-case.md | |
 
-| Медиа | Тип | Ширина | Подпись RU | Подпись EN |
-| --- | --- | --- | --- | --- |
-| cases/factory-director/assets/process.jpg | auto | | Карта ролей и потоков данных: от смены до решения директора | Map of roles and data flows: from the shop floor to the director's decision |
-| cases/factory-director/assets/detail.jpg | auto | | Карточка заказа: статус, узкие места и ответственный за следующий шаг | Order card: status, bottlenecks and the owner of the next step |
-
+| Медиа | Подпись RU | Подпись EN | Ширина |
+| --- | --- | --- | --- |
+| assets/images/cases/case_21_9.jpg | Экран директора | Director's screen | full |
+| cases/factory-director/assets/process.jpg | Карта ролей и потоков | Roles and data flows | 980 |
+| cases/factory-director/assets/detail.jpg | Карточка заказа | Order card | 760 |
 ### Кейс: natali
 
 | Поле | Русский | English |
@@ -165,12 +157,8 @@
 | Параметр | Значение |
 | --- | --- |
 | Цвета тегов | green; lime; amber |
-| Медиа | assets/images/cases/case_3_2.jpg |
-| Тип | auto |
 | Медиа для мобильных | |
 | Тип для мобильных | auto |
-| Ширина | 980 |
-| Подпись | Каталог оптовых предложений с порогами и остатками | Wholesale catalogue with tiers and stock |
 | URL RU | cases/natali/natali-case.md |
 | URL EN | |
 
@@ -178,11 +166,11 @@
 | --- | --- | --- | --- |
 | Читать кейс | Read case | cases/natali/natali-case.md | |
 
-| Медиа | Тип | Ширина | Подпись RU | Подпись EN |
-| --- | --- | --- | --- | --- |
-| cases/natali/assets/process.jpg | auto | | Путь закупщика: поиск, набор корзины, заявка и подтверждение условий | Buyer journey: search, cart, request and terms confirmation |
-| cases/natali/assets/detail.jpg | auto | | Карточка товара: оптовые пороги, остатки и кратность упаковки | Product card: wholesale tiers, stock and pack multiples |
-
+| Медиа | Подпись RU | Подпись EN | Ширина |
+| --- | --- | --- | --- |
+| assets/images/cases/case_3_2.jpg | Каталог оптовых предложений | Wholesale catalogue | full |
+| cases/natali/assets/process.jpg | Путь закупщика | Buyer journey | 980 |
+| cases/natali/assets/detail.jpg | Карточка товара | Product card | 760 |
 ### Кейс: byterm
 
 | Поле | Русский | English |
@@ -195,12 +183,8 @@
 | Параметр | Значение |
 | --- | --- |
 | Цвета тегов | blue; cyan; lime |
-| Медиа | assets/images/artifacts/dribbble-mockup-test3.jpg |
-| Тип | auto |
 | Медиа для мобильных | |
 | Тип для мобильных | auto |
-| Ширина | full |
-| Подпись | Терминал: график, стакан и портфель в одном окне | Terminal: chart, order book and portfolio in one window |
 | URL RU | cases/byterm/byterm-case.md |
 | URL EN | |
 
@@ -208,11 +192,11 @@
 | --- | --- | --- | --- |
 | Читать кейс | Read case | cases/byterm/byterm-case.md | |
 
-| Медиа | Тип | Ширина | Подпись RU | Подпись EN |
-| --- | --- | --- | --- | --- |
-| cases/byterm/assets/process.jpg | auto | | Раскладка терминала: панели, заявка и лента событий | Terminal layout: panels, order ticket and event feed |
-| cases/byterm/assets/detail.jpg | auto | | Панель заявки: расчёт суммы, комиссии и проверка полей | Order ticket: amount, fee and field validation |
-
+| Медиа | Подпись RU | Подпись EN | Ширина |
+| --- | --- | --- | --- |
+| assets/images/artifacts/dribbble-mockup-test3.jpg | Терминал: график и стакан | Terminal: chart and order book | full |
+| cases/byterm/assets/process.jpg | Раскладка терминала | Terminal layout | 980 |
+| cases/byterm/assets/detail.jpg | Панель заявки | Order ticket | 760 |
 ### Кейс: chums
 
 | Поле | Русский | English |
@@ -225,12 +209,8 @@
 | Параметр | Значение |
 | --- | --- |
 | Цвета тегов | violet; purple; indigo |
-| Медиа | assets/images/cases/case_3_4.jpg |
-| Тип | auto |
 | Медиа для мобильных | |
 | Тип для мобильных | auto |
-| Ширина | 980 |
-| Подпись | Перевод в чате: сумма, получатель и статус операции | In-chat transfer: amount, recipient and status |
 | URL RU | cases/chums/chums-case.md |
 | URL EN | |
 
@@ -238,11 +218,11 @@
 | --- | --- | --- | --- |
 | Читать кейс | Read case | cases/chums/chums-case.md | |
 
-| Медиа | Тип | Ширина | Подпись RU | Подпись EN |
-| --- | --- | --- | --- | --- |
-| cases/chums/assets/process.jpg | auto | | Путь нового пользователя: вход, первый чат, перевод | New user journey: sign-in, first chat, transfer |
-| cases/chums/assets/detail.jpg | auto | | Экран перевода в чате: сумма, получатель и статус операции | In-chat transfer: amount, recipient and transfer status |
-
+| Медиа | Подпись RU | Подпись EN | Ширина |
+| --- | --- | --- | --- |
+| assets/images/cases/case_3_4.jpg | Перевод в чате | In-chat transfer | full |
+| cases/chums/assets/process.jpg | Путь нового пользователя | New user journey | 980 |
+| cases/chums/assets/detail.jpg | Экран перевода | Transfer screen | 760 |
 ## Архивное
 
 | Поле | Русский | English |
@@ -522,12 +502,13 @@ Asana, ClickUp, Notion, Bitrix24, Figma, FigJam, Miro, Framer, Tilda, Pen and pa
 Готовые оттенки подобраны с контрастом текста к подложке не ниже 4,5:1 в обеих темах. При ручном вводе HSL или изменении токенов контраст нужно проверить заново.
 Если цвет пропущен или записан с ошибкой, используется цвет из стандартной последовательности.
 Добавляя новый тег, добавьте его перевод и следующий цвет. Общая палитра и оформление — в variables.css и main.css.
-Карточка — мини-сторителлинг: сверху название, год, описание, теги и ссылки, под ними обложка и кадры друг за другом.
-Обложка — это поле `Медиа`. Её подпись задаётся необязательной строкой `Подпись | Русский | English` в таблице параметров.
-Дополнительные кадры — необязательная таблица «Галерея» в конце блока кейса: колонки `Медиа`, `Тип`, `Ширина`, `Подпись RU`, `Подпись EN`.
-Пустая ячейка `Ширина` берёт ширину обложки; `full`, `min` и число работают так же, как у обложки. Подписи можно не заполнять, они выводятся по центру под кадром.
-В карточке достаточно 2–4 кадров, максимум 6 вместе с обложкой; в статье кейса ограничений нет.
-Клик по обложке или кадру открывает просмотрщик, и листание ограничено медиа одного кейса. Название и ссылки по-прежнему открывают статью.
+Карточка — мини-сторителлинг: сверху название, год, описание, теги и ссылки, ниже картинки друг за другом.
+Картинки задаются таблицей «Галерея» в конце блока: `Медиа`, `Подпись RU`, `Подпись EN`, `Ширина`.
+Первая строка таблицы — обложка карточки, дальше остальные кадры. Всего до 6 картинок вместе с обложкой; в статье кейса ограничений нет.
+Подписи можно не заполнять: в карточке они выводятся одной строкой по центру, поэтому держите их короткими. Полный текст подписи виден в просмотрщике.
+Пустая ячейка `Ширина` берёт ширину обложки; `full`, `min` и число работают так же, как у обложки. Ширины кадров могут отличаться.
+Клик по картинке открывает просмотрщик, и листание ограничено кадрами одного кейса.
+В модалку кейса ведут только ссылки: название и строки таблицы ссылок. Картинки и видео модалку не открывают.
 Ширина обложки: `full` — доступная ширина сайта; `min` — 440 px; число, например `980` — пиксели, но не больше доступной ширины.
 Поля страницы: на десктопе и планшете от 1025 px включительно — 107 px слева и справа (16 px + 75 px под фиксированное боковое меню + 16 px). Значит `full` = ширина окна минус 214 px: на 1440 px это 1226 px.
 До 1024 px включительно навигация уходит в плавающую шапку, поля — 16 px. Исключение на всех экранах — первый экран: колонка 200 px. Изображения карточек сохраняют пропорции.

@@ -96,15 +96,10 @@
   }
   // «Галерея» кейса — необязательная таблица с шапкой: дополнительные кадры
   // сторителлинга. Строки без медиа пропускаются, подписи необязательны.
-  function caseGallery(tables) {
+  function caseGallery(table) {
     // У таблицы marked шапка лежит отдельно от строк.
-    const header = table => (table.header || []).map(cell => cell.text.trim());
-    const table = tables.find(token => {
-      const titles = header(token);
-      return titles.includes('Медиа') && titles.includes('Подпись RU');
-    });
     if (!table) return [];
-    const titles = header(table);
+    const titles = (table.header || []).map(cell => cell.text.trim());
     return table.rows.map(row => {
       const cell = key => (row[titles.indexOf(key)]?.text || '').trim();
       const media = cell('Медиа');
@@ -327,18 +322,28 @@
     const works = fields(s, 'Работы', ['Заголовок', 'Описание']);
     const cards = Object.keys(s).filter(name => name.startsWith('Кейс:')).map(name => {
       const copy = fields(s, name, ['Название', 'Год', 'Описание', 'Теги']);
-      const parameterRows = rows(s, name, 1);
-      const settings = Object.fromEntries(parameterRows);
-      // Подпись обложки: строка «Подпись | RU | EN», необязательна.
-      const captionRow = parameterRows.find(row => row[0] === 'Подпись') || [];
-      const gallery = caseGallery((s[name] || []).filter(token => token.type === 'table'));
-      return { id: name.slice(5).trim(), copy, gallery, coverCaption: pair(captionRow[1] || '', captionRow[2] || ''),
-        image: url(settings['Медиа'] || settings['Изображение'], base, true),
-        type: mediaType(settings['Медиа'] || settings['Изображение'], settings['Тип'] || 'auto'),
+      // Таблицы карточки ищем по шапке: порядок таблиц в site.md может меняться.
+      const tables = (s[name] || []).filter(token => token.type === 'table');
+      const bodyRows = table => table.rows.map(row => row.map(cell => cell.text.trim()));
+      const tableHeader = table => (table.header || []).map(cell => cell.text.trim());
+      const findTable = keys => tables.find(table => keys.every(key => tableHeader(table).includes(key)));
+      const parameterTable = findTable(['Параметр', 'Значение']);
+      const settings = parameterTable ? Object.fromEntries(bodyRows(parameterTable)) : {};
+      const gallery = caseGallery(findTable(['Медиа']));
+      const linkTable = findTable(['URL RU', 'URL EN']);
+      // Первая картинка «Галереи» — обложка карточки; поле «Медиа» остаётся
+      // поддержкой старых блоков без таблицы галереи.
+      const coverMedia = gallery.length ? gallery[0].source : (settings['Медиа'] || settings['Изображение']);
+      if (!coverMedia) throw new Error('Нет первой картинки в карточке «' + name.slice(5).trim() + '»');
+      const cover = gallery.length ? gallery[0] : { type: mediaType(coverMedia, settings['Тип'] || 'auto'), width: null, caption: pair('') };
+      return { id: name.slice(5).trim(), copy, gallery: gallery.slice(1), coverCaption: cover.caption,
+        image: url(coverMedia, base, true), type: cover.type,
         mobileImage: settings['Медиа для мобильных'] ? url(settings['Медиа для мобильных'], base, true) : null,
         mobileType: settings['Медиа для мобильных'] ? mediaType(settings['Медиа для мобильных'], settings['Тип для мобильных'] || 'auto') : null,
         tagColors: (settings['Цвета тегов'] || '').split(';').map(value => value.trim()),
-        width: imageWidth(settings['Ширина']), href: localizedUrl(settings['URL RU'] || settings.URL, settings['URL EN']), links: links(rows(s, name, 2)) };
+        width: cover.width || imageWidth(settings['Ширина'] || 'full'),
+        href: localizedUrl(settings['URL RU'] || settings.URL, settings['URL EN']),
+        links: linkTable ? links(bodyRows(linkTable)) : [] };
     });
     const archive = s['Архивное'] ? fields(s, 'Архивное', ['Заголовок', 'Подпись']) : null;
     const archiveCards = Object.keys(s).filter(name => name.startsWith('Архив:')).map(name => {
@@ -447,7 +452,8 @@
     const gallery = element('div', 'work-gallery');
     const cover = element('figure', 'work-figure');
     cover.style.setProperty('--work-image-width', data.width);
-    const frame = translated(link(data.href, null, 'link link--card work-item__frame'), data.copy['Название'], true);
+    // Обложка — только медиа: модалку открывают название и ссылки, не картинки.
+    const frame = translated(element('a', 'link link--card work-item__frame'), data.copy['Название'], true);
     frame.dataset.fancybox = group;
     caseCovers.set(frame, data);
     renderCaseCover(frame, data);
