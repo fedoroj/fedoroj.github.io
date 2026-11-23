@@ -328,7 +328,7 @@
   --color-border-accent: var(--palette-blue-50);
   --color-border-avatar: var(--palette-white-20);
   --color-border-play: var(--palette-white-10);
-  --color-link-underline: var(--palette-neutral-75);
+  --color-link-underline: currentColor;
   --color-link-underline-hover: var(--color-accent-hover);
 
   /* заливки */
@@ -566,7 +566,7 @@
   --color-border-secondary: var(--palette-neutral-50);
   --article-quote-stroke: var(--color-border-secondary); /* В тёмной теме сохраняем прежний цвет. */
   --color-border-subtle: var(--palette-neutral-20);
-  --color-link-underline: var(--palette-neutral-35);
+  --color-link-underline: currentColor;
   --color-fill-neutral-soft: var(--palette-neutral-10);
   --color-fill-neutral-soft-hover: var(--palette-neutral-15);
   --color-fill-neutral-subtle: var(--palette-neutral-5);
@@ -902,7 +902,7 @@
   --link-accent-underline-offset: var(--space-1);
   --link-display-underline-offset: var(--space-2); /* 8px: отступ линии у крупных ссылок в контактах */
   --link-display-underline-offset-mobile: var(--space-1); /* 4px: линия ближе к тексту на телефонах */
-  --link-display-underline-color: var(--color-border-tertiary);
+  --link-display-underline-color: currentColor;
   --link-display-underline-width: var(--border-width-thin);
   --link-display-font: var(--font-roboto);
   --link-display-size: clamp(var(--fs-contact-min), 14cqi, var(--fs-contact));

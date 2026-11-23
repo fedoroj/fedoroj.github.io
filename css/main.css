@@ -354,6 +354,8 @@ section {
 .link:not(.btn) {
   color: var(--_link-color, var(--link-color));
   text-decoration-line: var(--_link-decoration, var(--link-decoration));
+  /* Пунктир вместо сплошной линии: линия в цвет текста, а не серая. */
+  text-decoration-style: dotted;
   text-decoration-color: var(
     --_link-underline-color,
     var(--link-underline-color)
@@ -378,6 +380,10 @@ section {
 }
 
 /* Markdown-статьи: ссылка наследует типографику своего абзаца/заголовка. */
+/* Ссылки в статьях кейсов остаются с обычной линией: они синие, а не чёрно-белые. */
+.link.link--article {
+  text-decoration-style: solid;
+}
 .link--article {
   font: inherit;
   --_link-color: var(--article-link-color);
