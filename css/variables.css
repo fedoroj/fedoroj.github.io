@@ -490,7 +490,8 @@
   /* Плавающая шапка: общий радиус в обоих состояниях и длительность раскрытия. */
   --mobile-header-radius: 20px;
   --mobile-header-transition: var(--duration-long);
-  --mobile-header-offset: var(--space-2); /* 8px сверху и по бокам плавающей шапки */
+  --mobile-header-offset: var(--space-2); /* 8px по бокам плавающей шапки */
+  --mobile-header-offset-top: var(--space-1); /* 4px сверху */
   --mobile-header-height: var(--space-10); /* 40px в закрытом состоянии */
   --mobile-hero-width: 200px; /* Исключение из общей мобильной колонки */
   --fs-mobile-display: 20px; /* Имя, мобильные заголовки секций и пункты раскрытого меню */

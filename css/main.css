@@ -2193,10 +2193,11 @@ html:has(#aboutVideoDialog[open], #caseDialog[open]),
     display: flex;
     flex: 0 0 var(--case-sheet-handle-area-height);
     justify-content: center;
-    align-items: flex-start;
-    padding-top: var(--space-2);
+    /* Полоска по центру области, граница отделяет её от статьи. */
+    align-items: center;
     box-sizing: border-box;
     background: var(--color-surface-case);
+    border-bottom: var(--border-width-thin) solid var(--color-border-subtle);
     touch-action: none;
     user-select: none;
     -webkit-user-select: none;
@@ -2225,7 +2226,7 @@ html:has(#aboutVideoDialog[open], #caseDialog[open]),
        Собственный clip не даёт слою инерционной прокрутки выходить за её границы. */
     background: transparent;
     clip-path: inset(0);
-    padding: var(--space-0) var(--space-4) var(--space-6);
+    padding: var(--space-4) var(--space-4) var(--space-6);
     /* Последний абзац можно прокрутить выше плавающей кнопки. */
     padding-bottom: calc(var(--button-height-l) + var(--space-4) * 2 + env(safe-area-inset-bottom));
   }

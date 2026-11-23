@@ -320,6 +320,20 @@ function bindGallery() {
   Fancybox.bind('[data-fancybox^="case-image-"], [data-fancybox="about-photo"]', Object.assign({}, galleryOptions, {
     Carousel: { infinite: false, Navigation: false }
   }));
+  // Стрелки внутри видео сфокусированы на нативном плеере и не листают галерею:
+  // забираем их у плеера, чтобы переключение слайдов работало всегда.
+  document.addEventListener('keydown', function(event) {
+    if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
+    var target = event.target;
+    if (!target || !target.closest || !target.closest('.fancybox__slide video')) return;
+    var instance = window.Fancybox && window.Fancybox.getInstance();
+    if (!instance || typeof instance.next !== 'function') return;
+    event.preventDefault();
+    event.stopPropagation();
+    if (event.key === 'ArrowRight') instance.next();
+    else instance.prev();
+  }, true);
+
   // Кадры одного кейса: просмотрщик ограничен его медиа. Видео открывается
   // с управлением; автоплей решает cases.js по наличию звуковой дорожки.
   Fancybox.bind('[data-fancybox^="case-gallery-"]', Object.assign({}, galleryOptions, {

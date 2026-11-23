@@ -642,9 +642,11 @@
       video.dataset.audioApplied = '';
       if (hasSound) {
         // Звук есть: автозапуск выключаем и останавливаем, если он уже пошёл.
+        // Тянуть весь файл ради кадра не нужно — хватает метаданных.
         video.dataset.autoplayBlocked = '';
         video.autoplay = false;
         video.removeAttribute('autoplay');
+        video.preload = 'metadata';
         if (!video.paused) video.pause();
       } else if (!reduced) {
         video.autoplay = true;
