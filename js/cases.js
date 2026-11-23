@@ -524,10 +524,59 @@
   // Только превью главной: статья внутри #caseDialog не входит в этот селектор.
   function syncVideos() {
     document.querySelectorAll('video[data-site-preview]').forEach(video => {
-      if (!video.dataset.previewSrc && !document.hidden && !document.querySelector('.fancybox__container') && video.getBoundingClientRect().bottom > -300 && video.getBoundingClientRect().top < innerHeight + 300) video.play().catch(() => {});
+      if (!video.dataset.autoplayBlocked && !video.dataset.previewSrc && !document.hidden && !document.querySelector('.fancybox__container') && video.getBoundingClientRect().bottom > -300 && video.getBoundingClientRect().top < innerHeight + 300) video.play().catch(() => {});
       else video.pause();
     });
   }
+  // Беззвучные видео играют сами, видео со звуком — только по действию
+  // пользователя: иначе на странице была бы каша из звуков. Список беззвучных
+  // готовит build_index.py в assets/video/audio-manifest.json.
+  let audioManifest = null;
+  async function readAudioManifest() {
+    if (audioManifest) return audioManifest;
+    try {
+      const response = await fetch(new URL('assets/video/audio-manifest.json', base), { cache: 'default' });
+      audioManifest = response.ok ? await response.json() : {};
+    } catch { audioManifest = {}; }
+    return audioManifest;
+  }
+  function mediaPath(address) {
+    try { return decodeURIComponent(new URL(address, location.href).pathname.replace(/^\/+/, '')); }
+    catch { return ''; }
+  }
+  async function applyVideoAutoplay() {
+    const pending = [...document.querySelectorAll('video')].filter(video => !video.dataset.audioApplied);
+    if (!pending.length) return;
+    const manifest = await readAudioManifest();
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    for (const video of pending) {
+      const source = video.currentSrc || video.getAttribute('src') || video.querySelector('source')?.getAttribute('src');
+      if (!source) continue;
+      const hasSound = manifest[mediaPath(source)];
+      if (hasSound === undefined) continue;
+      video.dataset.audioApplied = '';
+      if (hasSound) {
+        // Звук есть: автозапуск выключаем и останавливаем, если он уже пошёл.
+        video.dataset.autoplayBlocked = '';
+        video.autoplay = false;
+        video.removeAttribute('autoplay');
+        if (!video.paused) video.pause();
+      } else if (!reduced) {
+        video.autoplay = true;
+        video.setAttribute('autoplay', '');
+        video.playsInline = true;
+        video.play().catch(() => {});
+      }
+    }
+  }
+  window.applyVideoAutoplay = applyVideoAutoplay;
+  applyVideoAutoplay();
+  document.addEventListener('DOMContentLoaded', applyVideoAutoplay);
+  document.addEventListener('gallery-viewer-close', () => applyVideoAutoplay());
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) applyVideoAutoplay(); });
+  new MutationObserver(() => applyVideoAutoplay())
+    .observe(document.body, { childList: true, subtree: true });
+
   // Повторная попытка после жеста, если браузер заблокировал autoplay.
   document.addEventListener('pointerdown', syncVideos, { passive: true });
   document.addEventListener('keydown', syncVideos);
@@ -652,6 +701,7 @@
       node.dataset.contentLoaded = 'true'; node.setAttribute('aria-busy', 'false');
     });
     syncVideos();
+    applyVideoAutoplay();
     for (const [name, selector] of [['Метаданные', '.footer-meta'], ['Примечание', '.footer-note']]) {
       changed('footer-' + name, data.footer[name], () => rich(document.querySelector(selector), data.footer[name]));
     }
@@ -722,6 +772,7 @@
     dialog.setAttribute('aria-label', heading ? heading.textContent : article.label);
     content.replaceChildren(fragment);
     content.setAttribute('aria-busy', 'false');
+    applyVideoAutoplay();
   }
   async function loadArticle(initial = false) {
     if (!article || article.loading) return;

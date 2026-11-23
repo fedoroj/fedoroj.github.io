@@ -134,12 +134,33 @@ def check_glyphs():
                 fail(f'{path.relative_to(ROOT)}: {label}')
 
 
+
+def check_audio_manifest():
+    """Каждое видео должно быть в манифесте: иначе автоплей решится неверно."""
+    manifest_path = ROOT / 'assets' / 'video' / 'audio-manifest.json'
+    if not manifest_path.exists():
+        fail('assets/video/audio-manifest.json: файла нет, запустите build_index.py')
+        return
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+    except json.JSONDecodeError as error:
+        fail(f'audio-manifest.json не разбирается — {error}')
+        return
+    videos = {p.relative_to(ROOT).as_posix() for p in (ROOT / 'assets').rglob('*')
+              if p.suffix.lower() in {'.mp4', '.webm'}}
+    videos |= {p.relative_to(ROOT).as_posix() for p in (ROOT / 'cases').rglob('*')
+               if p.suffix.lower() in {'.mp4', '.webm'}}
+    for video in sorted(videos - set(manifest)):
+        fail(f'{video}: нет в audio-manifest.json — запустите build_index.py')
+
+
 def main():
     check_html()
     check_styles()
     check_content()
     check_sections()
     check_glyphs()
+    check_audio_manifest()
 
     if errors:
         print(f'Проверка не пройдена, проблем: {len(errors)}\n')

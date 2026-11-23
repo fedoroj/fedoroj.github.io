@@ -10,7 +10,9 @@
 
 import hashlib
 from html import escape
+import json
 import re
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -39,6 +41,52 @@ def content_lastmod():
     except (OSError, subprocess.CalledProcessError):
         pass
     return None
+
+
+VIDEO_EXTENSIONS = {'.mp4', '.webm'}
+
+
+def video_has_sound(path):
+    """Есть ли в видео звуковая дорожка.
+
+    Смотрим только наличие аудиопотока. Насколько он громкий — вопрос автора
+    ролика, сайт это не оценивает.
+    """
+    streams = subprocess.run(
+        ['ffprobe', '-v', 'error', '-select_streams', 'a',
+         '-show_entries', 'stream=codec_type', '-of', 'csv=p=0', str(path)],
+        capture_output=True, text=True,
+    )
+    return 'audio' in (streams.stdout or '')
+
+
+def update_audio_manifest():
+    """Пишет assets/video/audio-manifest.json: какие видео со звуком.
+
+    По нему сайт решает, включать ли автопроигрывание: беззвучные играют сами,
+    со звуком — только по действию пользователя. Новые видео попадают в манифест
+    при следующей сборке.
+    """
+    videos = sorted(
+        item for item in (ROOT / 'assets').rglob('*')
+        if item.suffix.lower() in VIDEO_EXTENSIONS
+    ) + sorted(
+        item for item in (ROOT / 'cases').rglob('*')
+        if item.suffix.lower() in VIDEO_EXTENSIONS
+    )
+    if not videos:
+        return
+    if not shutil.which('ffprobe'):
+        print('ffprobe не найден: манифест звука не обновлён')
+        return
+
+    data = {
+        video.relative_to(ROOT).as_posix(): video_has_sound(video)
+        for video in videos
+    }
+    target = ROOT / 'assets' / 'video' / 'audio-manifest.json'
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + '\n', encoding='utf-8')
 
 
 def update_sitemap():
@@ -125,6 +173,7 @@ def main():
             extra.write_text(updated, encoding='utf-8')
     print(f'Версии ресурсов index.html обновлены: {output.stat().st_size / 1024:.1f} КБ; CSS и JS подключены отдельно.')
     update_sitemap()
+    update_audio_manifest()
 
 
 if __name__ == '__main__':

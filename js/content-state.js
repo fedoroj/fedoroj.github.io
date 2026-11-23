@@ -118,7 +118,8 @@
           if (media.dataset.previewSrc) {
             media.src = media.dataset.previewSrc; delete media.dataset.previewSrc;
           }
-          if (!document.hidden && !document.querySelector('.fancybox__container')) media.play().catch(() => {});
+          // Видео со звуком само не запускаем: это решает cases.js по манифесту.
+          if (!media.dataset.autoplayBlocked && !document.hidden && !document.querySelector('.fancybox__container')) media.play().catch(() => {});
         } else media.pause();
       }
       if (state.near && state.slot.dataset.mediaState === 'loading') state.startTimer();
