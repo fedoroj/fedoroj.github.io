@@ -76,7 +76,8 @@
   let trigger = null;
   const applied = new Map();
   const mobileCaseMedia = window.matchMedia('(max-width: 767px)');
-  const caseCovers = new WeakMap();
+  // Кадр карточки → его медиа: на телефоне может быть своя версия файла.
+  const figureMedia = new WeakMap();
 
   function sections(markdown) {
     const result = {}; let heading = '';
@@ -104,10 +105,14 @@
       const cell = key => (row[titles.indexOf(key)]?.text || '').trim();
       const media = cell('Медиа');
       if (!media) return null;
+      const mobile = cell('Медиа для мобильных');
       return {
-        source: media, type: mediaType(media, cell('Тип') || 'auto'),
+        source: url(media, base, true), type: mediaType(media, cell('Тип') || 'auto'),
         width: cell('Ширина') ? imageWidth(cell('Ширина')) : null,
-        caption: pair(cell('Подпись RU'), cell('Подпись EN'))
+        caption: pair(cell('Подпись RU'), cell('Подпись EN')),
+        // Своя версия кадра для телефона: другой файл, свои пропорции.
+        mobile: mobile ? { source: url(mobile, base, true),
+          type: mediaType(mobile, cell('Тип для мобильных') || 'auto') } : null
       };
     }).filter(Boolean);
   }
@@ -329,19 +334,23 @@
       const findTable = keys => tables.find(table => keys.every(key => tableHeader(table).includes(key)));
       const parameterTable = findTable(['Параметр', 'Значение']);
       const settings = parameterTable ? Object.fromEntries(bodyRows(parameterTable)) : {};
-      const gallery = caseGallery(findTable(['Медиа']));
+      const media = caseGallery(findTable(['Медиа']));
       const linkTable = findTable(['URL RU', 'URL EN']);
-      // Первая картинка «Галереи» — обложка карточки; поле «Медиа» остаётся
-      // поддержкой старых блоков без таблицы галереи.
-      const coverMedia = gallery.length ? gallery[0].source : (settings['Медиа'] || settings['Изображение']);
-      if (!coverMedia) throw new Error('Нет первой картинки в карточке «' + name.slice(5).trim() + '»');
-      const cover = gallery.length ? gallery[0] : { type: mediaType(coverMedia, settings['Тип'] || 'auto'), width: null, caption: pair('') };
-      return { id: name.slice(5).trim(), copy, gallery: gallery.slice(1), coverCaption: cover.caption,
-        image: url(coverMedia, base, true), type: cover.type,
-        mobileImage: settings['Медиа для мобильных'] ? url(settings['Медиа для мобильных'], base, true) : null,
-        mobileType: settings['Медиа для мобильных'] ? mediaType(settings['Медиа для мобильных'], settings['Тип для мобильных'] || 'auto') : null,
+      // Блок без таблицы галереи: единственный кадр берётся из поля «Медиа».
+      const legacy = settings['Медиа'] || settings['Изображение'];
+      if (!media.length && legacy) {
+        media.push({ source: url(legacy, base, true), type: mediaType(legacy, settings['Тип'] || 'auto'),
+          width: null, caption: pair(''), mobile: null });
+      }
+      if (!media.length) throw new Error('Нет первой картинки в карточке «' + name.slice(5).trim() + '»');
+      // Мобильную обложку из старой записи относим к первому кадру.
+      if (!media[0].mobile && settings['Медиа для мобильных']) {
+        media[0].mobile = { source: url(settings['Медиа для мобильных'], base, true),
+          type: mediaType(settings['Медиа для мобильных'], settings['Тип для мобильных'] || 'auto') };
+      }
+      return { id: name.slice(5).trim(), copy, media,
         tagColors: (settings['Цвета тегов'] || '').split(';').map(value => value.trim()),
-        width: cover.width || imageWidth(settings['Ширина'] || 'full'),
+        width: media[0].width || imageWidth('full'),
         href: localizedUrl(settings['URL RU'] || settings.URL, settings['URL EN']),
         links: linkTable ? links(bodyRows(linkTable)) : [] };
     });
@@ -390,33 +399,31 @@
     return { cursors: cursorValues(s), tabSettings, favicon, toastLabels, loadingLabels, nav, hero, avatar, avatarMedia: url(media['Превью'] || media.GIF, base, true), avatarType: mediaType(media['Превью'] || media.GIF, media['Тип превью'] || 'auto'), avatarPoster: media['Постер'] ? url(media['Постер'], base, true) : null, video: url(media['Видео'], base, true),
       description, state, caseCloseLabel, buttons, works, cards, archive, archiveCards, gallery, artifacts, about, aboutPhoto, aboutSummary, aboutExperience, aboutTools, aboutIntro, publications, publicationItems, contacts, contactLinks, footer };
   }
-  // В DOM находится только выбранная обложка: второй файл не загружаем заранее.
-  // Типы могут отличаться, например видео на десктопе и GIF на телефоне.
-  function renderCaseCover(frame, data) {
-    const mobile = mobileCaseMedia.matches && data.mobileImage;
-    const source = mobile ? data.mobileImage : data.image;
-    const type = mobile ? data.mobileType : data.type;
-    const key = JSON.stringify([source, type]);
-    if (frame.dataset.coverKey === key) return;
-    // Обложка открывается в просмотрщике, а не в модалке: модалку открывают
-    // название и ссылки. Тип нужен Fancybox для видео.
-    frame.href = source;
-    if (type === 'video') frame.dataset.type = 'html5video';
-    else delete frame.dataset.type;
-    const previous = frame.querySelector('video');
-    frame.style.removeProperty('--media-ratio');
-    frame.replaceChildren(previewMedia(source, type, 'work-image'));
-    frame.dataset.coverKey = key;
+  // В DOM живёт только версия текущего брейкпоинта: второй файл не грузим.
+  // На телефоне можно подставить свой кадр (например, 3:4 вместо 16:9).
+  function renderFigureMedia(anchor) {
+    const entry = figureMedia.get(anchor);
+    if (!entry) return;
+    const current = mobileCaseMedia.matches && entry.mobile ? entry.mobile : entry;
+    const key = JSON.stringify([current.source, current.type]);
+    if (anchor.dataset.mediaKey === key) return;
+    const previous = anchor.querySelector('video');
+    // Кадр открывается в просмотрщике, а не в модалке.
+    anchor.href = current.source;
+    delete anchor.dataset.audioMarked;
+    delete anchor.dataset.silent;
+    if (current.type === 'video') anchor.dataset.type = 'html5video';
+    else delete anchor.dataset.type;
+    anchor.replaceChildren(previewMedia(current.source, current.type, 'work-image'));
+    anchor.dataset.mediaKey = key;
     if (previous) {
       previous.pause(); previous.removeAttribute('src');
       delete previous.dataset.previewSrc; previous.load();
     }
   }
   mobileCaseMedia.addEventListener('change', () => {
-    document.querySelectorAll('.work-item__frame').forEach(frame => {
-      const data = caseCovers.get(frame);
-      if (data) renderCaseCover(frame, data);
-    });
+    document.querySelectorAll('.work-figure__link').forEach(renderFigureMedia);
+    applyVideoAutoplay();
   });
   function card(data) {
     const item = element('article', 'work-item'); item.dataset.case = data.id;
@@ -446,38 +453,24 @@
     if (data.links.length) info.append(extra);
     item.append(info);
 
-    // Сторителлинг: текст сверху, кадры друг за другом снизу. Обложка и кадры
-    // открываются в просмотрщике, ограниченном медиа одного кейса.
+    // Сторителлинг: текст сверху, кадры друг за другом снизу. Первый кадр —
+    // обложка. Все кадры открываются в просмотрщике одного кейса.
     const group = 'case-gallery-' + data.id;
     const gallery = element('div', 'work-gallery');
-    const cover = element('figure', 'work-figure');
-    cover.style.setProperty('--work-image-width', data.width);
-    // Обложка — только медиа: модалку открывают название и ссылки, не картинки.
-    const frame = translated(element('a', 'link link--card work-item__frame'), data.copy['Название'], true);
-    frame.dataset.fancybox = group;
-    caseCovers.set(frame, data);
-    renderCaseCover(frame, data);
-    cover.append(frame);
-    if (data.coverCaption.ru) cover.append(element('figcaption', 'work-caption', data.coverCaption));
-    gallery.append(cover);
-    data.gallery.forEach((row, index) => gallery.append(workFigure(data, row, group, index)));
+    data.media.forEach((entry, index) => {
+      const figure = element('figure', 'work-figure');
+      figure.style.setProperty('--work-image-width', entry.width || data.width);
+      const fallback = pair(data.copy['Название'].ru + ' — кадр ' + (index + 1), data.copy['Название'].en + ' — frame ' + (index + 1));
+      const anchor = translated(element('a', 'link link--card work-figure__link'), entry.caption.ru ? entry.caption : fallback, true);
+      anchor.dataset.fancybox = group;
+      figureMedia.set(anchor, entry);
+      renderFigureMedia(anchor);
+      figure.append(anchor);
+      if (entry.caption.ru) figure.append(element('figcaption', 'work-caption', entry.caption));
+      gallery.append(figure);
+    });
     item.append(gallery);
     return item;
-  }
-  // Кадр карточки: подпись по центру, ширина — своя или как у обложки.
-  function workFigure(data, row, group, index) {
-    const figure = element('figure', 'work-figure');
-    figure.style.setProperty('--work-image-width', row.width || data.width);
-    const anchor = element('a', 'link link--card work-figure__link');
-    anchor.href = row.source;
-    anchor.dataset.fancybox = group;
-    const fallback = pair(data.copy['Название'].ru + ' — кадр ' + (index + 2), data.copy['Название'].en + ' — frame ' + (index + 2));
-    translated(anchor, row.caption.ru ? row.caption : fallback, true);
-    if (row.type === 'video') anchor.dataset.type = 'html5video';
-    anchor.append(previewMedia(row.source, row.type, 'work-image'));
-    figure.append(anchor);
-    if (row.caption.ru) figure.append(element('figcaption', 'work-caption', row.caption));
-    return figure;
   }
   function archiveCard(data) {
     const item = element('article', 'archive-card');

@@ -100,8 +100,6 @@
 | Параметр | Значение | 
 | --- | --- |
 | Цвета тегов | lime; cyan; violet |
-| Медиа для мобильных | |
-| Тип для мобильных | auto |
 | URL RU | cases/design-system/design-system-case.md |
 | URL EN | |
 <!-- Цвета тегов: red, orange, amber, yellow, lime, green, teal, cyan, blue, indigo, violet, purple, pink, brown, gray. Синонимы: grey, turquoise, aqua, gold. В строке «Цвета тегов» разделяйте значения точкой с запятой (;). -->
@@ -113,12 +111,13 @@
 | Google Play | Google Play | cases/design-system/design-system-case.md | |
 | Zinda.tj | Zinda.tj | cases/design-system/design-system-case.md | |
 
-| Медиа | Подпись RU | Подпись EN | Ширина |
-| --- | --- | --- | --- |
-| assets/video/video_case_2-35-1.mp4 | Платёжное поручение в кабинете | Payment instruction in the dashboard | full |
-| cases/design-system/assets/process.jpg | Карта сценария платежа | Payment flow map | 980 |
-| cases/design-system/assets/interaction.gif | Анимация шагов платежа | Payment steps animation | min |
-| cases/design-system/assets/detail.jpg | Выписка с фильтрами | Statement with filters | 760 |
+| Медиа | Подпись RU | Подпись EN | Ширина | Медиа для мобильных | Тип для мобильных |
+| --- | --- | --- | --- | --- | --- |
+| assets/video/video_case_2-35-1.mp4 |  |  | full | | |
+| cases/design-system/assets/process.jpg | Карта сценария платежа | Payment flow map | 980 | | |
+| cases/design-system/assets/interaction.gif | Анимация шагов платежа | Payment steps animation | min | | |
+| cases/design-system/assets/detail.jpg | Выписка с фильтрами | Statement with filters | 760 | | |
+
 ### Кейс: factory-director
 
 | Поле | Русский | English |
@@ -131,8 +130,6 @@
 | Параметр | Значение |
 | --- | --- |
 | Цвета тегов | cyan; blue; violet |
-| Медиа для мобильных | |
-| Тип для мобильных | auto |
 | URL RU | cases/factory-director/factory-director-case.md |
 | URL EN | |
 
@@ -140,11 +137,12 @@
 | --- | --- | --- | --- |
 | Читать кейс | Read case | cases/factory-director/factory-director-case.md | |
 
-| Медиа | Подпись RU | Подпись EN | Ширина |
-| --- | --- | --- | --- |
-| assets/images/cases/case_21_9.jpg | Экран директора | Director's screen | full |
-| cases/factory-director/assets/process.jpg | Карта ролей и потоков | Roles and data flows | 980 |
-| cases/factory-director/assets/detail.jpg | Карточка заказа | Order card | 760 |
+| Медиа | Подпись RU | Подпись EN | Ширина | Медиа для мобильных | Тип для мобильных |
+| --- | --- | --- | --- | --- | --- |
+| assets/images/cases/case_21_9.jpg |  |  | full | | |
+| cases/factory-director/assets/process.jpg | Карта ролей и потоков | Roles and data flows | 980 | | |
+| cases/factory-director/assets/detail.jpg | Карточка заказа | Order card | 760 | | |
+
 ### Кейс: natali
 
 | Поле | Русский | English |
@@ -157,8 +155,6 @@
 | Параметр | Значение |
 | --- | --- |
 | Цвета тегов | green; lime; amber |
-| Медиа для мобильных | |
-| Тип для мобильных | auto |
 | URL RU | cases/natali/natali-case.md |
 | URL EN | |
 
@@ -166,11 +162,12 @@
 | --- | --- | --- | --- |
 | Читать кейс | Read case | cases/natali/natali-case.md | |
 
-| Медиа | Подпись RU | Подпись EN | Ширина |
-| --- | --- | --- | --- |
-| assets/images/cases/case_3_2.jpg | Каталог оптовых предложений | Wholesale catalogue | full |
-| cases/natali/assets/process.jpg | Путь закупщика | Buyer journey | 980 |
-| cases/natali/assets/detail.jpg | Карточка товара | Product card | 760 |
+| Медиа | Подпись RU | Подпись EN | Ширина | Медиа для мобильных | Тип для мобильных |
+| --- | --- | --- | --- | --- | --- |
+| assets/images/cases/case_3_2.jpg |  |  | full | | |
+| cases/natali/assets/process.jpg | Путь закупщика | Buyer journey | 980 | | |
+| cases/natali/assets/detail.jpg | Карточка товара | Product card | 760 | | |
+
 ### Кейс: byterm
 
 | Поле | Русский | English |
@@ -183,8 +180,6 @@
 | Параметр | Значение |
 | --- | --- |
 | Цвета тегов | blue; cyan; lime |
-| Медиа для мобильных | |
-| Тип для мобильных | auto |
 | URL RU | cases/byterm/byterm-case.md |
 | URL EN | |
 
@@ -192,11 +187,12 @@
 | --- | --- | --- | --- |
 | Читать кейс | Read case | cases/byterm/byterm-case.md | |
 
-| Медиа | Подпись RU | Подпись EN | Ширина |
-| --- | --- | --- | --- |
-| assets/images/artifacts/dribbble-mockup-test3.jpg | Терминал: график и стакан | Terminal: chart and order book | full |
-| cases/byterm/assets/process.jpg | Раскладка терминала | Terminal layout | 980 |
-| cases/byterm/assets/detail.jpg | Панель заявки | Order ticket | 760 |
+| Медиа | Подпись RU | Подпись EN | Ширина | Медиа для мобильных | Тип для мобильных |
+| --- | --- | --- | --- | --- | --- |
+| assets/images/artifacts/dribbble-mockup-test3.jpg |  |  | full | | |
+| cases/byterm/assets/process.jpg | Раскладка терминала | Terminal layout | 980 | | |
+| cases/byterm/assets/detail.jpg | Панель заявки | Order ticket | 760 | | |
+
 ### Кейс: chums
 
 | Поле | Русский | English |
@@ -209,8 +205,6 @@
 | Параметр | Значение |
 | --- | --- |
 | Цвета тегов | violet; purple; indigo |
-| Медиа для мобильных | |
-| Тип для мобильных | auto |
 | URL RU | cases/chums/chums-case.md |
 | URL EN | |
 
@@ -218,11 +212,11 @@
 | --- | --- | --- | --- |
 | Читать кейс | Read case | cases/chums/chums-case.md | |
 
-| Медиа | Подпись RU | Подпись EN | Ширина |
-| --- | --- | --- | --- |
-| assets/images/cases/case_3_4.jpg | Перевод в чате | In-chat transfer | full |
-| cases/chums/assets/process.jpg | Путь нового пользователя | New user journey | 980 |
-| cases/chums/assets/detail.jpg | Экран перевода | Transfer screen | 760 |
+| Медиа | Подпись RU | Подпись EN | Ширина | Медиа для мобильных | Тип для мобильных |
+| --- | --- | --- | --- | --- | --- |
+| assets/images/cases/case_3_4.jpg |  |  | full | | |
+| cases/chums/assets/process.jpg | Путь нового пользователя | New user journey | 980 | | |
+| cases/chums/assets/detail.jpg | Экран перевода | Transfer screen | 760 | | |
 ## Архивное
 
 | Поле | Русский | English |
@@ -505,6 +499,9 @@ Asana, ClickUp, Notion, Bitrix24, Figma, FigJam, Miro, Framer, Tilda, Pen and pa
 Карточка — мини-сторителлинг: сверху название, год, описание, теги и ссылки, ниже картинки друг за другом.
 Картинки задаются таблицей «Галерея» в конце блока: `Медиа`, `Подпись RU`, `Подпись EN`, `Ширина`.
 Первая строка таблицы — обложка карточки, дальше остальные кадры. Всего до 6 картинок вместе с обложкой; в статье кейса ограничений нет.
+Для телефона у каждого кадра можно указать свою версию файла: `Медиа для мобильных` и `Тип для мобильных`.
+Например, на десктопе кадр 16:9, а на телефоне — его портретная версия 3:4. Пустая ячейка означает, что берётся основной файл.
+Обложка переключается автоматически при смене ширины окна; версия другого брейкпоинта не загружается.
 Подписи можно не заполнять: в карточке они выводятся одной строкой по центру, поэтому держите их короткими. Полный текст подписи виден в просмотрщике.
 Пустая ячейка `Ширина` берёт ширину обложки; `full`, `min` и число работают так же, как у обложки. Ширины кадров могут отличаться.
 Клик по картинке открывает просмотрщик, и листание ограничено кадрами одного кейса.

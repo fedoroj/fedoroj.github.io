@@ -88,7 +88,7 @@ def check_content():
     for block in re.split(r'(?m)^### Кейс: ', text)[1:]:
         name = block.splitlines()[0].strip()
         gallery = re.search(
-            r'(?m)^\| Медиа \| Подпись RU \| Подпись EN \| Ширина \|\n\|[^\n]*\|\n((?:\|[^\n]*\n?)*)',
+            r'(?m)^\| Медиа \| Подпись RU \| Подпись EN \| Ширина \|[^\n]*\n\|[^\n]*\|\n((?:\|[^\n]*\n?)*)',
             block,
         )
         if not gallery:
