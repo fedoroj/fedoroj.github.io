@@ -940,18 +940,23 @@
   }
   function startSheetGesture(event) {
     resetSheetGesture();
-    if (!sheetQuery.matches || !dialog.open || event.touches.length !== 1 || body.scrollTop > 1 ||
+    // Полоска свайпа (область с разделителем) сворачивает панель при любом
+    // скролле статьи. Свайп по самой статье — только сверху, иначе он мешает
+    // прокрутке.
+    const fromHandle = !!event.target.closest('.case-modal__handle');
+    if (!sheetQuery.matches || !dialog.open || event.touches.length !== 1 ||
+        (!fromHandle && body.scrollTop > 1) ||
         document.querySelector('.fancybox__container') ||
         !event.target.closest('.case-modal__body, .case-modal__handle') ||
         event.target.closest('a:not(.case-image-link), button, video, input, textarea, select, .article-table, pre') ||
         window.getSelection()?.toString()) return;
     const touch = event.touches[0];
-    sheetGesture = { id: touch.identifier, x: touch.clientX, y: touch.clientY, distance: 0, dragging: false };
+    sheetGesture = { id: touch.identifier, x: touch.clientX, y: touch.clientY, distance: 0, dragging: false, fromHandle };
   }
   function moveSheetGesture(event) {
     if (!sheetGesture) return;
     const touch = [...event.touches].find(item => item.identifier === sheetGesture.id);
-    if (!touch || event.touches.length !== 1 || body.scrollTop > 1) { resetSheetGesture(); return; }
+    if (!touch || event.touches.length !== 1 || (!sheetGesture.fromHandle && body.scrollTop > 1)) { resetSheetGesture(); return; }
     const dy = touch.clientY - sheetGesture.y, dx = Math.abs(touch.clientX - sheetGesture.x);
     if (!sheetGesture.dragging) {
       if (dy < -8 || dx > Math.max(10, dy)) { resetSheetGesture(); return; }
