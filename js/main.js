@@ -320,6 +320,33 @@ function bindGallery() {
   Fancybox.bind('[data-fancybox^="case-image-"], [data-fancybox="about-photo"]', Object.assign({}, galleryOptions, {
     Carousel: { infinite: false, Navigation: false }
   }));
+  // На телефоне над видео лежит прозрачный слой (см. .has-html5video в CSS):
+  // свайпы по нему листают кадры, а короткий тап играет и ставит на паузу.
+  var videoTapStart = null;
+  function videoLayer(target) {
+    return !!target && !!target.classList && target.classList.contains('fancybox__content') &&
+      !!target.parentElement && target.parentElement.classList.contains('has-html5video');
+  }
+  document.addEventListener('pointerdown', function(event) {
+    videoTapStart = videoLayer(event.target) ? { x: event.clientX, y: event.clientY } : null;
+  }, true);
+  document.addEventListener('pointerup', function(event) {
+    var start = videoTapStart;
+    videoTapStart = null;
+    if (!start || !videoLayer(event.target)) return;
+    if (Math.hypot(event.clientX - start.x, event.clientY - start.y) > 8) return;
+    var video = event.target.querySelector('video');
+    if (!video) return;
+    if (video.paused) { video.play().catch(function() {}); uiSounds?.playUISound('select'); }
+    else { video.pause(); uiSounds?.playUISound('press'); }
+  }, true);
+  // Тап по слою не должен срабатывать как клик просмотрщика (зум).
+  document.addEventListener('click', function(event) {
+    if (!videoLayer(event.target)) return;
+    event.preventDefault();
+    event.stopPropagation();
+  }, true);
+
   // Стрелки внутри видео сфокусированы на нативном плеере и не листают галерею:
   // забираем их у плеера, чтобы переключение слайдов работало всегда.
   document.addEventListener('keydown', function(event) {

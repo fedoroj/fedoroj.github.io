@@ -1409,6 +1409,21 @@ section {
   pointer-events: none;
 }
 
+/* Телефон: свайп по кадру-видео должен листать просмотрщик.
+   Прозрачный слой над роликом отдаёт жесты карусели, а полоса управления
+   внизу остаётся нативной. Тап по слою играет и ставит на паузу (main.js). */
+@media (max-width: 767px) {
+  .fancybox__container .has-html5video .fancybox__content {
+    position: relative;
+  }
+  .fancybox__container .has-html5video .fancybox__content::after {
+    content: '';
+    position: absolute;
+    inset: 0 0 var(--viewer-video-controls-height) 0;
+    z-index: 1;
+  }
+}
+
 /* Отступы панели просмотрщика: сверху/справа 8px, между кнопками 4px. */
 .fancybox__container .fancybox__toolbar {
   padding: var(--space-2) var(--space-2) var(--space-0) var(--space-0);

@@ -856,6 +856,9 @@
   --article-heading-axes: normal; /* Без специальных осей Roboto Flex */
   --article-heading-weight: var(--fw-semibold);
   --article-heading-line-height: 1.15;
+  /* Полоса нативных кнопок видео внизу просмотрщика: её не перекрываем,
+     чтобы оставались play, таймлайн и фуллскрин. */
+  --viewer-video-controls-height: 48px;
   --article-font-size: 14px; /* Наборный текст и таблицы на всех экранах */
   --article-line-height: 1.4; /* 140% */
   --article-caption-line-height: var(--lh-compact); /* 130% для подписей к медиа и таблицам */
