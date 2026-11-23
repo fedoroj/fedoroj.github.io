@@ -367,7 +367,17 @@ function bindGallery() {
     Html: {
       videoAutoplay: false,
       videoTpl: '<video class="fancybox__html5video" playsinline controls preload="metadata"><source src="{{src}}" type="{{format}}"></video>'
-    }
+    },
+    on: Object.assign({}, galleryOptions.on, {
+      // Ушли с кадра — ролик останавливаем, иначе он продолжает играть в фоне.
+      // Новый кадр с видео запускает cases.js по тому же правилу, что и первый.
+      change: function(instance) {
+        instance.container.querySelectorAll('.fancybox__slide:not(.is-selected) video').forEach(function(video) {
+          video.pause();
+        });
+        if (window.applyVideoAutoplay) window.applyVideoAutoplay();
+      }
+    })
   }));
 }
 

@@ -410,8 +410,6 @@
     const previous = anchor.querySelector('video');
     // Кадр открывается в просмотрщике, а не в модалке.
     anchor.href = current.source;
-    delete anchor.dataset.audioMarked;
-    delete anchor.dataset.silent;
     if (current.type === 'video') anchor.dataset.type = 'html5video';
     else delete anchor.dataset.type;
     anchor.replaceChildren(previewMedia(current.source, current.type, 'work-image'));
@@ -607,33 +605,28 @@
     const pending = [...document.querySelectorAll('video')].filter(video => !video.dataset.audioApplied && !video.closest('.fancybox__container'));
     // В просмотрщике кейса видео живёт недолго, поэтому обрабатываем его отдельно.
     const viewer = [...document.querySelectorAll('.fancybox__container video')].filter(video => !video.dataset.viewerApplied);
-    const unmarked = [...document.querySelectorAll('a[data-fancybox^="case-gallery-"]:not([data-audio-marked])')];
-    if (!pending.length && !viewer.length && !unmarked.length) return;
+    if (!pending.length && !viewer.length) return;
     const manifest = await readAudioManifest();
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     for (const video of viewer) {
+      // Играем только тот ролик, чей кадр сейчас открыт: скрытые слайды
+      // остаются на паузе и не запускаются в фоне.
+      if (!video.closest('.fancybox__slide')?.classList.contains('is-selected')) continue;
       const source = video.currentSrc || video.getAttribute('src') || video.querySelector('source')?.getAttribute('src');
       if (!source) continue;
       const hasSound = manifest[mediaPath(source)];
       if (hasSound === undefined) continue;
       video.dataset.viewerApplied = '';
-      if (hasSound) {
-        // С дорожкой: показываем управление и ждём решения пользователя.
-        video.controls = true; video.muted = false;
-        if (!video.paused) video.pause();
-      } else {
-        video.controls = true; video.muted = true; video.loop = true;
-        video.play().catch(() => {});
-      }
-    }
-    // Просмотрщик кейса: беззвучный ролик запускаем сами, со звуком — по кнопке.
-    for (const anchor of unmarked) {
-      const source = mediaPath(anchor.getAttribute('href') || '');
-      if (!/\.(mp4|webm|mov)$/i.test(source)) continue;
-      anchor.dataset.audioMarked = '';
-      if (!manifest[source]) anchor.dataset.silent = '';
+      // Как у артефактов: ролик стартует сразу при открытии кадра. Автоплей
+      // разрешён только без звука, поэтому запускаем беззвучно — звук
+      // включается кнопкой в плеере. Зацикливаем только ролики без дорожки.
+      video.controls = true;
+      if (!hasSound) video.loop = true;
+      if (reduced) { video.muted = false; continue; }
+      video.muted = true;
+      video.play().catch(() => {});
     }
     if (!pending.length) return;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     for (const video of pending) {
       const source = video.currentSrc || video.getAttribute('src') || video.querySelector('source')?.getAttribute('src');
       if (!source) continue;
