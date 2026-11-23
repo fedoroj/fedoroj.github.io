@@ -409,10 +409,11 @@ Asana, ClickUp, Notion, Bitrix24, Figma, FigJam, Miro, Framer, Tilda, Pen and pa
 
 | Русский | English | URL |
 | --- | --- | --- |
+| E-MAIL | E-MAIL | mailto:s.i.e.r.j.e.y@gmail.com |
 | ТЕЛЕГРАМ | TELEGRAM | https://t.me/fedoroj |
 | LINKEDIN | LINKEDIN | https://www.linkedin.com/in/fedoroj/ |
-| E-MAIL | E-MAIL | mailto:s.i.e.r.j.e.y@gmail.com |
 | ТГ-КАНАЛ | TG-CHANNEL | https://t.me/fedoros |
+| PINTEREST | PINTEREST | https://www.pinterest.com/fedoroj |
 | DSGNERS | DSGNERS | https://dsgners.ru/fedorov |
 | X | X | https://x.com/fedoroj |
 
