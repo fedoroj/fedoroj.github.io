@@ -109,24 +109,47 @@
     // Если основной скрипт не выполнился, пустые блоки не останутся вечной загрузкой.
     setTimeout(() => window.ContentState.failEmptyBlocks(), 22000);
     const watched = new WeakMap();
+    const watchedMedia = new Set();
+    // До первого скролла грузим видео только в первом экране. Иначе короткая
+    // вёрстка в момент загрузки «подносит» дальние карточки к экрану и
+    // запускает мегабайты раньше времени.
+    let scrolled = false;
+    const rootMargin = 300;
+    function isNear(media) {
+      const rect = media.getBoundingClientRect();
+      return rect.bottom > -rootMargin && rect.top < innerHeight + rootMargin;
+    }
+    // Видео-превью: грузим у экрана, иначе обрываем загрузку и оставляем постер.
+    function syncPreview(media, near) {
+      if (!media.matches('video[data-site-preview]')) return;
+      const canLoad = near && (scrolled || media.getBoundingClientRect().top < innerHeight);
+      if (!canLoad) { media.pause(); return; }
+      if (media.dataset.previewSrc) {
+        media.src = media.dataset.previewSrc; delete media.dataset.previewSrc;
+        // Запуск решает cases.js: беззвучные играют сами, со звуком — нет.
+        if (window.applyVideoAutoplay) window.applyVideoAutoplay();
+      }
+    }
+    const markScrolled = () => {
+      if (scrolled) return;
+      scrolled = true;
+      // После первого скролла догружаем то, что уже оказалось на экране.
+      watchedMedia.forEach(media => syncPreview(media, isNear(media)));
+    };
+    addEventListener('scroll', markScrolled, { passive: true });
+    addEventListener('pointerdown', markScrolled, { passive: true });
+    addEventListener('keydown', markScrolled);
     const nearScreen = new IntersectionObserver(entries => entries.forEach(entry => {
       const media = entry.target, state = watched.get(media);
       if (!state || !media.isConnected) return;
       state.near = entry.isIntersecting;
-      if (media.matches('video[data-site-preview]')) {
-        if (state.near) {
-          if (media.dataset.previewSrc) {
-            media.src = media.dataset.previewSrc; delete media.dataset.previewSrc;
-          }
-          // Видео со звуком само не запускаем: это решает cases.js по манифесту.
-          if (!media.dataset.autoplayBlocked && !document.hidden && !document.querySelector('.fancybox__container')) media.play().catch(() => {});
-        } else media.pause();
-      }
+      syncPreview(media, entry.isIntersecting);
       if (state.near && state.slot.dataset.mediaState === 'loading') state.startTimer();
     }), { rootMargin: '300px' });
     function watch(media) {
       // Fancybox сам управляет загрузкой/ошибками и геометрией своих медиа.
       if (watched.has(media) || media.closest('.logo, .fancybox__container')) return;
+      watchedMedia.add(media);
       // У обложек используем существующую рамку, чтобы не менять размеры и hover.
       let slot = media.parentElement;
       if (!slot.matches('.avatar, .work-item__frame, .gallery-item > a, .publication-image')) {

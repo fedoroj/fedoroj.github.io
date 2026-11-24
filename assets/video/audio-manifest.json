@@ -1,16 +1,58 @@
 {
-  "assets/video/about.mp4": true,
-  "assets/video/artefact-dsgners-mobile-optimized.mp4": false,
-  "assets/video/avatar-serge-2025.mp4": false,
-  "assets/video/video_case_2-35-1.mp4": true,
-  "cases/archive-app/assets/demo.mp4": true,
-  "cases/archive-brand/assets/demo.mp4": true,
-  "cases/archive-mobile/assets/demo.mp4": true,
-  "cases/archive-saas/assets/demo.mp4": true,
-  "cases/archive-web/assets/demo.mp4": true,
-  "cases/byterm/assets/demo.mp4": true,
-  "cases/chums/assets/demo.mp4": true,
-  "cases/design-system/assets/demo.mp4": true,
-  "cases/factory-director/assets/demo.mp4": true,
-  "cases/natali/assets/demo.mp4": true
+  "assets/video/about.mp4": {
+    "audio": true,
+    "duration": 52.0
+  },
+  "assets/video/artefact-dsgners-mobile-optimized.mp4": {
+    "audio": false,
+    "duration": 42.8
+  },
+  "assets/video/avatar-serge-2025.mp4": {
+    "audio": false,
+    "duration": 6.1
+  },
+  "assets/video/video_case_2-35-1.mp4": {
+    "audio": true,
+    "duration": 9.0
+  },
+  "cases/archive-app/assets/demo.mp4": {
+    "audio": true,
+    "duration": 9.0
+  },
+  "cases/archive-brand/assets/demo.mp4": {
+    "audio": true,
+    "duration": 9.0
+  },
+  "cases/archive-mobile/assets/demo.mp4": {
+    "audio": true,
+    "duration": 9.0
+  },
+  "cases/archive-saas/assets/demo.mp4": {
+    "audio": true,
+    "duration": 9.0
+  },
+  "cases/archive-web/assets/demo.mp4": {
+    "audio": true,
+    "duration": 9.0
+  },
+  "cases/byterm/assets/demo.mp4": {
+    "audio": true,
+    "duration": 9.0
+  },
+  "cases/chums/assets/demo.mp4": {
+    "audio": true,
+    "duration": 9.0
+  },
+  "cases/design-system/assets/demo.mp4": {
+    "audio": true,
+    "duration": 9.0
+  },
+  "cases/factory-director/assets/demo.mp4": {
+    "audio": true,
+    "duration": 9.0
+  },
+  "cases/natali/assets/demo.mp4": {
+    "audio": true,
+    "duration": 9.0
+  }
 }

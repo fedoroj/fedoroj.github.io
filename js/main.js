@@ -109,19 +109,28 @@ function formatVideoDuration(duration, lang) {
   var duration = document.getElementById('avatarDuration');
   var time = document.getElementById('avatarTime');
 
+  // Длительность известна заранее из манифеста (build_index.py), поэтому
+  // подпись на аватарке не требует загрузки самого видео.
   function updateVideoDuration() {
-    duration.setAttribute('data-en', formatVideoDuration(video.duration, 'en'));
-    duration.setAttribute('data-ru', formatVideoDuration(video.duration, 'ru'));
+    var seconds = parseFloat(video.dataset.duration) || video.duration;
+    duration.setAttribute('data-en', formatVideoDuration(seconds, 'en'));
+    duration.setAttribute('data-ru', formatVideoDuration(seconds, 'ru'));
     duration.textContent = duration.getAttribute('data-' + document.documentElement.lang);
     time.hidden = !duration.textContent;
   }
   video.addEventListener('loadedmetadata', updateVideoDuration);
   video.addEventListener('durationchange', updateVideoDuration);
   video.addEventListener('emptied', updateVideoDuration);
+  document.addEventListener('avatar-duration', updateVideoDuration);
   updateVideoDuration();
 
   avatar.addEventListener('click', function (event) {
     uiSounds?.playUISound('tap'); event.uiSoundHandled = true;
+    // Файл грузим только здесь: до клика на странице нет 18 МБ лишних запросов.
+    if (!video.getAttribute('src') && video.dataset.src) {
+      video.src = video.dataset.src;
+      video.load();
+    }
     dialog.show();
     video.currentTime = 0;
     video.muted = false;
@@ -402,11 +411,6 @@ document.addEventListener('load', function(event) {
 }, true);
 bindGallery();
 
-// Стили внешнего просмотрщика также не задерживают выполнение CMS.
-var galleryStyles = document.createElement('link');
-galleryStyles.rel = 'stylesheet';
-galleryStyles.href = 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css';
-document.head.append(galleryStyles);
 
 // Только mailto-ссылки: копируем адрес без темы письма и других параметров.
 var toastLabels = {

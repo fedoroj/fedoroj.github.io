@@ -401,6 +401,9 @@
   }
   // В DOM живёт только версия текущего брейкпоинта: второй файл не грузим.
   // На телефоне можно подставить свой кадр (например, 3:4 вместо 16:9).
+  // Первый кадр рядом с роликом: <имя>-poster.jpg. Его готовит build_index.py,
+  // чтобы карточка показывала заглушку, не скачивая видео целиком.
+  const posterFor = source => /\.(mp4|webm|mov)$/i.test(source) ? source.replace(/\.(mp4|webm|mov)$/i, '-poster.jpg') : null;
   function renderFigureMedia(anchor) {
     const entry = figureMedia.get(anchor);
     if (!entry) return;
@@ -412,7 +415,7 @@
     anchor.href = current.source;
     if (current.type === 'video') anchor.dataset.type = 'html5video';
     else delete anchor.dataset.type;
-    anchor.replaceChildren(previewMedia(current.source, current.type, 'work-image'));
+    anchor.replaceChildren(previewMedia(current.source, current.type, 'work-image', posterFor(current.source)));
     anchor.dataset.mediaKey = key;
     if (previous) {
       previous.pause(); previous.removeAttribute('src');
@@ -602,7 +605,10 @@
     catch { return ''; }
   }
   async function applyVideoAutoplay() {
-    const pending = [...document.querySelectorAll('video')].filter(video => !video.dataset.audioApplied && !video.closest('.fancybox__container'));
+    // «Видео о себе» — отдельный плеер: им управляет main.js, правило звука
+    // для превью на него не распространяется.
+    const pending = [...document.querySelectorAll('video')].filter(video =>
+      !video.dataset.audioApplied && !video.closest('.fancybox__container') && video.id !== 'aboutVideo');
     // В просмотрщике кейса видео живёт недолго, поэтому обрабатываем его отдельно.
     const viewer = [...document.querySelectorAll('.fancybox__container video')].filter(video => !video.dataset.viewerApplied);
     if (!pending.length && !viewer.length) return;
@@ -614,8 +620,9 @@
       if (!video.closest('.fancybox__slide')?.classList.contains('is-selected')) continue;
       const source = video.currentSrc || video.getAttribute('src') || video.querySelector('source')?.getAttribute('src');
       if (!source) continue;
-      const hasSound = manifest[mediaPath(source)];
-      if (hasSound === undefined) continue;
+      const info = manifest[mediaPath(source)];
+      if (!info) continue;
+      const hasSound = info.audio;
       video.dataset.viewerApplied = '';
       // Как у артефактов: ролик стартует сразу при открытии кадра. Автоплей
       // разрешён только без звука, поэтому запускаем беззвучно — звук
@@ -630,8 +637,9 @@
     for (const video of pending) {
       const source = video.currentSrc || video.getAttribute('src') || video.querySelector('source')?.getAttribute('src');
       if (!source) continue;
-      const hasSound = manifest[mediaPath(source)];
-      if (hasSound === undefined) continue;
+      const info = manifest[mediaPath(source)];
+      if (!info) continue;
+      const hasSound = info.audio;
       video.dataset.audioApplied = '';
       if (hasSound) {
         // Звук есть: автозапуск выключаем и останавливаем, если он уже пошёл.
@@ -707,8 +715,19 @@
       };
       full.src = data.avatarMedia;
     });
+    // src не ставим: 18 МБ начнут качаться раньше времени. Ссылку и
+    // длительность берём из манифеста, сам файл грузится по клику на аватарку.
     const video = document.getElementById('aboutVideo');
-    if (video.src !== data.video) { video.src = data.video; video.load(); }
+    if (video.dataset.src !== data.video) {
+      video.removeAttribute('src');
+      video.dataset.src = data.video;
+      readAudioManifest().then(manifest => {
+        const info = manifest[mediaPath(data.video)];
+        if (!info || !info.duration) return;
+        video.dataset.duration = String(info.duration);
+        document.dispatchEvent(new Event('avatar-duration'));
+      });
+    }
     rich(document.getElementById('heroDescription'), data.description);
     for (const [name, id] of [['Telegram', 'telegramCTA'], ['CV', 'cvCTA'], ['Presentation', 'presentationCTA']]) {
       const a = document.getElementById(id), value = data.buttons[name];

@@ -165,6 +165,21 @@ def check_audio_manifest():
                if p.suffix.lower() in {'.mp4', '.webm'}}
     for video in sorted(videos - set(manifest)):
         fail(f'{video}: нет в audio-manifest.json — запустите build_index.py')
+    for video in sorted(videos):
+        info = manifest.get(video)
+        if not isinstance(info, dict) or 'audio' not in info:
+            fail(f'{video}: устаревшая запись в audio-manifest.json — запустите build_index.py')
+            continue
+    # Постер нужен только роликам из карточек: это первая колонка таблиц site.md.
+    cards = set(re.findall(
+        r'^\|\s*((?:assets|cases)/[^|\s]+\.(?:mp4|webm))\s*\|',
+        (ROOT / 'site.md').read_text(encoding='utf-8'), re.I | re.M,
+    ))
+    for video in sorted(cards & videos):
+        path = ROOT / video
+        poster = path.parent / f'{path.stem}-poster.jpg'
+        if not poster.exists():
+            fail(f'{video}: нет постера {poster.name} — запустите build_index.py')
 
 
 def main():

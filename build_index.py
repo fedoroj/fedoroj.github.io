@@ -46,26 +46,52 @@ def content_lastmod():
 VIDEO_EXTENSIONS = {'.mp4', '.webm'}
 
 
-def video_has_sound(path):
-    """Есть ли в видео звуковая дорожка.
+def video_info(path):
+    """Звуковая дорожка и длительность ролика.
 
-    Смотрим только наличие аудиопотока. Насколько он громкий — вопрос автора
-    ролика, сайт это не оценивает.
+    Наличие дорожки решает, включать ли автоплей, а длительность показывает
+    кнопка «видео о себе» без загрузки самого файла. Громкость не оценивается.
     """
     streams = subprocess.run(
         ['ffprobe', '-v', 'error', '-select_streams', 'a',
          '-show_entries', 'stream=codec_type', '-of', 'csv=p=0', str(path)],
         capture_output=True, text=True,
     )
-    return 'audio' in (streams.stdout or '')
+    measured = subprocess.run(
+        ['ffprobe', '-v', 'error', '-show_entries', 'format=duration',
+         '-of', 'csv=p=0', str(path)],
+        capture_output=True, text=True,
+    )
+    try:
+        seconds = round(float((measured.stdout or '').strip()), 1)
+    except ValueError:
+        seconds = None
+    return {'audio': 'audio' in (streams.stdout or ''), 'duration': seconds}
+
+
+def video_poster(video):
+    """Первый кадр ролика рядом с файлом: <имя>-poster.jpg.
+
+    Показывается вместо видео, пока до него не доскроллили, поэтому сама
+    карточка не тянет мегабайты. Если файл уже есть, не перезаписываем.
+    """
+    poster = video.with_name(f'{video.stem}-poster.jpg')
+    if poster.exists() or not shutil.which('ffmpeg'):
+        return
+    subprocess.run(
+        ['ffmpeg', '-v', 'error', '-y', '-ss', '0', '-i', str(video),
+         '-frames:v', '1', '-vf', "scale='min(960,iw)':-2", '-q:v', '5', str(poster)],
+        capture_output=True,
+    )
 
 
 def update_audio_manifest():
-    """Пишет assets/video/audio-manifest.json: какие видео со звуком.
+    """Пишет assets/video/audio-manifest.json: звук, длительность и постеры.
 
-    По нему сайт решает, включать ли автопроигрывание: беззвучные играют сами,
-    со звуком — только по действию пользователя. Новые видео попадают в манифест
-    при следующей сборке.
+    По нему сайт решает, включать ли автопроигрывание (беззвучные играют сами,
+    со звуком — только по действию пользователя), какую длительность показать
+    у аватарки и какой первый кадр ставить заглушкой. Новые видео попадают
+    в манифест при следующей сборке.
     """
     videos = sorted(
         item for item in (ROOT / 'assets').rglob('*')
@@ -77,13 +103,21 @@ def update_audio_manifest():
     if not videos:
         return
     if not shutil.which('ffprobe'):
-        print('ffprobe не найден: манифест звука не обновлён')
+        print('ffprobe не найден: манифест видео не обновлён')
         return
 
-    data = {
-        video.relative_to(ROOT).as_posix(): video_has_sound(video)
-        for video in videos
-    }
+    # Постер нужен только тем роликам, что стоят в карточках: для остальных
+    # это лишние файлы в репозитории.
+    cards = set(re.findall(
+        r'^\|\s*((?:assets|cases)/[^|\s]+\.(?:mp4|webm))\s*\|',
+        (ROOT / 'site.md').read_text(encoding='utf-8'), re.I | re.M,
+    ))
+    data = {}
+    for video in videos:
+        relative = video.relative_to(ROOT).as_posix()
+        if relative in cards:
+            video_poster(video)
+        data[relative] = video_info(video)
     target = ROOT / 'assets' / 'video' / 'audio-manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + '\n', encoding='utf-8')
