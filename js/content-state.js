@@ -152,7 +152,7 @@
       watchedMedia.add(media);
       // У обложек используем существующую рамку, чтобы не менять размеры и hover.
       let slot = media.parentElement;
-      if (!slot.matches('.avatar, .work-item__frame, .gallery-item > a, .publication-image')) {
+      if (!slot.matches('.avatar, .work-figure__link, .gallery-item > a, .publication-image')) {
         slot = document.createElement('span'); slot.className = 'media-slot';
         media.replaceWith(slot); slot.append(media);
       }

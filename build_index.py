@@ -44,13 +44,30 @@ def content_lastmod():
 
 
 VIDEO_EXTENSIONS = {'.mp4', '.webm'}
+# Размеры нужны заглушкам: скелетон картинки совпадает с её пропорциями.
+MEDIA_EXTENSIONS = {'.jpg', '.jpeg', '.png', '.gif', '.mp4', '.webm'}
+
+
+def media_size(path):
+    """Ширина и высота файла: из них строится заглушка до загрузки."""
+    measured = subprocess.run(
+        ['ffprobe', '-v', 'error', '-select_streams', 'v:0',
+         '-show_entries', 'stream=width,height', '-of', 'csv=p=0:s=x', str(path)],
+        capture_output=True, text=True,
+    )
+    try:
+        width, height = (measured.stdout or '').strip().split('x')[:2]
+        return {'width': int(width), 'height': int(height)}
+    except ValueError:
+        return {}
 
 
 def video_info(path):
-    """Звуковая дорожка и длительность ролика.
+    """Звуковая дорожка, длительность и размер ролика.
 
-    Наличие дорожки решает, включать ли автоплей, а длительность показывает
-    кнопка «видео о себе» без загрузки самого файла. Громкость не оценивается.
+    Наличие дорожки решает, включать ли автоплей, длительность показывает
+    кнопка «видео о себе» без загрузки файла, размер задаёт пропорции заглушки.
+    Громкость не оценивается.
     """
     streams = subprocess.run(
         ['ffprobe', '-v', 'error', '-select_streams', 'a',
@@ -66,7 +83,7 @@ def video_info(path):
         seconds = round(float((measured.stdout or '').strip()), 1)
     except ValueError:
         seconds = None
-    return {'audio': 'audio' in (streams.stdout or ''), 'duration': seconds}
+    return {'audio': 'audio' in (streams.stdout or ''), 'duration': seconds, **media_size(path)}
 
 
 def video_poster(video):
@@ -100,10 +117,15 @@ def update_audio_manifest():
         item for item in (ROOT / 'cases').rglob('*')
         if item.suffix.lower() in VIDEO_EXTENSIONS
     )
-    if not videos:
+    media = sorted(
+        item for item in list((ROOT / 'assets').rglob('*')) + list((ROOT / 'cases').rglob('*'))
+        if item.suffix.lower() in MEDIA_EXTENSIONS and item.is_file()
+        and not item.stem.endswith('-poster')
+    )
+    if not media:
         return
     if not shutil.which('ffprobe'):
-        print('ffprobe не найден: манифест видео не обновлён')
+        print('ffprobe не найден: манифест медиа не обновлён')
         return
 
     # Постер нужен только тем роликам, что стоят в карточках: для остальных
@@ -113,11 +135,15 @@ def update_audio_manifest():
         (ROOT / 'site.md').read_text(encoding='utf-8'), re.I | re.M,
     ))
     data = {}
-    for video in videos:
-        relative = video.relative_to(ROOT).as_posix()
-        if relative in cards:
-            video_poster(video)
-        data[relative] = video_info(video)
+    for item in media:
+        relative = item.relative_to(ROOT).as_posix()
+        if item.suffix.lower() in VIDEO_EXTENSIONS:
+            if relative in cards:
+                video_poster(item)
+            data[relative] = video_info(item)
+        else:
+            # Картинкам достаточно размера: он задаёт пропорции заглушки.
+            data[relative] = media_size(item)
     target = ROOT / 'assets' / 'video' / 'audio-manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + '\n', encoding='utf-8')

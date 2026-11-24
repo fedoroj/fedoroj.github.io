@@ -1,58 +1,370 @@
 {
+  "assets/images/about-design-day-2026.jpg": {
+    "height": 1050,
+    "width": 1400
+  },
+  "assets/images/artifacts/a-letter.jpg": {
+    "height": 1400,
+    "width": 1400
+  },
+  "assets/images/artifacts/dev-site-img.jpg": {
+    "height": 583,
+    "width": 1400
+  },
+  "assets/images/artifacts/dribbble-mockup-test3.jpg": {
+    "height": 1050,
+    "width": 1400
+  },
+  "assets/images/artifacts/g-letter.jpg": {
+    "height": 1400,
+    "width": 1400
+  },
+  "assets/images/artifacts/p-letter-three-pink-floyd.jpg": {
+    "height": 1400,
+    "width": 1400
+  },
+  "assets/images/avatar-hero.jpg": {
+    "height": 1024,
+    "width": 1024
+  },
+  "assets/images/cases/case_1_1.jpg": {
+    "height": 1400,
+    "width": 1400
+  },
+  "assets/images/cases/case_21_9.jpg": {
+    "height": 600,
+    "width": 1400
+  },
+  "assets/images/cases/case_3_2.jpg": {
+    "height": 933,
+    "width": 1400
+  },
+  "assets/images/cases/case_3_4.jpg": {
+    "height": 1400,
+    "width": 1050
+  },
+  "assets/images/gallery-01.png": {
+    "height": 1024,
+    "width": 1024
+  },
+  "assets/images/gallery-02.png": {
+    "height": 1024,
+    "width": 1024
+  },
+  "assets/images/gallery-03.png": {
+    "height": 1024,
+    "width": 1024
+  },
+  "assets/images/gallery-04.png": {
+    "height": 1024,
+    "width": 1024
+  },
+  "assets/images/gallery-05.png": {
+    "height": 1024,
+    "width": 1024
+  },
+  "assets/images/gallery-06.png": {
+    "height": 1024,
+    "width": 1024
+  },
+  "assets/images/greeting-serge-gif.gif": {
+    "height": 480,
+    "width": 480
+  },
+  "assets/images/publications/blog-img.jpg": {
+    "height": 173,
+    "width": 313
+  },
+  "assets/images/publications/case_3_4.jpg": {
+    "height": 1400,
+    "width": 1050
+  },
+  "assets/images/work-01.png": {
+    "height": 1024,
+    "width": 1024
+  },
+  "assets/images/work-02.png": {
+    "height": 1024,
+    "width": 1024
+  },
+  "assets/images/work-03.png": {
+    "height": 1024,
+    "width": 1024
+  },
+  "assets/images/work-04.png": {
+    "height": 1024,
+    "width": 1024
+  },
+  "assets/logos/sf3d.gif": {
+    "height": 32,
+    "width": 81
+  },
+  "assets/preview/avatar-hero.jpg": {
+    "height": 1024,
+    "width": 1024
+  },
+  "assets/preview/gallery-01.jpg": {
+    "height": 1024,
+    "width": 1024
+  },
+  "assets/preview/gallery-02.jpg": {
+    "height": 1024,
+    "width": 1024
+  },
+  "assets/preview/gallery-03.jpg": {
+    "height": 1024,
+    "width": 1024
+  },
+  "assets/preview/gallery-04.jpg": {
+    "height": 1024,
+    "width": 1024
+  },
+  "assets/preview/gallery-05.jpg": {
+    "height": 1024,
+    "width": 1024
+  },
+  "assets/preview/gallery-06.jpg": {
+    "height": 1024,
+    "width": 1024
+  },
+  "assets/preview/work-01.jpg": {
+    "height": 1024,
+    "width": 1024
+  },
+  "assets/preview/work-02.jpg": {
+    "height": 1024,
+    "width": 1024
+  },
+  "assets/preview/work-03.jpg": {
+    "height": 1024,
+    "width": 1024
+  },
+  "assets/preview/work-04.jpg": {
+    "height": 1024,
+    "width": 1024
+  },
   "assets/video/about.mp4": {
     "audio": true,
-    "duration": 52.0
+    "duration": 52.0,
+    "height": 1280,
+    "width": 720
   },
   "assets/video/artefact-dsgners-mobile-optimized.mp4": {
     "audio": false,
-    "duration": 42.8
+    "duration": 42.8,
+    "height": 1080,
+    "width": 606
   },
   "assets/video/avatar-serge-2025.mp4": {
     "audio": false,
-    "duration": 6.1
+    "duration": 6.1,
+    "height": 720,
+    "width": 720
   },
   "assets/video/video_case_2-35-1.mp4": {
     "audio": true,
-    "duration": 9.0
+    "duration": 9.0,
+    "height": 682,
+    "width": 1600
+  },
+  "cases/archive-app/assets/cover.jpg": {
+    "height": 933,
+    "width": 1400
   },
   "cases/archive-app/assets/demo.mp4": {
     "audio": true,
-    "duration": 9.0
+    "duration": 9.0,
+    "height": 682,
+    "width": 1600
+  },
+  "cases/archive-app/assets/detail.jpg": {
+    "height": 1400,
+    "width": 1050
+  },
+  "cases/archive-app/assets/interaction.gif": {
+    "height": 720,
+    "width": 720
+  },
+  "cases/archive-brand/assets/cover.jpg": {
+    "height": 1400,
+    "width": 1400
   },
   "cases/archive-brand/assets/demo.mp4": {
     "audio": true,
-    "duration": 9.0
+    "duration": 9.0,
+    "height": 682,
+    "width": 1600
+  },
+  "cases/archive-brand/assets/detail.jpg": {
+    "height": 1400,
+    "width": 1050
+  },
+  "cases/archive-brand/assets/interaction.gif": {
+    "height": 720,
+    "width": 720
+  },
+  "cases/archive-mobile/assets/cover.jpg": {
+    "height": 1400,
+    "width": 1050
   },
   "cases/archive-mobile/assets/demo.mp4": {
     "audio": true,
-    "duration": 9.0
+    "duration": 9.0,
+    "height": 682,
+    "width": 1600
+  },
+  "cases/archive-mobile/assets/detail.jpg": {
+    "height": 1400,
+    "width": 1050
+  },
+  "cases/archive-mobile/assets/interaction.gif": {
+    "height": 720,
+    "width": 720
+  },
+  "cases/archive-saas/assets/cover.jpg": {
+    "height": 933,
+    "width": 1400
   },
   "cases/archive-saas/assets/demo.mp4": {
     "audio": true,
-    "duration": 9.0
+    "duration": 9.0,
+    "height": 682,
+    "width": 1600
+  },
+  "cases/archive-saas/assets/detail.jpg": {
+    "height": 1400,
+    "width": 1050
+  },
+  "cases/archive-saas/assets/interaction.gif": {
+    "height": 720,
+    "width": 720
+  },
+  "cases/archive-web/assets/cover.jpg": {
+    "height": 933,
+    "width": 1400
   },
   "cases/archive-web/assets/demo.mp4": {
     "audio": true,
-    "duration": 9.0
+    "duration": 9.0,
+    "height": 682,
+    "width": 1600
+  },
+  "cases/archive-web/assets/detail.jpg": {
+    "height": 1400,
+    "width": 1050
+  },
+  "cases/archive-web/assets/interaction.gif": {
+    "height": 720,
+    "width": 720
+  },
+  "cases/byterm/assets/cover.jpg": {
+    "height": 600,
+    "width": 1400
   },
   "cases/byterm/assets/demo.mp4": {
     "audio": true,
-    "duration": 9.0
+    "duration": 9.0,
+    "height": 682,
+    "width": 1600
+  },
+  "cases/byterm/assets/detail.jpg": {
+    "height": 1400,
+    "width": 1050
+  },
+  "cases/byterm/assets/interaction.gif": {
+    "height": 720,
+    "width": 720
+  },
+  "cases/byterm/assets/process.jpg": {
+    "height": 933,
+    "width": 1400
+  },
+  "cases/chums/assets/cover.jpg": {
+    "height": 600,
+    "width": 1400
   },
   "cases/chums/assets/demo.mp4": {
     "audio": true,
-    "duration": 9.0
+    "duration": 9.0,
+    "height": 682,
+    "width": 1600
+  },
+  "cases/chums/assets/detail.jpg": {
+    "height": 1400,
+    "width": 1050
+  },
+  "cases/chums/assets/interaction.gif": {
+    "height": 720,
+    "width": 720
+  },
+  "cases/chums/assets/process.jpg": {
+    "height": 933,
+    "width": 1400
+  },
+  "cases/design-system/assets/cover.jpg": {
+    "height": 600,
+    "width": 1400
   },
   "cases/design-system/assets/demo.mp4": {
     "audio": true,
-    "duration": 9.0
+    "duration": 9.0,
+    "height": 682,
+    "width": 1600
+  },
+  "cases/design-system/assets/detail.jpg": {
+    "height": 1400,
+    "width": 1050
+  },
+  "cases/design-system/assets/interaction.gif": {
+    "height": 720,
+    "width": 720
+  },
+  "cases/design-system/assets/process.jpg": {
+    "height": 933,
+    "width": 1400
+  },
+  "cases/factory-director/assets/cover.jpg": {
+    "height": 600,
+    "width": 1400
   },
   "cases/factory-director/assets/demo.mp4": {
     "audio": true,
-    "duration": 9.0
+    "duration": 9.0,
+    "height": 682,
+    "width": 1600
+  },
+  "cases/factory-director/assets/detail.jpg": {
+    "height": 1400,
+    "width": 1050
+  },
+  "cases/factory-director/assets/interaction.gif": {
+    "height": 720,
+    "width": 720
+  },
+  "cases/factory-director/assets/process.jpg": {
+    "height": 933,
+    "width": 1400
+  },
+  "cases/natali/assets/cover.jpg": {
+    "height": 600,
+    "width": 1400
   },
   "cases/natali/assets/demo.mp4": {
     "audio": true,
-    "duration": 9.0
+    "duration": 9.0,
+    "height": 682,
+    "width": 1600
+  },
+  "cases/natali/assets/detail.jpg": {
+    "height": 1400,
+    "width": 1050
+  },
+  "cases/natali/assets/interaction.gif": {
+    "height": 720,
+    "width": 720
+  },
+  "cases/natali/assets/process.jpg": {
+    "height": 933,
+    "width": 1400
   }
 }

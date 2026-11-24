@@ -598,7 +598,26 @@
       const response = await fetch(new URL('assets/video/audio-manifest.json', base), { cache: 'default' });
       audioManifest = response.ok ? await response.json() : {};
     } catch { audioManifest = {}; }
+    mediaSizes = audioManifest;
+    applyMediaSizes();
     return audioManifest;
+  }
+  // Размеры из манифеста: заглушка совпадает с будущим кадром, и вёрстка
+  // не прыгает после загрузки. Источник — build_index.py (ffprobe).
+  let mediaSizes = {};
+  function applyMediaSizes() {
+    document.querySelectorAll('img, video').forEach(media => {
+      const source = media.currentSrc || media.getAttribute('src') || media.dataset.previewSrc ||
+        media.dataset.src || media.querySelector('source')?.getAttribute('src');
+      if (!source) return;
+      const info = mediaSizes[mediaPath(source)];
+      if (!info || !info.width || !info.height) return;
+      const ratio = info.width + ' / ' + info.height;
+      if (media.dataset.mediaRatio === ratio) return;
+      media.dataset.mediaRatio = ratio;
+      media.width = info.width; media.height = info.height;
+      media.closest('.media-state')?.style.setProperty('--media-ratio', ratio);
+    });
   }
   function mediaPath(address) {
     try { return decodeURIComponent(new URL(address, location.href).pathname.replace(/^\/+/, '')); }
@@ -659,6 +678,9 @@
   }
   window.applyVideoAutoplay = applyVideoAutoplay;
   applyVideoAutoplay();
+  // Размеры нужны заглушкам ещё до появления карточек, поэтому тянем манифест
+  // сразу, а не только вместе с первым видео.
+  readAudioManifest().then(applyMediaSizes);
   document.addEventListener('DOMContentLoaded', applyVideoAutoplay);
   document.addEventListener('gallery-viewer-close', () => applyVideoAutoplay());
   document.addEventListener('visibilitychange', () => { if (!document.hidden) applyVideoAutoplay(); });
@@ -800,6 +822,7 @@
       node.dataset.contentLoaded = 'true'; node.setAttribute('aria-busy', 'false');
     });
     syncVideos();
+    applyMediaSizes();
     applyVideoAutoplay();
     for (const [name, selector] of [['Метаданные', '.footer-meta'], ['Примечание', '.footer-note']]) {
       changed('footer-' + name, data.footer[name], () => rich(document.querySelector(selector), data.footer[name]));
@@ -871,6 +894,7 @@
     dialog.setAttribute('aria-label', heading ? heading.textContent : article.label);
     content.replaceChildren(fragment);
     content.setAttribute('aria-busy', 'false');
+    applyMediaSizes();
     applyVideoAutoplay();
   }
   async function loadArticle(initial = false) {
