@@ -88,18 +88,18 @@
 | Заголовок | Работы | Selected works |
 | Описание | Избранные проекты | From design systems to product interfaces |
 
-### Кейс: design-system
+### Кейс: zinda-business
 
 | Поле | Русский | English |
 | --- | --- | --- |
-| Название | Zinda — цифровой банк | Zinda — bank app |
+| Название | Zinda Business — цифровой банк | Zinda Business — bank app |
 | Год | 2025–2026 | 2025–2026 |
-| Описание | Экраны банка для бизнеса Таджикистана: веб, приложение, мобайл. Вся инфраструктура отрисована за 4 месяца. Роль — дизайн-лид | Banking screens for businesses in Tajikistan: web, app, mobile. The whole infrastructure was designed in four months. Role — design lead |
-| Теги | Финтех; B2B; App; Web; ДС | Fintech; B2B; Design system |
+| Описание | Экраны банка для бизнеса Таджикистана: приложение и веб. Вся инфраструктура отрисована за 4 месяца. Роль — дизайн-лид | Banking screens for businesses in Tajikistan: web, app, mobile. The whole infrastructure was designed in four months. Role — design lead |
+| Теги | финтех; b2b; app; web; дс | fintech; b2b; app; web; design system |
 
 | Параметр | Значение | 
 | --- | --- |
-| Цвета тегов | lime; cyan; violet |
+| Цвета тегов | green; cyan; pink; blue; gray |
 | URL RU | cases/design-system/design-system-case.md |
 | URL EN | |
 <!-- Цвета тегов: red, orange, amber, yellow, lime, green, teal, cyan, blue, indigo, violet, purple, pink, brown, gray. Синонимы: grey, turquoise, aqua, gold. В строке «Цвета тегов» разделяйте значения точкой с запятой (;). -->
@@ -113,9 +113,9 @@
 
 | Медиа | Подпись RU | Подпись EN | Ширина | Медиа для мобильных | Тип для мобильных |
 | --- | --- | --- | --- | --- | --- |
-| cases/design-system/assets/02-home.jpg |  |  | full | | |
-| cases/design-system/assets/04-onboarding.jpg | Онбординг в приложении | Onboarding app | 980 | | |
-| cases/design-system/assets/22-web.jpg | Веб-версия банка | Web-version of bank | min | | |
+| cases/zinda-business/assets/02-home.jpg |  |  | full | | |
+| cases/zinda-business/assets/04-onboarding.jpg | Онбординг в приложении | Onboarding app | 980 | | |
+| cases/zinda-business/assets/22-web.jpg | Веб-версия банка | Web-version of bank | min | | |
 
 ### Кейс: factory-director
 
