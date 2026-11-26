@@ -86,7 +86,7 @@
 | Поле | Русский | English |
 | --- | --- | --- |
 | Заголовок | Работы | Selected works |
-| Описание | Избранные проекты | From design systems to product interfaces |
+| Описание | Отобрал те, что мне нравятся | Selected the ones I like |
 
 ### Кейс: zinda-business
 
@@ -94,19 +94,19 @@
 | --- | --- | --- |
 | Название | Zinda Business — цифровой банк | Zinda Business — bank app |
 | Год | 2025–2026 | 2025–2026 |
-| Описание | Экраны банка для бизнеса Таджикистана: приложение и веб. Вся инфраструктура отрисована за 4 месяца. Роль — дизайн-лид | Banking screens for businesses in Tajikistan: web, app, mobile. The whole infrastructure was designed in four months. Role — design lead |
+| Описание | Экраны банка для бизнеса Таджикистана. Роль — дизайн-лид | Banking screens for businesses in Tajikistan. Role — design lead |
 | Теги | финтех; b2b; app; web; дс | fintech; b2b; app; web; design system |
 
 | Параметр | Значение | 
 | --- | --- |
-| Цвета тегов | green; cyan; pink; blue; gray |
+| Цвета тегов | green; cyan; pink; blue; violet |
 | URL RU | cases/zinda-business/zinda-business-case.md |
 | URL EN | |
 <!-- Цвета тегов: red, orange, amber, yellow, lime, green, teal, cyan, blue, indigo, violet, purple, pink, brown, gray. Синонимы: grey, turquoise, aqua, gold. В строке «Цвета тегов» разделяйте значения точкой с запятой (;). -->
 
 | Русский | English | URL RU | URL EN |
 | --- | --- | --- | --- |
-| Читать кейс | Read case | cases/zinda-business/zinda-business-case.md | |
+| Читать кейс | Case Study | cases/zinda-business/zinda-business-case.md | |
 | App Store | App Store | https://apps.apple.com/us/app/zinda-business/id6759039919?l=ru | |
 | Google Play | Google Play | https://play.google.com/store/apps/details?id=com.zinda.b2b&hl=ru | |
 | Zinda.tj | Zinda.tj | https://zinda.tj/ru | |
