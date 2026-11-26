@@ -107,16 +107,15 @@
 | Русский | English | URL RU | URL EN |
 | --- | --- | --- | --- |
 | Читать кейс | Read case | cases/design-system/design-system-case.md | |
-| App Store | App Store | cases/design-system/design-system-case.md | |
-| Google Play | Google Play | cases/design-system/design-system-case.md | |
-| Zinda.tj | Zinda.tj | cases/design-system/design-system-case.md | |
+| App Store | App Store | https://apps.apple.com/us/app/zinda-business/id6759039919?l=ru | |
+| Google Play | Google Play | https://play.google.com/store/apps/details?id=com.zinda.b2b&hl=ru | |
+| Zinda.tj | Zinda.tj | https://zinda.tj/ru | |
 
 | Медиа | Подпись RU | Подпись EN | Ширина | Медиа для мобильных | Тип для мобильных |
 | --- | --- | --- | --- | --- | --- |
-| assets/video/video_case_2-35-1.mp4 |  |  | full | | |
-| cases/design-system/assets/process.jpg | Карта сценария платежа | Payment flow map | 980 | | |
-| cases/design-system/assets/interaction.gif | Анимация шагов платежа | Payment steps animation | min | | |
-| cases/design-system/assets/detail.jpg | Выписка с фильтрами | Statement with filters | 760 | | |
+| cases/design-system/assets/02-home.jpg |  |  | full | | |
+| cases/design-system/assets/04-onboarding.jpg | Онбординг в приложении | Onboarding app | 980 | | |
+| cases/design-system/assets/22-web.jpg | Веб-версия банка | Web-version of bank | min | | |
 
 ### Кейс: factory-director
 
