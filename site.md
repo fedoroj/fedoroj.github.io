@@ -100,13 +100,13 @@
 | Параметр | Значение | 
 | --- | --- |
 | Цвета тегов | green; cyan; pink; blue; gray |
-| URL RU | cases/design-system/design-system-case.md |
+| URL RU | cases/zinda-business/zinda-business-case.md |
 | URL EN | |
 <!-- Цвета тегов: red, orange, amber, yellow, lime, green, teal, cyan, blue, indigo, violet, purple, pink, brown, gray. Синонимы: grey, turquoise, aqua, gold. В строке «Цвета тегов» разделяйте значения точкой с запятой (;). -->
 
 | Русский | English | URL RU | URL EN |
 | --- | --- | --- | --- |
-| Читать кейс | Read case | cases/design-system/design-system-case.md | |
+| Читать кейс | Read case | cases/zinda-business/zinda-business-case.md | |
 | App Store | App Store | https://apps.apple.com/us/app/zinda-business/id6759039919?l=ru | |
 | Google Play | Google Play | https://play.google.com/store/apps/details?id=com.zinda.b2b&hl=ru | |
 | Zinda.tj | Zinda.tj | https://zinda.tj/ru | |
