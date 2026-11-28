@@ -456,7 +456,7 @@ Asana, ClickUp, Notion, Bitrix24, Figma, FigJam, Miro, Framer, Tilda, Pen and pa
 
 ### Ссылки и пути
 
-Везде используется только URL: `cases/design-system/design-system-case.md` открывает статью в модальном окне,
+Везде используется только URL: `cases/zinda-business/zinda-business-case.md` открывает статью в модальном окне,
 а `https://example.com` — сайт в отдельной вкладке. Ссылки `.md` определяются автоматически.
 Внешний MD должен быть доступен для загрузки браузером (CORS); ссылка на страницу GitHub с кодом не является самим MD-файлом.
 Также доступны `mailto:` и `tel:` для контактов. Якорь `#about` ведёт к блоку сайта.
@@ -530,8 +530,8 @@ Asana, ClickUp, Notion, Bitrix24, Figma, FigJam, Miro, Framer, Tilda, Pen and pa
 
 ```text
 cases/
-  design-system/
-    design-system-case.md
+  zinda-business/
+    zinda-business-case.md
     assets/
       cover.jpg
       process.jpg
