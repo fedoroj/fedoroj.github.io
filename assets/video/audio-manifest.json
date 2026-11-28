@@ -301,28 +301,6 @@
     "height": 933,
     "width": 1400
   },
-  "cases/design-system/assets/cover.jpg": {
-    "height": 600,
-    "width": 1400
-  },
-  "cases/design-system/assets/demo.mp4": {
-    "audio": true,
-    "duration": 9.0,
-    "height": 682,
-    "width": 1600
-  },
-  "cases/design-system/assets/detail.jpg": {
-    "height": 1400,
-    "width": 1050
-  },
-  "cases/design-system/assets/interaction.gif": {
-    "height": 720,
-    "width": 720
-  },
-  "cases/design-system/assets/process.jpg": {
-    "height": 933,
-    "width": 1400
-  },
   "cases/factory-director/assets/cover.jpg": {
     "height": 600,
     "width": 1400
@@ -366,5 +344,93 @@
   "cases/natali/assets/process.jpg": {
     "height": 933,
     "width": 1400
+  },
+  "cases/zinda-business/assets/01-hero.jpg": {
+    "height": 1080,
+    "width": 1920
+  },
+  "cases/zinda-business/assets/02-home.jpg": {
+    "height": 1080,
+    "width": 1920
+  },
+  "cases/zinda-business/assets/03-theme.jpg": {
+    "height": 1080,
+    "width": 1920
+  },
+  "cases/zinda-business/assets/04-onboarding.jpg": {
+    "height": 1080,
+    "width": 1920
+  },
+  "cases/zinda-business/assets/05-login.jpg": {
+    "height": 1080,
+    "width": 1920
+  },
+  "cases/zinda-business/assets/06-deposits.jpg": {
+    "height": 1080,
+    "width": 1920
+  },
+  "cases/zinda-business/assets/07-deposit-terms.jpg": {
+    "height": 1080,
+    "width": 1920
+  },
+  "cases/zinda-business/assets/08-salary.jpg": {
+    "height": 1080,
+    "width": 1920
+  },
+  "cases/zinda-business/assets/09-salary-order.jpg": {
+    "height": 1080,
+    "width": 1920
+  },
+  "cases/zinda-business/assets/10-employee.jpg": {
+    "height": 1080,
+    "width": 1920
+  },
+  "cases/zinda-business/assets/11-loans.jpg": {
+    "height": 1080,
+    "width": 1920
+  },
+  "cases/zinda-business/assets/12-line.jpg": {
+    "height": 1080,
+    "width": 1920
+  },
+  "cases/zinda-business/assets/13-cards.jpg": {
+    "height": 1080,
+    "width": 1920
+  },
+  "cases/zinda-business/assets/14-applications.jpg": {
+    "height": 1080,
+    "width": 1920
+  },
+  "cases/zinda-business/assets/15-chat.jpg": {
+    "height": 1080,
+    "width": 1920
+  },
+  "cases/zinda-business/assets/16-profile.jpg": {
+    "height": 1080,
+    "width": 1920
+  },
+  "cases/zinda-business/assets/17-home-scroll.jpg": {
+    "height": 1080,
+    "width": 1920
+  },
+  "cases/zinda-business/assets/18-colors.jpg": {
+    "height": 900,
+    "width": 1600
+  },
+  "cases/zinda-business/assets/19-font.jpg": {
+    "height": 900,
+    "width": 1600
+  },
+  "cases/zinda-business/assets/20-variables.jpg": {
+    "height": 900,
+    "width": 1600
+  },
+  "cases/zinda-business/assets/21-icons.jpg": {
+    "height": 900,
+    "width": 1600
+  },
+  "cases/zinda-business/assets/22-web.jpg": {
+    "height": 900,
+    "width": 1600
   }
 }
