@@ -1243,6 +1243,17 @@ section {
     transform: translateY(-50%);
   }
 }
+/* Ширина окна кейса повторяет колонку контента: 1024 → 1200 → 1440px.
+   Ниже 1280 остаётся прежняя ширина из переменной. */
+@media (min-width: 1280px) {
+  :root { --case-modal-width: var(--content-max-1280); }
+}
+@media (min-width: 1440px) {
+  :root { --case-modal-width: var(--content-max-1440); }
+}
+@media (min-width: 1920px) {
+  :root { --case-modal-width: var(--content-max-1920); }
+}
 /* Планшеты с плавающей шапкой: больше воздуха над и под модалкой. */
 @media (min-width: 768px) and (max-width: 1024px) {
   .case-modal {
