@@ -490,6 +490,12 @@
   /* Плавающая шапка: общий радиус в обоих состояниях и длительность раскрытия. */
   --mobile-header-radius: 20px;
   --mobile-header-transition: var(--duration-long);
+  /* Широкие экраны: от 1280px поля чуть больше, а контент ограничен по ширине,
+     чтобы строки не растягивались на 2К/4К. */
+  --page-padding-wide: 116px;
+  --content-max-1280: 1024px;
+  --content-max-1440: 1200px;
+  --content-max-1920: 1440px;
   --mobile-header-offset: var(--space-2); /* 8px по бокам плавающей шапки */
   --mobile-header-offset-top: var(--space-1); /* 4px сверху */
   --mobile-header-height: var(--space-10); /* 40px в закрытом состоянии */

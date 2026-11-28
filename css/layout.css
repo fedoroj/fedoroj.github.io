@@ -33,6 +33,25 @@ main {
   }
 }
 
+/* От 1280px поля 116px, а ширина контента ограничена: 1024 → 1200 → 1440px.
+   Ниже 1280 всё как было: поля 107px и контент на всю доступную ширину. */
+@media (min-width: 1280px) {
+  body {
+    padding-inline: var(--page-padding-wide);
+  }
+  main {
+    width: 100%;
+    max-width: var(--content-max-1280);
+    margin-inline: auto;
+  }
+}
+@media (min-width: 1440px) {
+  main { max-width: var(--content-max-1440); }
+}
+@media (min-width: 1920px) {
+  main { max-width: var(--content-max-1920); }
+}
+
 /* 2. Ширина блоков */
 
 /* Ширина нижних секций задаётся токенами в variables.css.
